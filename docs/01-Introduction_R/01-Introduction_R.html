@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>MATH/STAT 338: Probability</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Anthony Scotina" />
+    <script src="libs/header-attrs-2.6/header-attrs.js"></script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <link rel="stylesheet" href="my-theme.css" type="text/css" />
+    <link rel="stylesheet" href="my-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# MATH/STAT 338: Probability
+## Introduction to Probability with R
+### Anthony Scotina
+
+---
+
+
+
+
+
+
+
+
+
+
+&lt;!--
+pagedown::chrome_print("~/Dropbox/Teaching/03-Simmons Courses/MATH228-Introduction to Data Science/Lecture Slides/01-Introduction/01-Introduction.html")
+--&gt;
+
+class: center, middle, frame
+
+# Introduction
+
+---
+
+# Who am I?
+
+.pull-left[
+
+**Anthony Scotina** (he/him)
+
+- Asst. Prof of Statistics
+
+- Website/blog: [https://scotinastats.rbind.io/](https://scotinastats.rbind.io/)
+
+- **Fun fact**: One of my *favorite* classes as an undergrad was *Probability*
+
+- I used to have many hobbies, but all I do these days is use **R**. 
+
+&lt;br&gt;
+
+- I have an 11-month old cat named **Moose**!
+]
+
+.pull-right[
+&lt;img src="cat.jpg" width="3093" /&gt;
+
+]
+
+---
+
+# Where are you?
+
+.center[
+## Probability!!!
+
+&lt;img src="STAT338_hex.png" width="45%" /&gt;
+]
+
+---
+
+# Where are you?
+
+.center[
+&lt;img src="prob_wiki.png" width="1613" /&gt;
+]
+
+---
+
+# Some Information
+
+**Grading**
+
+- **Problem Sets** [20%]: Roughly weekly problem sets involving both analytical and computational exercises
+
+- **Take Home Exams** [40%]: See syllabus for dates!
+
+- **Mini-projects** [40%]: Two blogpost-style projects will be assigned throughout the semester. 
+
+--
+
+**Student Hours**
+
+- **Wednesday**, 12pm-1pm (in-person or on Zoom)
+
+- **Thursday**, 11am-1pm (Zoom only)
+
+- or by appointment, or whenever you see my office door open!
+
+--
+
+**Please read through the syllabus and let me know if you have any questions!**
+
+---
+
+# Activity #1 (Rock-paper-scissors)
+
+- In *pairs of two*, play **10 games of rock-paper-scissors**. 
+
+- Write down your choice after each throw (*R*, *P*, or *S*)
+
+- Identify your *longest sequence of consecutive throws*!
+
+--
+
+&lt;br&gt;
+
+.details[
+
+```r
+rps = sample(c("R", "P", "S"), size = 10, replace = TRUE)
+rps
+```
+
+```
+##  [1] "R" "R" "S" "S" "P" "P" "P" "S" "R" "R"
+```
+]
+
+---
+
+# Activity #1 (Rock-paper-scissors)
+
+.panelset.sideways[
+.panel[.panel-name[Plot]
+![](01-Introduction_R_files/figure-html/rps-1.png)
+]
+.panel[.panel-name[R Code]
+
+```r
+trials = replicate(10000, {
+  example = sample(c("R", "P", "S"), size = 10, replace = TRUE)
+  max(rle(example)$lengths)
+})
+
+gf_histogram( ~ trials, binwidth = 1, color = "white") + 
+  scale_x_continuous(breaks = scales::pretty_breaks()) + 
+  labs(x = "Longest run", 
+       y = "Number of simulations", 
+       title = "10 games of RPS") +
+  theme_bw()
+```
+]
+
+]
+
+---
+
+# Activity #1 (Rock-paper-scissors)
+
+.panelset.sideways[
+.panel[.panel-name[Plot]
+![](01-Introduction_R_files/figure-html/rps3-1.png)
+]
+.panel[.panel-name[R Code]
+
+```r
+trials = replicate(10000, {
+  example = sample(c("R", "P", "S"), size = 20, replace = TRUE)
+  max(rle(example)$lengths)
+})
+
+gf_histogram( ~ trials, binwidth = 1, color = "white") + 
+  scale_x_continuous(breaks = scales::pretty_breaks()) + 
+  labs(x = "Longest run", 
+       y = "Number of simulations", 
+       title = "20 games of RPS") +
+  theme_bw()
+```
+]
+
+]
+
+---
+
+# Activity #1 (Rock-paper-scissors)
+
+.panelset.sideways[
+.panel[.panel-name[Plot]
+![](01-Introduction_R_files/figure-html/rps2-1.png)
+]
+.panel[.panel-name[R Code]
+
+```r
+trials = replicate(10000, {
+  example = sample(c("R", "P", "S"), size = 100, replace = TRUE)
+  max(rle(example)$lengths)
+})
+
+gf_histogram( ~ trials, binwidth = 1, color = "white") + 
+  scale_x_continuous(breaks = scales::pretty_breaks()) + 
+  labs(x = "Longest run", 
+       y = "Number of simulations", 
+       title = "100 games of RPS") +
+  theme_bw()
+```
+]
+
+]
+
+---
+
+# Activity #2 (Coin flips)
+
+I need **two volunteers**!
+
+- *Volunteer 1*: You'll be the "Judge of Randomness"
+
+- *Volunteer 2*: You'll write a sequence of "0"s and "1"s on the board that are supposed to look like the results of 20 coin flips. 
+
+(I'll also write a sequence of "0"s and "1"s on the board!)
+
+--
+
+.details[
+
+```r
+sample(0:1, size = 20, replace = TRUE)
+```
+
+```
+##  [1] 0 0 0 1 0 1 0 0 0 1 1 1 1 0 0 0 0 1 0 1
+```
+]
+
+---
+
+# Activity #2 (Coin flips)
+
+.panelset.sideways[
+.panel[.panel-name[Plot]
+![](01-Introduction_R_files/figure-html/fake_coin-1.png)
+]
+.panel[.panel-name[R Code]
+
+```r
+coin_flips_runs = replicate(10000, {
+  flips = sample(0:1, size = 20, replace = TRUE)
+  c(max(rle(flips)$lengths), 
+    length(rle(flips)$values))
+}, simplify = FALSE)
+
+coin_flips = do.call(rbind.data.frame, coin_flips_runs)
+names(coin_flips) = c("max_runs", "num_runs")
+
+gf_jitter(max_runs ~ num_runs, data = coin_flips, 
+          alpha = 0.4) + 
+  labs(x = "Number of unique runs", 
+       y = "Longest run", 
+       title = "Simulating 20 coin tosses", 
+       subtitle = "10,000 times") +
+  theme_bw()
+```
+]
+
+]
+
+---
+
+class: center, middle, frame
+
+# Some {base} R Basics
+
+&lt;img src="base_r_meme.jpeg" width="227" /&gt;
+
+---
+
+# Vectors
+
+R is built around **vectors**, which are probably the single-most important data structure you'll need to understand for this class. 
+
+--
+
+**Examples**
+
+
+```
+## [1] 3 3 8 3 3 9
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+```
+##  [1]  2  4  6  8 10 12 14 16 18 20
+```
+
+```
+## [1] "I"     "have"  "a"     "cat"   "named" "Moose"
+```
+
+```
+## [1]  TRUE  TRUE FALSE FALSE  TRUE
+```
+
+--
+
+Vectors can take elements of *multiple types* (e.g., `numeric`, `character`, `logical`). 
+
+- But each vector's elements must *all* be the **same type**. 
+
+---
+
+# Creating Vectors
+
+There are *many*, **many** ways to create vectors. One way is via the `c()` function:
+
+
+```r
+c(3, 3, 8)
+
+c("I", "have", "a", "cat", "named", "Moose")
+
+c(TRUE, TRUE, FALSE, FALSE, TRUE)
+
+c("Heads", "Tails")
+```
+
+- Each element is separated by a **comma**, and the *output* is a vector. 
+
+---
+
+# Creating Vectors: `a:b`
+
+There are other ways to create vectors that can be *much* more useful than entering individual elements into `c()`. 
+
+- The `:` operator can be used to generate a sequence of *integers* from a **starting** value to an **end** value.
+
+
+```r
+1:10
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+```r
+0:1
+```
+
+```
+## [1] 0 1
+```
+
+```r
+-1:4
+```
+
+```
+## [1] -1  0  1  2  3  4
+```
+
+---
+
+# Creating Vectors: `seq()`
+
+The `seq()` function is a *generalization* of the `:` operator, and allows us to enter the *length* of increments ourselves. 
+
+
+```r
+seq(1, 10, by = 1) # This is identical to 1:10
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+
+```r
+seq(1, 10, by = 2)
+```
+
+```
+## [1] 1 3 5 7 9
+```
+
+
+```r
+seq(1, 10, by = 0.5)
+```
+
+```
+##  [1]  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0  6.5  7.0  7.5  8.0
+## [16]  8.5  9.0  9.5 10.0
+```
+
+
+---
+
+# Creating Vectors: `rep()`
+
+The `rep()` function **repeats** things! The output is *still* a vector, though. 
+
+
+```r
+rep(338, times = 5)
+```
+
+```
+## [1] 338 338 338 338 338
+```
+
+```r
+rep("Moose", times = 5)
+```
+
+```
+## [1] "Moose" "Moose" "Moose" "Moose" "Moose"
+```
+
+--
+
+We can also *nest* a vector within `rep()`:
+
+
+```r
+rep(c("Heads", "Tails"), times = 5)
+```
+
+```
+##  [1] "Heads" "Tails" "Heads" "Tails" "Heads" "Tails" "Heads" "Tails" "Heads"
+## [10] "Tails"
+```
+
+- Instead of `times = 5`, use `each = 5` if you want `"Heads"` and `"Tails"` to each appear consecutively. 
+
+---
+
+# Vector Operations
+
+At its core, R is a big, *fancy* statistical calculator. 
+
+- While we can **add**, **subtract**, **multiply**, and **divide** numbers like you can in any calculator, we can also perform these operations (and more!) on vectors. 
+
+
+```r
+c(1, 2, 3, 4, 5) + c(6, 7, 8, 9, 10)
+```
+
+```
+## [1]  7  9 11 13 15
+```
+
+
+```r
+c(1, 2, 3, 4, 5) * c(6, 7, 8, 9, 10)
+```
+
+```
+## [1]  6 14 24 36 50
+```
+
+- 🚨 **Note**: Make sure vectors are the same *length* when doing this!
+
+---
+
+# Assignment
+
+We can store vectors under an **alias** so we don't have to keep typing out `c()`, `seq()`, etc. 
+
+
+```r
+my_vec = c(1, 2, 3, 4, 5)
+```
+
+--
+
+
+```r
+my_vec^2
+```
+
+```
+## [1]  1  4  9 16 25
+```
+
+```r
+my_vec + my_vec
+```
+
+```
+## [1]  2  4  6  8 10
+```
+
+```r
+rep(my_vec, 2)
+```
+
+```
+##  [1] 1 2 3 4 5 1 2 3 4 5
+```
+
+---
+
+# Logical Vectors
+
+**Logical** vectors are made up of only *two unique "logical" elements*: 
+
+- `TRUE` or `FALSE`
+
+--
+
+"Under the hood", `TRUE` and `FALSE` have values of `1` and `0`, respectively. 
+
+
+```r
+c(TRUE, FALSE) + c(TRUE, FALSE)
+```
+
+```
+## [1] 2 0
+```
+
+```r
+mean(c(TRUE, TRUE, TRUE, FALSE, FALSE))
+```
+
+```
+## [1] 0.6
+```
+
+---
+
+# Logical Operators
+
+Let's create two objects to use with some *logical tests*:
+
+
+```r
+moose_age = 1 # rounding up
+anthony_age = 31 # rounding down
+```
+
+--
+
+Here are some commonly-used **logical operators**
+
+- `==`: equal to
+- `!=`: not equal to
+- `&gt;`: greater than
+- `&gt;=`: greater than or equal to
+- `&lt;`: less than
+- `&lt;=`: less than or equal to
+- `%in%`: true if a value is **in** a vector
+
+---
+
+# Logical Operators
+
+The `==` operator asks whether two objects are **equal**. 
+
+The code below tests the following:
+
+&gt; Moose's age equals Anthony's age. 
+
+
+```r
+moose_age == anthony_age
+```
+
+```
+## [1] FALSE
+```
+
+--
+
+&gt; Moose's age does *not* equal Anthony's age. 
+
+
+```r
+moose_age != anthony_age
+```
+
+```
+## [1] TRUE
+```
+
+--
+
+&gt; "Moose's age is greater than Anthony's age. 
+
+
+```r
+moose_age &gt; anthony_age
+```
+
+```
+## [1] FALSE
+```
+
+---
+
+# Combining Logicals
+
+We can combine *several* logical operators to check multiple conditions!
+
+- `&amp;` for **and**, `|` for **or**
+
+The code below tests the following:
+
+&gt; Moose's age is less than Anthony's age **and** Moose's age is less than 5. 
+
+
+```r
+(moose_age &lt; anthony_age) &amp; 
+  (moose_age &lt; 5)
+```
+
+```
+## [1] TRUE
+```
+
+--
+
+&gt; Moose's age is less than Anthony's age **or** Anthony's age is less than 30. 
+
+
+```r
+(moose_age &lt; anthony_age) | 
+  (anthony_age &lt; 30)
+```
+
+```
+## [1] TRUE
+```
+
+---
+
+# Indexing Vectors
+
+To examine or use *specific* elements in a vector, we need to identify its **index**. 
+
+Let's randomly sample some data from a **binomial distribution** (more on this later!!!). 
+
+
+```r
+set.seed(338) # To control R's random number generator
+my_sample = rbinom(n = 1000, size = 20, prob = 0.5)
+```
+
+--
+
+&lt;br&gt;
+
+To examine a *single* element from `my_sample`, indicate the *index* you'd like in **square brackets**:
+
+
+```r
+my_sample[338]
+```
+
+```
+## [1] 8
+```
+
+- The 338th element in the `my_sample` vector is `8`. 
+
+---
+
+# Indexing Vectors
+
+We can supply *vectors* within the square brackets to index *multiple elements*:
+
+
+```r
+my_sample[330:339]
+```
+
+```
+##  [1] 11 11 12  9 10  7 11 11  8 13
+```
+
+- The output above gives the 330th *through* the 339th elements of `my_sample`. 
+
+---
+
+# Indexing Vectors (with logicals)
+
+When working with large vectors, it can be useful to select elements that satisfy some condition(s). 
+
+- Suppose we wanted to extract *only* the elements of `my_sample` that are **greater than 12**. 
+
+--
+
+&lt;br&gt;
+
+
+```r
+my_sample[my_sample &gt; 12]
+```
+
+```
+##   [1] 15 13 13 14 14 14 13 14 13 13 13 14 14 14 14 14 13 14 13 13 13 13 14 13 13
+##  [26] 13 13 13 15 13 13 14 13 13 14 15 14 13 13 16 14 14 15 13 13 13 13 13 16 14
+##  [51] 13 15 13 13 13 13 14 13 13 14 13 14 13 13 14 13 13 13 13 14 16 14 14 13 13
+##  [76] 13 15 13 14 16 13 14 14 13 13 14 13 14 13 13 13 14 13 13 15 15 13 13 13 13
+## [101] 15 13 13 16 13 14 13 18 14 15 14 13 13 13 15 15 14 13 13 14 14 14 13 14 15
+## [126] 16 13 15 14 14
+```
+
+- By indexing on a *logical*, we extract only the indices that are set to `TRUE` in `my_sample &gt; 12`. 
+
+---
+
+# Practice
+
+&gt; Extract *only* the elements of `my_sample` that are *greater than 12* **OR** *less than or equal to 5*. 
+
+--
+
+**Solution**:
+
+
+```r
+my_sample[my_sample &gt; 12 | my_sample &lt;= 5]
+```
+
+```
+##   [1] 15 13 13  5 14 14 14 13 14 13 13 13  5  5 14 14 14 14  5  5 14 13 14 13 13
+##  [26] 13 13 14 13  4 13 13 13 13 15 13 13 14 13 13  5 14 15 14 13 13  5 16 14 14
+##  [51] 15 13  5 13 13 13 13 16  5 14 13 15 13 13 13  5 13 14  5 13 13  5 14 13 14
+##  [76] 13 13 14 13 13 13 13  5 14 16 14 14 13 13 13 15 13 14  5  5 16 13 14 14 13
+## [101] 13 14 13  4 14 13  5  5 13 13 14 13 13 15 15 13 13 13 13 15 13 13 16 13  5
+## [126] 14 13  5 18 14 15  4 14 13 13 13 15 15 14 13 13  4 14 14 14  5 13  4 14 15
+## [151]  4 16 13 15 14 14
+```
+
+---
+
+# Some Other Useful Functions
+
+- `mean()`: calculate the **mean** of a vector
+
+
+```r
+mean(my_sample)
+```
+
+```
+## [1] 10.044
+```
+
+- `sum()`: calculate the **sum** of a vector
+
+
+```r
+sum(my_sample)
+```
+
+```
+## [1] 10044
+```
+
+- `length()`: calculate the **length** (e.g., *sample size*) of a vector
+
+
+```r
+length(my_sample)
+```
+
+```
+## [1] 1000
+```
+
+- plus many more!
+
+---
+
+# The `%in%` Operator
+
+The `%in%` operator is *very useful* for checking whether *multiple* elements occur in a vector. 
+
+Recall `my_sample`. Let's check whether each element equals either `5`, `10`, or `15`:
+
+
+```r
+my_sample == 5 | my_sample == 10 | my_sample == 15
+```
+
+- **Note**: The output is a **logical vector** that is the same length as `my_sample`. 
+
+--
+
+Alternatively, we could use %in%:
+
+
+```r
+my_sample %in% c(5, 10, 15)
+```
+
+---
+
+# `sample()`
+
+In the early part of the semester, we will use `sample()` *a ton*. 
+
+- With `sample()`, we can **randomly select** elements from a vector *with* or *without replacement*. 
+
+--
+
+&lt;br&gt;
+
+Let's **simulate** flipping a *fair coin* 20 times!
+
+
+```r
+coin_flips = sample(c("H", "T"), size = 20, replace = TRUE)
+coin_flips
+```
+
+```
+##  [1] "T" "H" "T" "T" "T" "T" "T" "T" "H" "T" "T" "H" "T" "H" "T" "H" "T" "T" "H"
+## [20] "T"
+```
+
+&gt; What might happen if we set `replace = FALSE`?
+
+---
+
+# `sample()`
+
+In the early part of the semester, we will use `sample()` *a ton*. 
+
+- With `sample()`, we can **randomly select** elements from a vector *with* or *without replacement*. 
+
+&lt;br&gt;
+
+Next, let's simulate randomly selecting 20 numbers from 1 through 1,000. 
+
+
+```r
+sample(1:1000, size = 20, replace = FALSE)
+```
+
+```
+##  [1]  13 145 715 347 444 418 429 408 348 861 300 410 565  58 328  73 284  18 398
+## [20] 683
+```
+
+&gt; What might happen if we set `replace = TRUE`?
+
+---
+
+# `sample()`
+
+In the early part of the semester, we will use `sample()` *a ton*. 
+
+- With `sample()`, we can **randomly select** elements from a vector *with* or *without replacement*. 
+
+&lt;br&gt;
+
+Let's **simulate** flipping a *biased coin* 20 times!
+
+
+```r
+coin_flips = sample(c("H", "T"), size = 20, replace = TRUE, prob = c(0.75, 0.25))
+table(coin_flips)
+```
+
+```
+## coin_flips
+##  H  T 
+## 13  7
+```
+
+**Note**: In this simulation, the `"H"` has a 75% chance of being selected. 
+
+---
+
+# `which()`
+
+The `which()` function allows us to see *which* indices in a vector satisfy some logical condition. 
+
+- The result is a vector of **indices**, *not* elements!
+
+--
+
+&lt;br&gt;
+
+Using the *biased* coin from the previous slide, let's see when we saw our first "Tails"
+
+
+```r
+which(coin_flips == "T")
+```
+
+```
+## [1]  3  5  7  9 12 17 19
+```
+
+```r
+which(coin_flips == "T")[1] # Gives the first result only
+```
+
+```
+## [1] 3
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"countIncrementalSlides": false,
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<script>
+(function() {
+  var divHTML = document.querySelectorAll(".details-open");
+  divHTML.forEach(function (el) {
+    var preNodes = el.getElementsByTagName("pre");
+    var outputNode = preNodes[1];
+    outputNode.outerHTML = "<details open class='output'><summary>Output</summary>" + outputNode.outerHTML + "</details>";
+  })
+})();
+(function() {
+  var divHTML = document.querySelectorAll(".details");
+  divHTML.forEach(function (el) {
+    var preNodes = el.getElementsByTagName("pre");
+    var outputNode = preNodes[1];
+    outputNode.outerHTML = "<details class='output'><summary>Output</summary>" + outputNode.outerHTML + "</details>";
+  })
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
