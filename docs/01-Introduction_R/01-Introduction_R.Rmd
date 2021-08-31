@@ -232,6 +232,8 @@ I need **two volunteers**!
 
 - *Volunteer 1*: You'll be the "Judge of Randomness"
 
+--
+
 - *Volunteer 2*: You'll write a sequence of "0"s and "1"s on the board that are supposed to look like the results of 20 coin flips. 
 
 (I'll also write a sequence of "0"s and "1"s on the board!)
