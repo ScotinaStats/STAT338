@@ -127,9 +127,11 @@ knitr::include_graphics("prob_wiki.png")
 
 # Activity #1 (Rock-paper-scissors)
 
-- In *pairs of two*, play **10 games of rock-paper-scissors**. 
+- In *pairs of two*, play **20 games of rock-paper-scissors**. 
 
 - Write down your choice after each throw (*R*, *P*, or *S*)
+
+--
 
 - Identify your *longest sequence of consecutive throws*!
 
@@ -139,7 +141,7 @@ knitr::include_graphics("prob_wiki.png")
 
 .details[
 ```{r}
-rps = sample(c("R", "P", "S"), size = 10, replace = TRUE)
+rps = sample(c("R", "P", "S"), size = 20, replace = TRUE)
 rps
 ```
 ]
@@ -155,7 +157,7 @@ rps
 .panel[.panel-name[R Code]
 ```{r rps, fig.show='hide', fig.width = 5, fig.height = 4, dpi = 300}
 trials = replicate(10000, {
-  example = sample(c("R", "P", "S"), size = 10, replace = TRUE)
+  example = sample(c("R", "P", "S"), size = 20, replace = TRUE)
   max(rle(example)$lengths)
 })
 
@@ -163,7 +165,7 @@ gf_histogram( ~ trials, binwidth = 1, color = "white") +
   scale_x_continuous(breaks = scales::pretty_breaks()) + 
   labs(x = "Longest run", 
        y = "Number of simulations", 
-       title = "10 games of RPS") +
+       title = "20 games of RPS") +
   theme_bw()
 ```
 ]
@@ -181,7 +183,7 @@ gf_histogram( ~ trials, binwidth = 1, color = "white") +
 .panel[.panel-name[R Code]
 ```{r rps3, fig.show='hide', fig.width = 5, fig.height = 4, dpi = 300}
 trials = replicate(10000, {
-  example = sample(c("R", "P", "S"), size = 20, replace = TRUE)
+  example = sample(c("R", "P", "S"), size = 5, replace = TRUE)
   max(rle(example)$lengths)
 })
 
@@ -189,7 +191,7 @@ gf_histogram( ~ trials, binwidth = 1, color = "white") +
   scale_x_continuous(breaks = scales::pretty_breaks()) + 
   labs(x = "Longest run", 
        y = "Number of simulations", 
-       title = "20 games of RPS") +
+       title = "5 games of RPS") +
   theme_bw()
 ```
 ]
