@@ -242,6 +242,7 @@ I need **two volunteers**!
 
 .details[
 ```{r}
+set.seed(338)
 sample(0:1, size = 20, replace = TRUE)
 ```
 ]
