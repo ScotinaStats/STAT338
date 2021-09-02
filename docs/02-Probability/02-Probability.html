@@ -1,0 +1,2486 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>MATH/STAT 338: Probability</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Anthony Scotina" />
+    <script src="libs/header-attrs-2.6/header-attrs.js"></script>
+    <link rel="stylesheet" href="my-theme.css" type="text/css" />
+    <link rel="stylesheet" href="my-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# MATH/STAT 338: Probability
+## Probability and Counting
+### Anthony Scotina
+
+---
+
+
+
+
+
+
+
+
+&lt;!--
+pagedown::chrome_print("~/Dropbox/Teaching/03-Simmons Courses/MATH228-Introduction to Data Science/Lecture Slides/01-Introduction/01-Introduction.html")
+--&gt;
+
+class: center, middle, frame
+
+# The "Naive" Definition of Probability
+
+---
+
+# Experiments
+
+An **experiment** is the (very general) process that produces an *observation*. 
+
+- tossing a coin or die, taking some measurement of an individual, Spotify shuffle (eh, [kinda](https://www.businessinsider.com/spotify-made-shuffle-feature-less-random-to-actually-feel-random-2020-3)...), etc.
+
+![](https://media.giphy.com/media/3XEHibVa4cIf72Qzzu/giphy.gif)
+
+- We know the observations that *could* happen, but we don't know which particular observation *will* happen. They are **random**!
+
+---
+
+# Events
+
+Performing an experiment (e.g., tossing a coin) can result in one or more possible outcomes. 
+
+- We call these **events**, and usually denote them with *capital letters*.
+
+--
+
+**Example**
+
+Toss a die and observe the number of dots on the top face. 
+
+- One possible event is: `$$A = \text{roll an even number} = \{2, 4, 6\}$$`
+
+- Another event: `$$B = \text{roll a five} = \{5\}$$`
+
+--
+
+**Note**
+
+- Event `\(A\)` is a *compound event* and can be decomposed into smaller *simple events*. 
+
+---
+
+# Sample Space
+
+The **sample space** is the set of *all possible outcomes* of an experiment. 
+
+- This will *always* be denoted by the letter `\(S\)`. 
+
+--
+
+**Examples**
+
+- Tossing a die: `$$S = \{1, 2, 3, 4, 5, 6\}$$`
+
+--
+
+- Choosing which pic of Moose to show to STAT 338:
+
+.center[
+
+&lt;img src="moose.png" width="637" /&gt;
+
+]
+
+---
+
+# 🚧 Set Theory Detour 🚧
+
+*Set Theory*: The language of sets will give us a clear and precise way to work with events. 
+
+- Events themselves are **sets**!
+
+--
+
+**Definitions** 💻️
+
+Let `\(A\)` and `\(B\)` be events in the sample space `\(S\)`.
+
+1. **Intersection**: `\(A\cap B\)` is the set of events that are in **both** `\(A\)` *and* `\(B\)`. 
+
+2. **Union**: `\(A\cup B\)` is the set of events that are in **either** `\(A\)` *or* `\(B\)` (or *both*). 
+
+3. `\(A\)` is a **subset** of `\(B\)`, `\(A\subset B\)`, if every element of `\(A\)` is also an element of `\(B\)`. 
+
+4. The **empty set**, `\(\emptyset\)`, is the set consisting of *no points*. 
+    - The empty set is also a subset of every set!
+    
+5. The **complement** of `\(A\)`, written as `\(\bar{A}\)`, is the set of points in `\(S\)` *but not in* `\(A\)`. 
+
+6. `\(A\)` and `\(B\)` are **disjoint/mutually exclusive** if `\(A\cap B = \emptyset\)`. 
+
+---
+
+# Practice
+
+Consider the experiment of picking a random card from a standard deck of 52 cards, and the following four events:
+
+- *A*: card is a heart
+
+- *B*: card is a diamond
+
+- *C*: card is an ace
+
+- *D*: card is black
+
+1. Describe the events `\(A\cap C\)` and `\(A\cup C\)`. 
+
+2. Describe the events `\(A\cap B\)` and `\(A\cup B\)`. 
+
+3. Describe `\((A\cup B)\cap (A\cup C)\)`. 
+
+4. Describe the relationship between `\(A\cup B\)` and `\(\bar{D}\)`. 
+
+---
+
+# Okay, so what is probability?!
+
+The "simple" definition of the **probability** of an event, dating back centuries, was to...
+
+- **count** up the number of ways an event could happen, and...
+
+- divide by the **total number of possible outcomes** of an experiment. 
+
+This is the **naive definition of probability**: For an event `\(A\subset S\)`, `$$P(A) = \frac{\text{number of outcomes favorable to } A}{\text{total number of outcomes in } S}$$`
+
+--
+
+&lt;br&gt;
+
+Why *naive*?
+
+- *S* must be **finite**. 
+
+- Each unique element of *S* is **equally likely**. 
+
+---
+
+class: center, middle, frame
+
+# Counting
+
+---
+
+# How to count
+
+Sometimes when using the **naive definition of probability**, calculating the sizes of `\(A\)` and `\(S\)` is straightforward. 
+
+- **Example**, toss a coin twice and calculate the *probability that both coins landed on "heads"*.
+
+- *S* `\(=\)` {HH, HT, TH, TT}
+
+--
+
+Often the sets we'll need to count are *extremely large*, and we can't simply list out all possible outcomes. 
+
+- **Example**: What is the probability of a *full house* in poker?
+
+.center[
+![](https://media.giphy.com/media/11peb90FxNJqfK/giphy.gif)
+]
+
+---
+
+# Multiplication (mn) Rule
+
+Consider two sub-experiments *A* and *B* with *a* and *b* possible outcomes, respectively.
+
+- **Then the compound experiment with *A* and *B* has *ab* possible outcomes.**
+
+--
+
+&lt;br&gt;
+
+**Example** (Ice cream cones from *Blitzstein and Hwang*)
+
+&gt; Suppose you are buying an ice cream cone. You can choose whether to have:
+
+&gt; - chocolate, vanilla, or strawberry as your flavor, 
+
+&gt; - a cake cone or a waffle cone, 
+
+&gt; - rainbow, chocolate, or no sprinkles
+
+&gt; How many different ice cream cone/flavor/sprinkle combinations are available?
+
+---
+
+# The Birthday Problem
+
+There are *21* people in a room (e.g., this room...). Assume:
+
+(i) each person's birthday is equally likely to be any of the 365 days of the year (sorry, leap year birthdays!)
+
+(ii) birthdays are *independent*
+
+Find the probably that at least one pair of people in the group have the same birthday. 
+
+**What to count**:
+
+1. The number of **TOTAL** ways to assign birthdays to the 21 people in the room. 
+    - This is the *denominator* of the naive definition of probability. 
+
+2. The number of ways to assign birthdays to 21 people *such that there are two people who share a birthday. 
+    - This is the number of outcomes favorable to the "full house" event.
+    
+---
+
+# The Birthday Problem
+
+There are *21* people in a room (e.g., this room...). Assume:
+
+(i) each person's birthday is equally likely to be any of the 365 days of the year (sorry, leap year birthdays!)
+
+(ii) birthdays are *independent*
+
+Find the probably that at least one pair of people in the group have the same birthday. 
+
+🚨The number of ways we can choose *k* objects from *n* total objects **without replacement** (*when order matters*) is given by `$$P_{k}^{n}=n(n-1)(n-2)\cdots(n-k+1)=\frac{n!}{(n-k)!}$$`
+
+---
+
+# The Birthday Problem
+
+.center[
+&lt;img src="birthday_problem.png" width="75%" /&gt;
+]
+
+---
+
+# Full House in Poker
+
+Find the probability of obtaining a **full house** in poker. 
+
+- A *full house* is a hand of five cards that contains *three cards of one rank and two cards of another rank*. 
+
+**What to count**:
+
+1. The number of **TOTAL** possible hands of five cards. 
+    - This is the *denominator* of the naive definition of probability. 
+    
+2. The number of ways we can obtain three cards of one rank and two cards of another rank. 
+    - This is the number of outcomes favorable to the "full house" event. 
+
+--
+
+🚨The number of ways we can choose *k* objects from *n* total objects (*when order doesn't matter*) is given by `$$\binom{n}{k}=C_{k}^{n}=\frac{n!}{k!(n-k)!}$$`
+- We can find this number in R with `choose(n, k)`. 
+
+---
+
+# Full House in Poker
+
+Find the probability of obtaining a **full house** in poker. 
+
+- A *full house* is a hand of five cards that contains *three cards of one rank and two cards of another rank*. 
+
+**What to count**:
+
+**1.** The number of **TOTAL** possible hands of five cards. 
+
+- There are `\(\binom{52}{5}\)`, or `choose(52, 5)` total possible hands of five cards. 
+
+**2.** The number of ways we can obtain three cards of one rank and two cards of another rank. 
+
+- There are 13 ways to choose the first rank. 
+- There are `\(\binom{4}{3}\)` ways to choose *three* cards of that rank from the four suits (hearts, diamonds, clubs, spades). 
+- There are 12 ways to choose the second rank (since the first was already chosen). 
+- There are `\(\binom{4}{2}\)` ways to choose *two* cards of that rank from the four suits. 
+
+---
+
+# Sarah the Chimp
+
+.pull-left[
+- In 1978, researchers Premack and Woodruff published a study in *Science* magazine, reporting an experiment where an adult chimpanzee named Sarah was shown videotapes of eight different scenarios of a human being faced with a problem.
+
+- After each videotape showing, she was presented with two photographs, one of which depicted a possible solution to the problem.
+
+- Sarah could pick the photograph with the correct solution for seven of the eight problems!
+]
+
+.pull-right[
+![](chimp.jpeg)
+]
+
+---
+
+# How?!
+
+What are **two possible explanations** for Sarah getting 7 correct answers out of 8?
+
+--
+
+1. Sarah was just guessing and got lucky. 
+
+2. Sarah can do better than just guessing. 
+
+--
+
+Let's try to model this study *under the assumption that Sarah was guessing*. 
+
+.center[
+&lt;img src="coin_flip.png" width="25%" /&gt;
+]
+
+&gt; What is the probability of flipping 7 heads in 8 coin tosses, assuming the coin is fair? 🤔
+
+---
+
+# Coin Tossing
+
+&gt; What is the probability of flipping 7 heads in 8 coin tosses, assuming the coin is fair? 🤔
+
+.center[
+&lt;img src="coin_flip.png" width="25%" /&gt;
+]
+
+**What to count**:
+
+1. The number of **TOTAL** possible results in 8 coin tosses. 
+    
+2. The number of ways we can land 7 heads in 8 coin tosses. 
+
+---
+
+# Simulating Probability
+
+We can also **simulate** one possible outcome of this experiment with `sample(...)`:
+
+- Randomly sample from `c("Heads", "Tails")` **8** times. 
+
+- Set `replace = FALSE` to sample *without replacement*. 
+    - What do you think would happen if we set `replace = TRUE`?
+
+
+```r
+results = c("Heads", "Tails")
+sample(results, size = 8, replace = TRUE)
+```
+
+```
+## [1] "Heads" "Heads" "Heads" "Tails" "Tails" "Heads" "Tails" "Heads"
+```
+
+---
+
+# Newton-Pepys Problem
+
+Isaac Newton was consulted about the following problem by Samuel Pepys, who wanted the information for gambling purposes. Which of the following events has the highest probability?
+
+- *A*: At least one 6 appears when 6 fair dice are rolled. 
+
+- *B*: At least two 6's appear when 12 fair dice are rolled. 
+
+- *C*: At least three 6's appear when 18 fair dice are rolled. 
+
+--
+
+&lt;br&gt;
+
+Does the **naive definition of probability** apply?
+
+- Is the number of possible outcomes *finite*?
+
+- Are each of the possible outcomes *equally likely*?
+
+---
+
+# Simulating the Newton-Pepys Problem
+
+For now, let's simulate **one trial** from each of the events *A*, *B*, and *C*. 
+
+
+```r
+rolls_A = sample(1:6, size = 6, replace = TRUE)
+rolls_A
+```
+
+```
+## [1] 6 3 3 3 4 1
+```
+
+```r
+any_six = any(rolls_A == 6)
+any_six
+```
+
+```
+## [1] TRUE
+```
+
+&lt;br&gt;
+
+&gt; Try simulating one trial for events *B* and *C*!
+
+---
+
+class: center, middle, frame
+
+# The Axioms of Probability
+
+---
+
+# The Axioms of Probability
+
+The *naive* definition can only take us so far, because it relies on *equally likely outcomes* and a *finite sample space*. 
+
+- Here is the more **general** definition of probability that we'll rely on for the rest of the class!
+
+&lt;br&gt;
+
+Suppose `\(S\)` is a sample space associated with an experiment. To every event `\(A\)` in `\(S\)`, we define `\(P(A)\)` as the **probability** of `\(A\)` so that the following *axioms* hold:
+
+- **Axiom 1**: `\(P(A)\geq0\)`
+
+- **Axiom 2**: `\(P(S)=1\)` and `\(P(\emptyset)=0\)`
+
+- **Axiom 3**: If `\(A_{1},A_{2},A_{3},\dots\)` form a sequence of *pairwise mutually exclusive* events in `\(S\)` (that is, `\(A_{i}\cap A_{j}=\emptyset\)` if `\(i\neq j\)` ), then: `$$P(A_{1}\cup A_{2}\cup A_{3}\cup \cdots)=\sum_{i=1}^{\infty}P(A_{i})$$`
+
+---
+
+# Properties of Probability
+
+We can use the **axioms of probability** to derive other important properties of probability!
+
+&lt;br&gt;
+
+For any events `\(A\)` and `\(B\)`:
+
+1.  `\(P(\bar{A})=1-P(A)\)`
+
+2.  If `\(A\subset B\)`, then `\(P(A)\leq P(B)\)`. 
+
+3.  (The **Additive Law of Probability**) `$$P(A\cup B)=P(A)+P(B)-P(A\cap B)$$`
+
+---
+
+# Story Proofs
+
+Sometimes it is easier to understand **why** a result is true and *what it means* through a *proof by interpretation*, rather than through (sometimes) *tedious algebra*. 
+
+- A **story proof** is a *proof by interpretation*!
+
+&lt;br&gt;
+
+**Some Examples**
+
+**1.** For any nonnegative integers `\(n\)` and `\(k\)` with `\(k\leq n\)`, we have `$$\binom{n}{k}=\binom{n}{n-k}$$`
+
+--
+
+**2.** (*The Team Captain*) For any positive integers `\(n\)` and `\(k\)` with `\(k\leq n\)`, `$$n\binom{n-1}{k-1}=k\binom{n}{k}$$`
+
+---
+
+class: center, middle, frame
+
+# Conditional Probability
+
+---
+
+# Motivating Example
+
+.pull-left[
+&lt;img src="titanic.jpg" width="2687" /&gt;
+]
+
+.pull-right[
+The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half of the passengers and crew.
+
+- The probability of an event (e.g., *survival*) will sometimes depend upon whether we have *additional information* about **other events** (e.g., passenger *status*). 
+
+&lt;br&gt; 
+
+**Conditional probability** shows us how we can incorporate additional "evidence" into our understanding of certain phenomena. 
+]
+
+---
+
+# Motivating Example
+
+**Results**
+
+.center[
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#hhhjdkmsxe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hhhjdkmsxe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hhhjdkmsxe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hhhjdkmsxe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hhhjdkmsxe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hhhjdkmsxe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hhhjdkmsxe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hhhjdkmsxe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hhhjdkmsxe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hhhjdkmsxe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hhhjdkmsxe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hhhjdkmsxe .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hhhjdkmsxe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hhhjdkmsxe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hhhjdkmsxe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hhhjdkmsxe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hhhjdkmsxe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#hhhjdkmsxe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hhhjdkmsxe .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#hhhjdkmsxe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hhhjdkmsxe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hhhjdkmsxe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hhhjdkmsxe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hhhjdkmsxe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hhhjdkmsxe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#hhhjdkmsxe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hhhjdkmsxe .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#hhhjdkmsxe .gt_left {
+  text-align: left;
+}
+
+#hhhjdkmsxe .gt_center {
+  text-align: center;
+}
+
+#hhhjdkmsxe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hhhjdkmsxe .gt_font_normal {
+  font-weight: normal;
+}
+
+#hhhjdkmsxe .gt_font_bold {
+  font-weight: bold;
+}
+
+#hhhjdkmsxe .gt_font_italic {
+  font-style: italic;
+}
+
+#hhhjdkmsxe .gt_super {
+  font-size: 65%;
+}
+
+#hhhjdkmsxe .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="hhhjdkmsxe" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Status</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Crew</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">First</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Second</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Third</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Total</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Alive</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">212</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">201</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">119</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">180</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">712</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Dead</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">677</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">123</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">116</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">530</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">1446</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Total</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">889</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">324</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">235</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">710</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">2158</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+]
+
+--
+
+Suppose we randomly select a *Titanic* passenger from the list. What is the probability that this passenger survived?
+
+- `\(P(\text{Alive})=\text{?}\)`
+
+---
+
+# Motivating Example
+
+**Results**
+
+.center[
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#vuyuifodpz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vuyuifodpz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vuyuifodpz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vuyuifodpz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vuyuifodpz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vuyuifodpz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vuyuifodpz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vuyuifodpz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vuyuifodpz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vuyuifodpz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vuyuifodpz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vuyuifodpz .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vuyuifodpz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vuyuifodpz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vuyuifodpz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vuyuifodpz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vuyuifodpz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#vuyuifodpz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vuyuifodpz .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#vuyuifodpz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vuyuifodpz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vuyuifodpz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vuyuifodpz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vuyuifodpz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vuyuifodpz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#vuyuifodpz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vuyuifodpz .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#vuyuifodpz .gt_left {
+  text-align: left;
+}
+
+#vuyuifodpz .gt_center {
+  text-align: center;
+}
+
+#vuyuifodpz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vuyuifodpz .gt_font_normal {
+  font-weight: normal;
+}
+
+#vuyuifodpz .gt_font_bold {
+  font-weight: bold;
+}
+
+#vuyuifodpz .gt_font_italic {
+  font-style: italic;
+}
+
+#vuyuifodpz .gt_super {
+  font-size: 65%;
+}
+
+#vuyuifodpz .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="vuyuifodpz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Status</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Crew</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">First</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Second</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Third</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Total</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Alive</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">212</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">201</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">119</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">180</td>
+      <td class="gt_row gt_left" style="background-color: #E0FFFF; color: #000000; font-weight: bold;">712</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Dead</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">677</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">123</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">116</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">530</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">1446</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Total</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">889</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">324</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">235</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">710</td>
+      <td class="gt_row gt_left" style="background-color: #E0FFFF; color: #000000; font-weight: bold;">2158</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+]
+
+Suppose we randomly select a *Titanic* passenger from the list. What is the probability that this passenger survived?
+
+- `\(P(\text{Alive})=712/2158=0.33\)`
+
+---
+
+# Motivating Example
+
+**Now**, let's suppose we receive *additional information*. 
+
+- The passenger selected was *first class*. 
+
+**Results**
+
+.center[
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#lhqkhwjkgs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lhqkhwjkgs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lhqkhwjkgs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lhqkhwjkgs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lhqkhwjkgs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lhqkhwjkgs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lhqkhwjkgs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lhqkhwjkgs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lhqkhwjkgs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lhqkhwjkgs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lhqkhwjkgs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lhqkhwjkgs .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lhqkhwjkgs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lhqkhwjkgs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lhqkhwjkgs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lhqkhwjkgs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lhqkhwjkgs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#lhqkhwjkgs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lhqkhwjkgs .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#lhqkhwjkgs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lhqkhwjkgs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lhqkhwjkgs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lhqkhwjkgs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lhqkhwjkgs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lhqkhwjkgs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#lhqkhwjkgs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lhqkhwjkgs .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#lhqkhwjkgs .gt_left {
+  text-align: left;
+}
+
+#lhqkhwjkgs .gt_center {
+  text-align: center;
+}
+
+#lhqkhwjkgs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lhqkhwjkgs .gt_font_normal {
+  font-weight: normal;
+}
+
+#lhqkhwjkgs .gt_font_bold {
+  font-weight: bold;
+}
+
+#lhqkhwjkgs .gt_font_italic {
+  font-style: italic;
+}
+
+#lhqkhwjkgs .gt_super {
+  font-size: 65%;
+}
+
+#lhqkhwjkgs .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="lhqkhwjkgs" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Status</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Crew</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">First</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Second</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Third</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Total</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Alive</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">212</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">201</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">119</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">180</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">712</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Dead</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">677</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">123</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">116</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">530</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">1446</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Total</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">889</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">324</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">235</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">710</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">2158</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+]
+
+What is the probability that this passenger survived, **given** that they were first class?
+
+- `\(P(\text{Alive}\mid \text{First Class})=\text{?}\)`
+
+---
+
+# Motivating Example
+
+**Now**, let's suppose we receive *additional information*. 
+
+- The passenger selected was *first class*. 
+
+**Results**
+
+.center[
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#izkealcxfj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#izkealcxfj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#izkealcxfj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#izkealcxfj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#izkealcxfj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#izkealcxfj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#izkealcxfj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#izkealcxfj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#izkealcxfj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#izkealcxfj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#izkealcxfj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#izkealcxfj .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#izkealcxfj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#izkealcxfj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#izkealcxfj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#izkealcxfj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#izkealcxfj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#izkealcxfj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#izkealcxfj .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#izkealcxfj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#izkealcxfj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#izkealcxfj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#izkealcxfj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#izkealcxfj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#izkealcxfj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#izkealcxfj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#izkealcxfj .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#izkealcxfj .gt_left {
+  text-align: left;
+}
+
+#izkealcxfj .gt_center {
+  text-align: center;
+}
+
+#izkealcxfj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#izkealcxfj .gt_font_normal {
+  font-weight: normal;
+}
+
+#izkealcxfj .gt_font_bold {
+  font-weight: bold;
+}
+
+#izkealcxfj .gt_font_italic {
+  font-style: italic;
+}
+
+#izkealcxfj .gt_super {
+  font-size: 65%;
+}
+
+#izkealcxfj .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="izkealcxfj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Status</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Crew</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">First</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Second</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Third</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Total</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Alive</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">212</td>
+      <td class="gt_row gt_left" style="background-color: #E0FFFF; color: #000000; font-weight: bold;">201</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">119</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">180</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">712</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Dead</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">677</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">123</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">116</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">530</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">1446</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">Total</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">889</td>
+      <td class="gt_row gt_left" style="background-color: #E0FFFF; color: #000000; font-weight: bold;">324</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">235</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">710</td>
+      <td class="gt_row gt_left" style="background-color: #FFFFFF; color: #000000;">2158</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+]
+
+What is the probability that this passenger survived, **given** that they were first class?
+
+- `\(P(\text{Alive}\mid \text{First Class})=201/324=0.62\)`
+
+---
+
+# Conditional Probability
+
+&gt; *Conditioning is the soul of statistics.* 
+&gt; - Blitzstein and Hwang, 2019
+
+The **conditional probability** of an event `\(A\)`, given that an event `\(B\)` has occurred, is defined as `$$P(A\mid B)=\frac{P(A\cap B)}{P(B)},$$` provided `\(P(B)&gt;0\)`. 
+
+--
+
+- **Note**: This means that `$$P(A\cap B)=P(A\mid B)P(B).$$` This will be *very important* in a little bit!
+
+---
+
+# Example 🎲🎲
+
+Suppose that we toss two balanced dice. What is the probability that both dice are 4, given that the sum of the two dice is 8?
+
+&gt; Define these events:
+
+&gt; - *A*: Observe that both dice are 4
+
+&gt; - *B*: Observe that the sum of the two dice is 8. 
+
+--
+
+**Solution**
+
+`$$P(A\mid B)=\frac{P(A\cap B)}{P(B)}=\frac{1/36}{5/36}=1/5$$`
+
+--
+
+**Practice**
+
+🤔 What is `\(P(B\mid A)\)`?
+
+---
+
+# Practice
+
+A standard deck of cards is shuffled well. We draw a two-card hand, *without replacement*. Define the following events:
+
+- `\(A\)`: we drew two aces
+
+- `\(B\)`: we drew an ace
+
+- `\(C\)`: we drew the ace of diamonds
+
+&lt;br&gt;
+
+**1.** Find `\(P(A\mid B)\)`. 
+
+&lt;br&gt;
+
+**2.** Find `\(P(A\mid C)\)`. 
+
+---
+
+# Simulation
+
+A standard deck of cards is shuffled well. We draw a two-card hand, *without replacement*. Define the following events:
+
+- `\(A\)`: we drew two aces
+
+- `\(B\)`: we drew an ace
+
+- `\(C\)`: we drew the ace of diamonds
+
+Simulating `\(P(B)\)`:
+
+
+```r
+cards = c(rep("Hearts", 13), rep("Diamonds", 13), 
+          rep("Clubs", 13), rep("Spades", 13))
+simulated_draws &lt;- replicate(10000, {
+  draw &lt;- sample(cards, size = 2, replace = FALSE)
+  draw[2] %in% c("Hearts", "Diamonds")
+})
+
+mean(simulated_draws)
+```
+
+```
+## [1] 0.5008
+```
+
+---
+
+# Independence
+
+Two events are said to be **independent** if knowledge that one event occurs does not indicate whether the other event is more likely to occur. 
+
+Formally, two events are **independent** if *any* one of the following holds:
+
+- `\(P(A\mid B)=P(A)\)`
+
+- `\(P(B\mid A)=P(B)\)`
+
+- `\(P(A\cap B)=P(A)P(B)\)`
+
+Otherwise, the events are said to be *dependent*. 
+
+---
+
+# Example
+
+Consider the following events in the toss of a single die:
+
+- *A*: Observe an odd number
+
+- *B*: Observe an even number
+
+- *C*: Observe a 1 or 2
+
+&lt;br&gt;
+
+&gt; Are *A* and *B* independent events? What about *A* and *C*?
+
+--
+
+**Solution**
+
+- *A* and *B* are **dependent**, because `\(P(A\mid B)\neq P(A)\)`.
+    - Knowing that we observed an even number means that we **CANNOT** observe an odd number. 
+    
+- *A* and *C* are **independent**, because `\(P(A\mid C)=P(A)\)`. 
+    - Both probabilities are equal to 1/2. 
+    
+---
+
+# Multiple Indepedent Events
+
+Suppose we roll five ordinary dice. 
+
+&gt; What is the probability that all of them show six?
+
+&lt;br&gt;
+
+&gt; What is the probability that **at least one** six appears?
+
+&gt; - [Hint: What is the complement of this event?]
+
+
+---
+
+class: center, middle, frame
+
+# Bayes' Rule
+
+---
+
+# Piéchart Disease 😨😱
+
+It is "well-known" that *Piéchart Disease* afflicts 1% of the population. Suppose a patient gets tested for Piéchart Disease. 
+
+**Some notation**:
+
+- *D*: patient has the disease
+
+- *T*: patient tests positive for the disease
+
+**Some assumptions**:
+
+- The test is advertised as "*95% accurate*". 
+    - We're assuming this means that `\(P(T\mid D)=0.95=P(\bar{T}\mid \bar{D})\)`
+    
+&lt;br&gt;
+
+But what *really* matters to the patient? Is it `\(P(T\mid D)\)`? 🤔
+
+---
+
+# Flipping the conditional
+
+In general, `\(P(A\mid B)\neq P(B\mid A)\)`. It is *very* common to mix up these two probabilities!
+
+- This is called the **prosecutor's fallacy**. 
+
+- **Always be aware of your denominator, or the event on which you are conditioning!!!**
+
+--
+
+However, `\(P(A\mid B)\)` and `\(P(B\mid A)\)` *are* related through the fact that:
+
+1. `\(P(A\cap B)=P(A\mid B)P(B)\)`
+
+2. `\(P(A\cap B)=P(B\mid A)P(A)\)`
+
+---
+
+# Bayes' Rule
+
+The probabilities `\(P(A\cap B)\)` and `\(P(B\cap A)\)` are *linked* through **Bayes' Rule**: `$$P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}$$`
+
+--
+
+Some *Statistics* lore...
+
+.pull-left[
+Named after **Thomas Bayes**.
+
+&lt;img src="bayes.jpeg" width="207" /&gt;
+]
+
+.pull-right[
+Published by **Richard Price**. 
+
+&lt;img src="price.jpeg" width="60%" /&gt;
+]
+
+---
+
+# Piéchart Disease 😨😱
+
+It is "well-known" that *Piéchart Disease* afflicts 1% of the population. Suppose a patient gets tested for Piéchart Disease. 
+
+**Some notation**:
+
+- *D*: patient has the disease
+
+- *T*: patient tests positive for the disease
+
+We know that `\(P(T\mid D)=0.95\)`. But what we *really* want to know is `\(P(D\mid T)\)`.
+
+- This is the probability **that the patient has the disease**...
+    - *given that they tested positive*. 
+
+We can use Bayes' Rule for this... `$$P(D\mid T)=\frac{P(T\mid D)P(D)}{P(T)}$$`
+
+--
+
+- But what is `\(P(T)\)`?!
+
+---
+
+# Law of Total Probability (LTP)
+
+The **Law of Total Probability** works *in tandem* with Bayes' Rule, and allows us to connect *unconditional* and *conditional* probabilities. 
+
+- The LTP works by **partitioning** the sample space, *S*, into a union of **disjoint** slices.
+
+--
+
+A **partition** of *S* is a collection of sets `\(\{B_{1},B_{2},\dots,B_{k}\}\)` such that:
+
+1. `\(S = B_{1}\cup B_{2}\cup\cdots\cup B_{k}\)`
+
+2. `\(B_{i}\cap B_{j}=\emptyset\)` for `\(i\neq j\)`
+
+--
+
+If `\(A\subset S\)`, this allows us to state the LTP: `$$P(A)=\sum_{i=1}^{n}P(A\mid B_{i})P(B_{i})$$`
+
+---
+
+# Piéchart Disease 😨😱
+
+We know that `\(P(T\mid D)=0.95\)`. But what we *really* want to know is `\(P(D\mid T)\)`.
+
+- This is the probability **that the patient has the disease**...
+    - *given that they tested positive*. 
+
+We can use Bayes' Rule for this... `$$P(D\mid T)=\frac{P(T\mid D)P(D)}{P(T)}$$`
+
+--
+
+Now we can decompose `\(T\)` into a union of disjoint slices: `$$T=(T\cap D)\cup (T\cap \bar{D})$$`
+
+- We can use this, along with **Axiom 3** and the connection between `\(P(T\cap D)\)` and `\(P(T\mid D)\)` to find `\(P(T)\)`! 
+
+---
+
+# Practice
+
+(WMS Exercise 2.135)
+
+Of the travelers arriving at a small airport, 60% fly on major airlines, 30% fly on privately owned planes, and the remainder fly on commercially owned planes not belonging to a major airline. Of those traveling on major airlines, 50% are traveling for business reasons, whereas 60% of those arriving on private planes and 90% of those arriving on other commercially owned planes are traveling for business reasons. 
+
+Suppose that we randomly select one person arriving at this airport. What is the probability that the person...
+
+1. is traveling on business?
+
+2. is traveling for business on a privately owned plane?
+
+3. arrived on a privately owned plane, given that the person is traveling for business reasons?
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"countIncrementalSlides": false,
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
