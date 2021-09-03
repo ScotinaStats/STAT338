@@ -222,6 +222,22 @@ Consider two sub-experiments *A* and *B* with *a* and *b* possible outcomes, res
 
 ---
 
+# Multiplication (mn) Rule
+
+Consider two sub-experiments *A* and *B* with *a* and *b* possible outcomes, respectively.
+
+- **Then the compound experiment with *A* and *B* has *ab* possible outcomes.**
+
+<br>
+
+**Example** (Runners from *Blitzstein and Hwang*)
+
+> Suppose that 10 people are running a race. Assume that no ties are possible, and each runner finishes the race. 
+
+> How many possibilities are there for the first, second, and third place winners?
+
+---
+
 # The Birthday Problem
 
 There are *21* people in a room (e.g., this room...). Assume:
@@ -266,6 +282,24 @@ knitr::include_graphics("birthday_problem.png")
 
 ---
 
+# The Binomial Coefficient and Overcounting
+
+Consider the following two examples:
+
+1. In a committee with *n* members, how many ways are there to choose a president, vice president, and treasurer?
+
+2. In a committee with *n* members, how many ways are there to choose three *officers* of equal rank?
+
+--
+
+<br>
+
+🚨The number of ways we can choose *k* objects from *n* total objects (*when order doesn't matter*) is given by $$\binom{n}{k}=C_{k}^{n}=\frac{n!}{k!(n-k)!}$$
+
+- We can find this number in R with `choose(n, k)`. 
+
+---
+
 # Full House in Poker
 
 Find the probability of obtaining a **full house** in poker. 
@@ -279,11 +313,6 @@ Find the probability of obtaining a **full house** in poker.
     
 2. The number of ways we can obtain three cards of one rank and two cards of another rank. 
     - This is the number of outcomes favorable to the "full house" event. 
-
---
-
-🚨The number of ways we can choose *k* objects from *n* total objects (*when order doesn't matter*) is given by $$\binom{n}{k}=C_{k}^{n}=\frac{n!}{k!(n-k)!}$$
-- We can find this number in R with `choose(n, k)`. 
 
 ---
 
