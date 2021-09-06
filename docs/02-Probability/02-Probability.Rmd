@@ -146,7 +146,7 @@ Consider the experiment of picking a random card from a standard deck of 52 card
 
 3. Describe $(A\cup B)\cap (A\cup C)$. 
 
-4. Describe the relationship between $A\cup B$ and $\bar{D}$. 
+4. Describe the relationship between $A\cup B$ and $D$. 
 
 ---
 
