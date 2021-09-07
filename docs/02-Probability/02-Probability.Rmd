@@ -398,23 +398,15 @@ knitr::include_graphics("coin_flip.png")
 
 # Newton-Pepys Problem
 
-Isaac Newton was consulted about the following problem by Samuel Pepys, who wanted the information for gambling purposes. Which of the following events has the highest probability?
+Isaac Newton was consulted about the following problem by Samuel Pepys, who wanted the information for gambling purposes. 
+
+**Which of the following events has the highest probability?**
 
 - *A*: At least one 6 appears when 6 fair dice are rolled. 
 
 - *B*: At least two 6's appear when 12 fair dice are rolled. 
 
 - *C*: At least three 6's appear when 18 fair dice are rolled. 
-
---
-
-<br>
-
-Does the **naive definition of probability** apply?
-
-- Is the number of possible outcomes *finite*?
-
-- Are each of the possible outcomes *equally likely*?
 
 ---
 
