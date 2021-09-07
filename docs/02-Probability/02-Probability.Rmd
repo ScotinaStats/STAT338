@@ -309,10 +309,10 @@ Find the probability of obtaining a **full house** in poker.
 
 **What to count**:
 
-1. The number of **TOTAL** possible hands of five cards. 
+**1.**. The number of **TOTAL** possible hands of five cards. 
     - This is the *denominator* of the naive definition of probability. 
     
-2. The number of ways we can obtain three cards of one rank and two cards of another rank. 
+**2.** The number of ways we can obtain three cards of one rank and two cards of another rank. 
     - This is the number of outcomes favorable to the "full house" event. 
 
 ---
