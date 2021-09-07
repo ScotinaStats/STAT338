@@ -396,22 +396,6 @@ knitr::include_graphics("coin_flip.png")
 
 ---
 
-# Simulating Probability
-
-We can also **simulate** one possible outcome of this experiment with `sample(...)`:
-
-- Randomly sample from `c("Heads", "Tails")` **8** times. 
-
-- Set `replace = FALSE` to sample *without replacement*. 
-    - What do you think would happen if we set `replace = TRUE`?
-
-```{r}
-results = c("Heads", "Tails")
-sample(results, size = 8, replace = TRUE)
-```
-
----
-
 # Newton-Pepys Problem
 
 Isaac Newton was consulted about the following problem by Samuel Pepys, who wanted the information for gambling purposes. Which of the following events has the highest probability?
