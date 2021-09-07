@@ -253,8 +253,9 @@ Find the probably that at least one pair of people in the group have the same bi
 1. The number of **TOTAL** ways to assign birthdays to the 21 people in the room. 
     - This is the *denominator* of the naive definition of probability. 
 
-2. The number of ways to assign birthdays to 21 people *such that there are two people who share a birthday. 
-    - This is the number of outcomes favorable to the "full house" event.
+2. The number of ways to assign birthdays to 21 people *such that there are two people who share a birthday*. 
+    - This is the number of "favorable" outcomes.
+    - Maybe it'll be easier to find the **complement**...
     
 ---
 
