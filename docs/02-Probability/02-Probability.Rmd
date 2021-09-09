@@ -400,8 +400,9 @@ For now, let's simulate **one trial** from each of the events *A*, *B*, and *C*.
 rolls_A = sample(1:6, size = 6, replace = TRUE)
 rolls_A
 
-any_six = any(rolls_A == 6)
-any_six
+sum(rolls_A == 6) >= 1
+
+any(rolls_A == 6)
 ```
 
 <br>
