@@ -352,8 +352,6 @@ Find the probability of obtaining a **full house** in poker.
 
 What are **two possible explanations** for Sarah getting 7 correct answers out of 8?
 
---
-
 1. Sarah was just guessing and got lucky. 
 
 2. Sarah can do better than just guessing. 
@@ -366,23 +364,7 @@ Let's try to model this study *under the assumption that Sarah was guessing*.
 &lt;img src="coin_flip.png" width="25%" /&gt;
 ]
 
-&gt; What is the probability of flipping 7 heads in 8 coin tosses, assuming the coin is fair? 🤔
-
----
-
-# Coin Tossing
-
-&gt; What is the probability of flipping 7 heads in 8 coin tosses, assuming the coin is fair? 🤔
-
-.center[
-&lt;img src="coin_flip.png" width="25%" /&gt;
-]
-
-**What to count**:
-
-1. The number of **TOTAL** possible results in 8 coin tosses. 
-    
-2. The number of ways we can land 7 heads in 8 coin tosses. 
+&gt; What is the probability of flipping *at least* 7 heads in 8 coin tosses, assuming the coin is fair? 🤔
 
 ---
 
@@ -411,7 +393,7 @@ rolls_A
 ```
 
 ```
-## [1] 4 2 5 6 4 4
+## [1] 4 6 5 5 5 5
 ```
 
 ```r
@@ -520,7 +502,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#rcmyracenv .gt_table {
+#mqsfjbffae .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -545,7 +527,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   border-left-color: #D3D3D3;
 }
 
-#rcmyracenv .gt_heading {
+#mqsfjbffae .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -557,7 +539,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   border-right-color: #D3D3D3;
 }
 
-#rcmyracenv .gt_title {
+#mqsfjbffae .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -567,7 +549,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   border-bottom-width: 0;
 }
 
-#rcmyracenv .gt_subtitle {
+#mqsfjbffae .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -577,13 +559,13 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   border-top-width: 0;
 }
 
-#rcmyracenv .gt_bottom_border {
+#mqsfjbffae .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rcmyracenv .gt_col_headings {
+#mqsfjbffae .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -598,7 +580,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   border-right-color: #D3D3D3;
 }
 
-#rcmyracenv .gt_col_heading {
+#mqsfjbffae .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -618,7 +600,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   overflow-x: hidden;
 }
 
-#rcmyracenv .gt_column_spanner_outer {
+#mqsfjbffae .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -630,15 +612,15 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   padding-right: 4px;
 }
 
-#rcmyracenv .gt_column_spanner_outer:first-child {
+#mqsfjbffae .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rcmyracenv .gt_column_spanner_outer:last-child {
+#mqsfjbffae .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rcmyracenv .gt_column_spanner {
+#mqsfjbffae .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -650,7 +632,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   width: 100%;
 }
 
-#rcmyracenv .gt_group_heading {
+#mqsfjbffae .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -672,7 +654,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   vertical-align: middle;
 }
 
-#rcmyracenv .gt_empty_group_heading {
+#mqsfjbffae .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -687,15 +669,15 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   vertical-align: middle;
 }
 
-#rcmyracenv .gt_from_md > :first-child {
+#mqsfjbffae .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rcmyracenv .gt_from_md > :last-child {
+#mqsfjbffae .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rcmyracenv .gt_row {
+#mqsfjbffae .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -714,7 +696,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   overflow-x: hidden;
 }
 
-#rcmyracenv .gt_stub {
+#mqsfjbffae .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -726,7 +708,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   padding-left: 12px;
 }
 
-#rcmyracenv .gt_summary_row {
+#mqsfjbffae .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -736,7 +718,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   padding-right: 5px;
 }
 
-#rcmyracenv .gt_first_summary_row {
+#mqsfjbffae .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -746,7 +728,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   border-top-color: #D3D3D3;
 }
 
-#rcmyracenv .gt_grand_summary_row {
+#mqsfjbffae .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -756,7 +738,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   padding-right: 5px;
 }
 
-#rcmyracenv .gt_first_grand_summary_row {
+#mqsfjbffae .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -766,11 +748,11 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   border-top-color: #D3D3D3;
 }
 
-#rcmyracenv .gt_striped {
+#mqsfjbffae .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rcmyracenv .gt_table_body {
+#mqsfjbffae .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -779,7 +761,7 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   border-bottom-color: #D3D3D3;
 }
 
-#rcmyracenv .gt_footnotes {
+#mqsfjbffae .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -793,13 +775,13 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   border-right-color: #D3D3D3;
 }
 
-#rcmyracenv .gt_footnote {
+#mqsfjbffae .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#rcmyracenv .gt_sourcenotes {
+#mqsfjbffae .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -813,46 +795,46 @@ The *RMS Titanic* collided with an iceberg on April 14, 1912, killing over half 
   border-right-color: #D3D3D3;
 }
 
-#rcmyracenv .gt_sourcenote {
+#mqsfjbffae .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#rcmyracenv .gt_left {
+#mqsfjbffae .gt_left {
   text-align: left;
 }
 
-#rcmyracenv .gt_center {
+#mqsfjbffae .gt_center {
   text-align: center;
 }
 
-#rcmyracenv .gt_right {
+#mqsfjbffae .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rcmyracenv .gt_font_normal {
+#mqsfjbffae .gt_font_normal {
   font-weight: normal;
 }
 
-#rcmyracenv .gt_font_bold {
+#mqsfjbffae .gt_font_bold {
   font-weight: bold;
 }
 
-#rcmyracenv .gt_font_italic {
+#mqsfjbffae .gt_font_italic {
   font-style: italic;
 }
 
-#rcmyracenv .gt_super {
+#mqsfjbffae .gt_super {
   font-size: 65%;
 }
 
-#rcmyracenv .gt_footnote_marks {
+#mqsfjbffae .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="rcmyracenv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="mqsfjbffae" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -912,7 +894,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#khlzkvlvqc .gt_table {
+#qpzqcddaax .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -937,7 +919,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-left-color: #D3D3D3;
 }
 
-#khlzkvlvqc .gt_heading {
+#qpzqcddaax .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -949,7 +931,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-right-color: #D3D3D3;
 }
 
-#khlzkvlvqc .gt_title {
+#qpzqcddaax .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -959,7 +941,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-bottom-width: 0;
 }
 
-#khlzkvlvqc .gt_subtitle {
+#qpzqcddaax .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -969,13 +951,13 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-top-width: 0;
 }
 
-#khlzkvlvqc .gt_bottom_border {
+#qpzqcddaax .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#khlzkvlvqc .gt_col_headings {
+#qpzqcddaax .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -990,7 +972,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-right-color: #D3D3D3;
 }
 
-#khlzkvlvqc .gt_col_heading {
+#qpzqcddaax .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1010,7 +992,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   overflow-x: hidden;
 }
 
-#khlzkvlvqc .gt_column_spanner_outer {
+#qpzqcddaax .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1022,15 +1004,15 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   padding-right: 4px;
 }
 
-#khlzkvlvqc .gt_column_spanner_outer:first-child {
+#qpzqcddaax .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#khlzkvlvqc .gt_column_spanner_outer:last-child {
+#qpzqcddaax .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#khlzkvlvqc .gt_column_spanner {
+#qpzqcddaax .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1042,7 +1024,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   width: 100%;
 }
 
-#khlzkvlvqc .gt_group_heading {
+#qpzqcddaax .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1064,7 +1046,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   vertical-align: middle;
 }
 
-#khlzkvlvqc .gt_empty_group_heading {
+#qpzqcddaax .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1079,15 +1061,15 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   vertical-align: middle;
 }
 
-#khlzkvlvqc .gt_from_md > :first-child {
+#qpzqcddaax .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#khlzkvlvqc .gt_from_md > :last-child {
+#qpzqcddaax .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#khlzkvlvqc .gt_row {
+#qpzqcddaax .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1106,7 +1088,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   overflow-x: hidden;
 }
 
-#khlzkvlvqc .gt_stub {
+#qpzqcddaax .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1118,7 +1100,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   padding-left: 12px;
 }
 
-#khlzkvlvqc .gt_summary_row {
+#qpzqcddaax .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1128,7 +1110,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   padding-right: 5px;
 }
 
-#khlzkvlvqc .gt_first_summary_row {
+#qpzqcddaax .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1138,7 +1120,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-top-color: #D3D3D3;
 }
 
-#khlzkvlvqc .gt_grand_summary_row {
+#qpzqcddaax .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1148,7 +1130,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   padding-right: 5px;
 }
 
-#khlzkvlvqc .gt_first_grand_summary_row {
+#qpzqcddaax .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1158,11 +1140,11 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-top-color: #D3D3D3;
 }
 
-#khlzkvlvqc .gt_striped {
+#qpzqcddaax .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#khlzkvlvqc .gt_table_body {
+#qpzqcddaax .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1171,7 +1153,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-bottom-color: #D3D3D3;
 }
 
-#khlzkvlvqc .gt_footnotes {
+#qpzqcddaax .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1185,13 +1167,13 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-right-color: #D3D3D3;
 }
 
-#khlzkvlvqc .gt_footnote {
+#qpzqcddaax .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#khlzkvlvqc .gt_sourcenotes {
+#qpzqcddaax .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1205,46 +1187,46 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-right-color: #D3D3D3;
 }
 
-#khlzkvlvqc .gt_sourcenote {
+#qpzqcddaax .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#khlzkvlvqc .gt_left {
+#qpzqcddaax .gt_left {
   text-align: left;
 }
 
-#khlzkvlvqc .gt_center {
+#qpzqcddaax .gt_center {
   text-align: center;
 }
 
-#khlzkvlvqc .gt_right {
+#qpzqcddaax .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#khlzkvlvqc .gt_font_normal {
+#qpzqcddaax .gt_font_normal {
   font-weight: normal;
 }
 
-#khlzkvlvqc .gt_font_bold {
+#qpzqcddaax .gt_font_bold {
   font-weight: bold;
 }
 
-#khlzkvlvqc .gt_font_italic {
+#qpzqcddaax .gt_font_italic {
   font-style: italic;
 }
 
-#khlzkvlvqc .gt_super {
+#qpzqcddaax .gt_super {
   font-size: 65%;
 }
 
-#khlzkvlvqc .gt_footnote_marks {
+#qpzqcddaax .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="khlzkvlvqc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="qpzqcddaax" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -1306,7 +1288,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#mvdjlwsbns .gt_table {
+#ftzsjozfzy .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1331,7 +1313,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-left-color: #D3D3D3;
 }
 
-#mvdjlwsbns .gt_heading {
+#ftzsjozfzy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1343,7 +1325,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-right-color: #D3D3D3;
 }
 
-#mvdjlwsbns .gt_title {
+#ftzsjozfzy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1353,7 +1335,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-bottom-width: 0;
 }
 
-#mvdjlwsbns .gt_subtitle {
+#ftzsjozfzy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1363,13 +1345,13 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-top-width: 0;
 }
 
-#mvdjlwsbns .gt_bottom_border {
+#ftzsjozfzy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mvdjlwsbns .gt_col_headings {
+#ftzsjozfzy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1384,7 +1366,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-right-color: #D3D3D3;
 }
 
-#mvdjlwsbns .gt_col_heading {
+#ftzsjozfzy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1404,7 +1386,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   overflow-x: hidden;
 }
 
-#mvdjlwsbns .gt_column_spanner_outer {
+#ftzsjozfzy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1416,15 +1398,15 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   padding-right: 4px;
 }
 
-#mvdjlwsbns .gt_column_spanner_outer:first-child {
+#ftzsjozfzy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mvdjlwsbns .gt_column_spanner_outer:last-child {
+#ftzsjozfzy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mvdjlwsbns .gt_column_spanner {
+#ftzsjozfzy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1436,7 +1418,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   width: 100%;
 }
 
-#mvdjlwsbns .gt_group_heading {
+#ftzsjozfzy .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1458,7 +1440,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   vertical-align: middle;
 }
 
-#mvdjlwsbns .gt_empty_group_heading {
+#ftzsjozfzy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1473,15 +1455,15 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   vertical-align: middle;
 }
 
-#mvdjlwsbns .gt_from_md > :first-child {
+#ftzsjozfzy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mvdjlwsbns .gt_from_md > :last-child {
+#ftzsjozfzy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mvdjlwsbns .gt_row {
+#ftzsjozfzy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1500,7 +1482,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   overflow-x: hidden;
 }
 
-#mvdjlwsbns .gt_stub {
+#ftzsjozfzy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1512,7 +1494,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   padding-left: 12px;
 }
 
-#mvdjlwsbns .gt_summary_row {
+#ftzsjozfzy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1522,7 +1504,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   padding-right: 5px;
 }
 
-#mvdjlwsbns .gt_first_summary_row {
+#ftzsjozfzy .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1532,7 +1514,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-top-color: #D3D3D3;
 }
 
-#mvdjlwsbns .gt_grand_summary_row {
+#ftzsjozfzy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1542,7 +1524,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   padding-right: 5px;
 }
 
-#mvdjlwsbns .gt_first_grand_summary_row {
+#ftzsjozfzy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1552,11 +1534,11 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-top-color: #D3D3D3;
 }
 
-#mvdjlwsbns .gt_striped {
+#ftzsjozfzy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mvdjlwsbns .gt_table_body {
+#ftzsjozfzy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1565,7 +1547,7 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-bottom-color: #D3D3D3;
 }
 
-#mvdjlwsbns .gt_footnotes {
+#ftzsjozfzy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1579,13 +1561,13 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-right-color: #D3D3D3;
 }
 
-#mvdjlwsbns .gt_footnote {
+#ftzsjozfzy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#mvdjlwsbns .gt_sourcenotes {
+#ftzsjozfzy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1599,46 +1581,46 @@ Suppose we randomly select a *Titanic* passenger from the list. What is the prob
   border-right-color: #D3D3D3;
 }
 
-#mvdjlwsbns .gt_sourcenote {
+#ftzsjozfzy .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#mvdjlwsbns .gt_left {
+#ftzsjozfzy .gt_left {
   text-align: left;
 }
 
-#mvdjlwsbns .gt_center {
+#ftzsjozfzy .gt_center {
   text-align: center;
 }
 
-#mvdjlwsbns .gt_right {
+#ftzsjozfzy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mvdjlwsbns .gt_font_normal {
+#ftzsjozfzy .gt_font_normal {
   font-weight: normal;
 }
 
-#mvdjlwsbns .gt_font_bold {
+#ftzsjozfzy .gt_font_bold {
   font-weight: bold;
 }
 
-#mvdjlwsbns .gt_font_italic {
+#ftzsjozfzy .gt_font_italic {
   font-style: italic;
 }
 
-#mvdjlwsbns .gt_super {
+#ftzsjozfzy .gt_super {
   font-size: 65%;
 }
 
-#mvdjlwsbns .gt_footnote_marks {
+#ftzsjozfzy .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="mvdjlwsbns" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="ftzsjozfzy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -1700,7 +1682,7 @@ What is the probability that this passenger survived, **given** that they were f
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#puzunsxezj .gt_table {
+#lpwdlksiye .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1725,7 +1707,7 @@ What is the probability that this passenger survived, **given** that they were f
   border-left-color: #D3D3D3;
 }
 
-#puzunsxezj .gt_heading {
+#lpwdlksiye .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1737,7 +1719,7 @@ What is the probability that this passenger survived, **given** that they were f
   border-right-color: #D3D3D3;
 }
 
-#puzunsxezj .gt_title {
+#lpwdlksiye .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1747,7 +1729,7 @@ What is the probability that this passenger survived, **given** that they were f
   border-bottom-width: 0;
 }
 
-#puzunsxezj .gt_subtitle {
+#lpwdlksiye .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1757,13 +1739,13 @@ What is the probability that this passenger survived, **given** that they were f
   border-top-width: 0;
 }
 
-#puzunsxezj .gt_bottom_border {
+#lpwdlksiye .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#puzunsxezj .gt_col_headings {
+#lpwdlksiye .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1778,7 +1760,7 @@ What is the probability that this passenger survived, **given** that they were f
   border-right-color: #D3D3D3;
 }
 
-#puzunsxezj .gt_col_heading {
+#lpwdlksiye .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1798,7 +1780,7 @@ What is the probability that this passenger survived, **given** that they were f
   overflow-x: hidden;
 }
 
-#puzunsxezj .gt_column_spanner_outer {
+#lpwdlksiye .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1810,15 +1792,15 @@ What is the probability that this passenger survived, **given** that they were f
   padding-right: 4px;
 }
 
-#puzunsxezj .gt_column_spanner_outer:first-child {
+#lpwdlksiye .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#puzunsxezj .gt_column_spanner_outer:last-child {
+#lpwdlksiye .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#puzunsxezj .gt_column_spanner {
+#lpwdlksiye .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1830,7 +1812,7 @@ What is the probability that this passenger survived, **given** that they were f
   width: 100%;
 }
 
-#puzunsxezj .gt_group_heading {
+#lpwdlksiye .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1852,7 +1834,7 @@ What is the probability that this passenger survived, **given** that they were f
   vertical-align: middle;
 }
 
-#puzunsxezj .gt_empty_group_heading {
+#lpwdlksiye .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1867,15 +1849,15 @@ What is the probability that this passenger survived, **given** that they were f
   vertical-align: middle;
 }
 
-#puzunsxezj .gt_from_md > :first-child {
+#lpwdlksiye .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#puzunsxezj .gt_from_md > :last-child {
+#lpwdlksiye .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#puzunsxezj .gt_row {
+#lpwdlksiye .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1894,7 +1876,7 @@ What is the probability that this passenger survived, **given** that they were f
   overflow-x: hidden;
 }
 
-#puzunsxezj .gt_stub {
+#lpwdlksiye .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1906,7 +1888,7 @@ What is the probability that this passenger survived, **given** that they were f
   padding-left: 12px;
 }
 
-#puzunsxezj .gt_summary_row {
+#lpwdlksiye .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1916,7 +1898,7 @@ What is the probability that this passenger survived, **given** that they were f
   padding-right: 5px;
 }
 
-#puzunsxezj .gt_first_summary_row {
+#lpwdlksiye .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1926,7 +1908,7 @@ What is the probability that this passenger survived, **given** that they were f
   border-top-color: #D3D3D3;
 }
 
-#puzunsxezj .gt_grand_summary_row {
+#lpwdlksiye .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1936,7 +1918,7 @@ What is the probability that this passenger survived, **given** that they were f
   padding-right: 5px;
 }
 
-#puzunsxezj .gt_first_grand_summary_row {
+#lpwdlksiye .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1946,11 +1928,11 @@ What is the probability that this passenger survived, **given** that they were f
   border-top-color: #D3D3D3;
 }
 
-#puzunsxezj .gt_striped {
+#lpwdlksiye .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#puzunsxezj .gt_table_body {
+#lpwdlksiye .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1959,7 +1941,7 @@ What is the probability that this passenger survived, **given** that they were f
   border-bottom-color: #D3D3D3;
 }
 
-#puzunsxezj .gt_footnotes {
+#lpwdlksiye .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1973,13 +1955,13 @@ What is the probability that this passenger survived, **given** that they were f
   border-right-color: #D3D3D3;
 }
 
-#puzunsxezj .gt_footnote {
+#lpwdlksiye .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#puzunsxezj .gt_sourcenotes {
+#lpwdlksiye .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1993,46 +1975,46 @@ What is the probability that this passenger survived, **given** that they were f
   border-right-color: #D3D3D3;
 }
 
-#puzunsxezj .gt_sourcenote {
+#lpwdlksiye .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#puzunsxezj .gt_left {
+#lpwdlksiye .gt_left {
   text-align: left;
 }
 
-#puzunsxezj .gt_center {
+#lpwdlksiye .gt_center {
   text-align: center;
 }
 
-#puzunsxezj .gt_right {
+#lpwdlksiye .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#puzunsxezj .gt_font_normal {
+#lpwdlksiye .gt_font_normal {
   font-weight: normal;
 }
 
-#puzunsxezj .gt_font_bold {
+#lpwdlksiye .gt_font_bold {
   font-weight: bold;
 }
 
-#puzunsxezj .gt_font_italic {
+#lpwdlksiye .gt_font_italic {
   font-style: italic;
 }
 
-#puzunsxezj .gt_super {
+#lpwdlksiye .gt_super {
   font-size: 65%;
 }
 
-#puzunsxezj .gt_footnote_marks {
+#lpwdlksiye .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="puzunsxezj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="lpwdlksiye" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -2163,7 +2145,7 @@ mean(simulated_draws)
 ```
 
 ```
-## [1] 0.5007
+## [1] 0.5005
 ```
 
 ---

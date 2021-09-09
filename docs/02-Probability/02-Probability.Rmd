@@ -360,8 +360,6 @@ Find the probability of obtaining a **full house** in poker.
 
 What are **two possible explanations** for Sarah getting 7 correct answers out of 8?
 
---
-
 1. Sarah was just guessing and got lucky. 
 
 2. Sarah can do better than just guessing. 
@@ -376,25 +374,7 @@ knitr::include_graphics("coin_flip.png")
 ```
 ]
 
-> What is the probability of flipping 7 heads in 8 coin tosses, assuming the coin is fair? 🤔
-
----
-
-# Coin Tossing
-
-> What is the probability of flipping 7 heads in 8 coin tosses, assuming the coin is fair? 🤔
-
-.center[
-```{r, echo = FALSE, out.width = "25%"}
-knitr::include_graphics("coin_flip.png")
-```
-]
-
-**What to count**:
-
-1. The number of **TOTAL** possible results in 8 coin tosses. 
-    
-2. The number of ways we can land 7 heads in 8 coin tosses. 
+> What is the probability of flipping *at least* 7 heads in 8 coin tosses, assuming the coin is fair? 🤔
 
 ---
 
