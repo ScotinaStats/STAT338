@@ -340,44 +340,6 @@ Find the probability of obtaining a **full house** in poker.
 
 ---
 
-# Sarah the Chimp
-
-.pull-left[
-- In 1978, researchers Premack and Woodruff published a study in *Science* magazine, reporting an experiment where an adult chimpanzee named Sarah was shown videotapes of eight different scenarios of a human being faced with a problem.
-
-- After each videotape showing, she was presented with two photographs, one of which depicted a possible solution to the problem.
-
-- Sarah could pick the photograph with the correct solution for seven of the eight problems!
-]
-
-.pull-right[
-![](chimp.jpeg)
-]
-
----
-
-# How?!
-
-What are **two possible explanations** for Sarah getting 7 correct answers out of 8?
-
-1. Sarah was just guessing and got lucky. 
-
-2. Sarah can do better than just guessing. 
-
---
-
-Let's try to model this study *under the assumption that Sarah was guessing*. 
-
-.center[
-```{r, echo = FALSE, out.width = "25%"}
-knitr::include_graphics("coin_flip.png")
-```
-]
-
-> What is the probability of flipping *at least* 7 heads in 8 coin tosses, assuming the coin is fair? 🤔
-
----
-
 # Newton-Pepys Problem
 
 Isaac Newton was consulted about the following problem by Samuel Pepys, who wanted the information for gambling purposes. 
@@ -448,6 +410,44 @@ For any events $A$ and $B$:
 2.  If $A\subset B$, then $P(A)\leq P(B)$. 
 
 3.  (The **Additive Law of Probability**) $$P(A\cup B)=P(A)+P(B)-P(A\cap B)$$
+
+---
+
+# Sarah the Chimp
+
+.pull-left[
+- In 1978, researchers Premack and Woodruff published a study in *Science* magazine, reporting an experiment where an adult chimpanzee named Sarah was shown videotapes of eight different scenarios of a human being faced with a problem.
+
+- After each videotape showing, she was presented with two photographs, one of which depicted a possible solution to the problem.
+
+- Sarah could pick the photograph with the correct solution for seven of the eight problems!
+]
+
+.pull-right[
+![](chimp.jpeg)
+]
+
+---
+
+# How?!
+
+What are **two possible explanations** for Sarah getting 7 correct answers out of 8?
+
+1. Sarah was just guessing and got lucky. 
+
+2. Sarah can do better than just guessing. 
+
+--
+
+Let's try to model this study *under the assumption that Sarah was guessing*. 
+
+.center[
+```{r, echo = FALSE, out.width = "25%"}
+knitr::include_graphics("coin_flip.png")
+```
+]
+
+> What is the probability of flipping *at least* 7 heads in 8 coin tosses, assuming the coin is fair? 🤔
 
 ---
 
@@ -702,31 +702,6 @@ A standard deck of cards is shuffled well. We draw a two-card hand, *without rep
 
 ---
 
-# Simulation
-
-A standard deck of cards is shuffled well. We draw a two-card hand, *without replacement*. Define the following events:
-
-- $A$: we drew two aces
-
-- $B$: we drew an ace
-
-- $C$: we drew the ace of diamonds
-
-Simulating $P(B)$:
-
-```{r}
-cards = c(rep("Hearts", 13), rep("Diamonds", 13), 
-          rep("Clubs", 13), rep("Spades", 13))
-simulated_draws <- replicate(10000, {
-  draw <- sample(cards, size = 2, replace = FALSE)
-  draw[2] %in% c("Hearts", "Diamonds")
-})
-
-mean(simulated_draws)
-```
-
----
-
 # Independence
 
 Two events are said to be **independent** if knowledge that one event occurs does not indicate whether the other event is more likely to occur. 
@@ -773,13 +748,13 @@ Consider the following events in the toss of a single die:
 
 Suppose we roll five ordinary dice. 
 
-> What is the probability that all of them show six?
+**1.** What is the probability that all of them show six?
 
 <br>
 
-> What is the probability that **at least one** six appears?
+**2.** What is the probability that **at least one** six appears?
 
-> - [Hint: What is the complement of this event?]
+- [Hint: What is the complement of this event?]
 
 
 ---
