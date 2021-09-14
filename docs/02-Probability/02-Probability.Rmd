@@ -753,7 +753,9 @@ Consider the following events in the toss of a single die:
     
 ---
 
-# Multiple Indepedent Events
+```{r, echo = FALSE, eval = FALSE}
+
+# Multiple Independent Events
 
 Suppose we roll five ordinary dice. 
 
@@ -771,6 +773,8 @@ Suppose we roll five ordinary dice.
 
 
 ---
+  
+```
 
 class: center, middle, frame
 
