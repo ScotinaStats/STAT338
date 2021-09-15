@@ -693,21 +693,24 @@ $$P(A\mid B)=\frac{P(A\cap B)}{P(B)}=\frac{1/36}{5/36}=1/5$$
 
 # Practice
 
-A standard deck of cards is shuffled well. We draw a two-card hand, *without replacement*. Define the following events:
+Bob Ross was a legendary painter and television host who hosted *The Joy of Painting* for 11 years on PBS. Watch an episode of *The Joy of Painting* [HERE](https://www.youtube.com/watch?v=WT6n0K2zGnA). 
 
-- $A$: we drew two aces
+.pull-left[
 
-- $B$: we drew an ace
+1. 91% of Bob Ross's paintings contain a tree. 85% contain two or more trees. What is the probability that he painted a second tree, given that he painted a tree?
 
-- $C$: we drew the ace of diamonds
+2. 18% of Bob Ross's paintings contain a cabin. Given that he painted a cabin, there is a 35% chance the cabin is on a lake. What is the probability that a Bob Ross painting contains both a cabin and a lake?
 
-<br>
 
-**1.** Find $P(A\mid B)$. 
 
-<br>
+]
 
-**2.** Find $P(A\mid C)$. 
+.pull-right[
+```{r, echo = FALSE, out.width = "75%"}
+knitr::include_graphics("bob_ross.jpeg")
+```
+
+]
 
 ---
 
