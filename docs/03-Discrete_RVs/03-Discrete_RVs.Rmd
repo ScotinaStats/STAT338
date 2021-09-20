@@ -354,34 +354,7 @@ Let $y$ be a *discrete random variable* with PMF $p(y)$. Then the **expected val
 
 **Examples**
 
-**2.** (Capture-Recapture)
-
-.pull-left[
-```{r, echo = FALSE}
-data.frame(X = c(0, 1, 2), 
-           p = c(0.1, 0.6, 0.3)) %>%
-  gt() %>%
-  cols_label(
-    p = "P(X = x)"
-  )
-```
-]
-
-.pull-right[
-Using the definition of expected value, $$E(X)=1.2$$
-]
-
----
-
-# Expected Value
-
-Let $y$ be a *discrete random variable* with PMF $p(y)$. Then the **expected value** of $Y$, denoted as $E(Y)$, is $$E(Y)=\sum_{y}yp(y).$$
-
-- This definition is inspired by the *weighted mean* of a set of data points, where each possible outcome is weighted by its probability. 
-
-**Examples**
-
-**3.** (Eurasian Lynx)
+**2.** (Eurasian Lynx)
 
 .pull-left[
 ```{r, echo = FALSE, out.width = "50%"}
