@@ -196,7 +196,7 @@ The **Eurasian lynx** (pictured below) is a wild cat that lives in the north of 
 
 .pull-left[
 ```{r, echo = FALSE, out.width = "70%"}
-knitr::include_graphics("moose_lynx.jpg")
+knitr::include_graphics("moose_lynx.JPG")
 ```
 ]
 
@@ -269,13 +269,9 @@ knitr::include_graphics("box.jpg")
 
 For *any* discrete probability distribution, the following must be true:
 
-<br>
+1.  $0\leq p(y)\leq 1$ for all $y$. 
 
-**1.** $0\leq p(y)\leq 1$ for all $y$. 
-
-<br>
-
-**2.** $\sum_{y}p(y)=1$, where the summation is over all values of $y$ with nonzero probability. 
+2.  $\sum_{y}p(y)=1$, where the summation is over all values of $y$ with nonzero probability. 
 
 ---
 
@@ -389,7 +385,7 @@ Let $y$ be a *discrete random variable* with PMF $p(y)$. Then the **expected val
 
 .pull-left[
 ```{r, echo = FALSE, out.width = "50%"}
-knitr::include_graphics("moose_lynx.jpg")
+knitr::include_graphics("moose_lynx.JPG")
 ```
 ]
 
