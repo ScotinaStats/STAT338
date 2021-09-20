@@ -826,7 +826,7 @@ However, $P(A\mid B)$ and $P(B\mid A)$ *are* related through the fact that:
 
 # Bayes' Rule
 
-The probabilities $P(A\mid B)$ and $P(B\mid A)$ are *linked* through **Bayes' Rule**: $$P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}$$
+The probabilities $P(A\mid B)$ and $P(B\mid A)$ are *linked* through **Bayes' Rule**: $$P(B\mid A)=\frac{P(A\mid B)P(B)}{P(A)}$$
 
 --
 
