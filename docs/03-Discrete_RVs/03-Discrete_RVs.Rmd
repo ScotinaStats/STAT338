@@ -745,7 +745,7 @@ class: center, middle, frame
 
 # The Geometric Distribution
 
-Random variables that follow a **geometric distribution** are associated with experiments that are *similar* to the inomial experiment:
+Random variables that follow a **geometric distribution** are associated with experiments that are *similar* to the binomial experiment:
 
 1. In a sequence of *Bernoulli* trials, each trial results in one of two outcomes: *success* or *failure*
 
