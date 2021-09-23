@@ -495,7 +495,7 @@ A random variable $Y$ is said to have the **Bernoulli distribution** with parame
 
 **Examples**
 
-$Y=\cdots$
+$Y=1$ if...
 
 - drawing a heart from a standard deck of cards
 - flipping a fair coin and having it land heads
@@ -531,24 +531,26 @@ This *experiment* is actually a *sequence of Bernoulli trials*, aka a...
 
 ---
 
+```{r, echo = FALSE, eval = FALSE}
 # Simulating the Binomial Experiment
 
-```{r}
+{r}
 cards = c(rep("Hearts", 13), rep("Diamonds", 13), 
           rep("Spades", 13), rep("Clubs", 13))
 cards_10 = sample(cards, size = 10, replace = TRUE)
 cards_10
-```
+
 
 --
 
-```{r}
+{r}
 cards_10 == "Hearts"
-```
+
 
 Let's derive the **probability** of this event. 
 
 ---
+```
 
 # Binomial Distribution
 
@@ -652,13 +654,13 @@ Suppose **70%** of customers at **Piéchart Emporium** qualify for a *discount*.
 
 - We choose **5** customers *at random*. 
 
-1. Find the probability that 4 of the customers qualify for a discount. 
+**1.** Find the probability that 4 of the customers qualify for a discount. 
 
 ```{r}
 dbinom(4, size = 5, prob = 0.7)
 ```
 
-2. Find the probability that *at least* 2 customers qualify for a discount. 
+**2.** Find the probability that *at least* 2 customers qualify for a discount. 
 
 ```{r}
 1 - pbinom(1, size = 5, prob = 0.7)
