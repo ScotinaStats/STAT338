@@ -374,19 +374,6 @@ $$E(X)=\text{?}$$
 
 ---
 
-# Simulating Expected Value
-
-Using the same setup as before with the *Eurasian Lynx* example...
-
-```{r}
-litter_probs = c(0.18, 0.51, 0.27, 0.04)
-X = sample(1:4, 10000, replace = TRUE, prob = litter_probs)
-
-mean(X)
-```
-
----
-
 # Practice 
 
 An instant lottery ticket costs &#36;2. Out of a total of 10,000 tickets printed for this lottery... 
