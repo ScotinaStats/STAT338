@@ -334,7 +334,7 @@ When dealing with *many* probabilities, it can often be simpler to summarize a d
 
 # Expected Value
 
-Let $y$ be a *discrete random variable* with PMF $p(y)$. Then the **expected value** of $Y$, denoted as $E(Y)$, is $$E(Y)=\sum_{y}yp(y).$$
+Let $Y$ be a *discrete random variable* with PMF $p(y)$. Then the **expected value** of $Y$, denoted as $E(Y)$, is $$E(Y)=\sum_{y}yp(y).$$
 
 - This definition is inspired by the *weighted mean* of a set of data points, where each possible outcome is weighted by its probability. 
 
