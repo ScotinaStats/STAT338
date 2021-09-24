@@ -499,7 +499,6 @@ $Y=1$ if...
 
 - drawing a heart from a standard deck of cards
 - flipping a fair coin and having it land heads
-- tossing "scissors" in a game of rock-paper-scissors
 
 🤔 **But what if we had a sequence of identical Bernoulli "trials"?**
 
