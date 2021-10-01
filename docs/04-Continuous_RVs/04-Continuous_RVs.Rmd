@@ -1,0 +1,1300 @@
+---
+title: "MATH/STAT 338: Probability"
+subtitle: "Continuous Random Variables"
+author: "Anthony Scotina"
+date: 
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["my-theme.css", "my-fonts.css"]
+    nature:
+      countIncrementalSlides: false
+      highlightLines: true
+---
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+mono_accent(base_color = "#5E5E5E") #3E8A83?
+options(htmltools.preserve.raw = FALSE)
+```
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, warning = FALSE
+)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(mosaic)
+library(gt)
+```
+
+<!--
+pagedown::chrome_print("~/Dropbox/Teaching/03-Simmons Courses/MATH228-Introduction to Data Science/Lecture Slides/01-Introduction/01-Introduction.html")
+-->
+
+class: center, middle, frame
+
+# Probability Density Functions
+
+---
+
+# Continuous vs Discrete
+
+(From my **STAT 118** slides...)
+
+**Numerical (Quantitative) Variables**
+
+- **Discrete**: Numerical variable that can *only take whole, non-negative numbers* (0, 1, 2, ...)
+    - Examples: number of students in STAT 118, number of heads when flipping 3 coins. 
+
+- **Continuous**: Numerical variable that can *take an infinite range of numbers* within a (sometimes infinite) interval.     
+    - Examples: age, temperature, height, weight
+
+--
+
+<br>
+
+(Not from my **STAT 118** slides...)
+
+We can find $P(X=2)$ if $X$ is **discrete** (whatever $X$ may be). 
+
+- But if $Y$ is **continuous** and can *take an infinite range of numbers*, what is $P(Y=2)$?
+
+---
+
+# An Old Phone Example
+
+Suppose the number of calls received in a call center, $Y$, follow a $\text{Poisson}(1)$ distribution. 
+
+- That is, $P(Y=y)=p(y)=\frac{1^{y}}{y!}e^{-1}$, $y=0,1,2\dots$
+
+Find $P(Y\leq y)$ for $y=0, 1, 2, 3$ (i.e., you'll find four different probabilities).
+
+**Solution**:
+
+- $P(Y\leq 0)=P(Y=0)=p(0)=e^{-1}=\boxed{0.37}$
+
+- $P(Y\leq 1)=P(Y=0)+P(Y=1)=p(0)+p(1)=e^{-1}+e^{-1}=\boxed{0.74}$
+
+- $P(Y\leq 2)=p(0)+p(1)+p(2)=e^{-1}+e^{-1}+\frac{1}{2}e^{-1}=\boxed{0.92}$
+
+- $P(Y\leq 3)=p(0)+p(1)+p(2)+p(3)=e^{-1}+e^{-1}+\frac{1}{2}e^{-1}+\frac{1}{6}e^{-1}=\boxed{0.98}$
+
+The quantity $P(Y\leq y)$ is known as the **cumulative distribution function**, and will be very useful to us as we begin working with *continuous* random variables. 
+
+---
+
+# Cumulative Distribution Function
+
+Let $Y$ denote any random variable. The **cumulative distribution function (CDF)** of $Y$, denoted by $F(Y)$, is such that $$F(y)=P(Y\leq y),\quad -\infty<y<\infty$$
+
+--
+
+For $Y\sim \text{Poisson}(1)$, $$F(y)=P(Y\leq y)=\begin{cases}0&y<0\\0.37&0\leq y<1\\0.74& 1\leq y<2\\0.92& 2\leq y<3\\0.98&3\leq y<4\\ \dots&\dots\end{cases}$$
+
+<br>
+
+.center[
+**What does this look like as a graph?**
+]
+
+---
+
+# CDF Properties
+
+If $F(y)$ is a *cumulative distribution function*, then:
+
+1. $F(-\infty)=\lim_{y\to-\infty}F(y)=0$
+
+2. $F(\infty)=\lim_{y\to\infty}F(y)=1$
+
+3. $F(y)$ is a **nondecreasing** function of $y$. [If $y_{1}$ and $y_{2}$ are *any* values that that $y_{1}<y_{2}$, then $F(y_{1})\leq F(y_{2})$.]
+
+---
+
+# A New Phone Example
+
+Instead of modeling the **number** of calls received in an hour, what if we modeled the **lengths** of calls?
+
+--
+
+- The **number** of calls *has* to be an **integer** (0, 1, 2, ...)
+
+- The **lengths** of calls can be *any* **real number** $c\in[0,\infty)$
+    - (Though let's assume the caller gets tired and hangs up after a *max* of 10 mins.)
+
+--
+
+Suppose we are modeling the **lengths** of calls as a random variable, $Y$:
+
+> A random variable *Y* with distribution function *F(y)* is said to be **continuous** if *F(y)* is...*continuous*!
+
+> - i.e., **not** a *step function*
+
+<br>
+
+.center[
+**What does this look like as a graph?**
+]
+
+---
+
+# Probability Density Function
+
+Recall that the **probability mass function** gives $P(Y=y)$ for *any* **discrete** random variable $Y$. 
+
+- Because $P(Y=y)=0$ for any **continuous** random variable, $Y$, we need something different here...
+
+--
+
+Let $F(y)$ be the distribution function for a *continuous* random variable $Y$. Then $f(y)$, given by $$f(y)=\frac{dF(y)}{dy}=F'(y)$$ wherever the derivative exists, is called the **probability density function (PDF)** for the random variable $Y$. 
+
+- Therefore, we can find $F(y)=P(Y\leq y)$ for a continuous variable with **integration**: $$F(y)=\int_{-\infty}^{y}f(t)\,dt$$
+
+---
+
+# Probability Density Function
+
+**Probability density functions**, like *probability mass functions*, are *theoretical models for some frequency distribution of a *population*:
+
+.pull-left[
+The **Binomial(20, 0.3)** distribution:
+
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+set.seed(338)
+binomial_samp = rbinom(n = 1000, size = 20, prob = 0.3)
+gf_histogram( ~ binomial_samp, binwidth = 0.5) + 
+  labs(x = "y", y = "p(y)") + 
+  scale_y_continuous(labels = scales::percent_format(accuracy = 0.01, scale = 0.001, suffix = "")) +
+  theme_bw()
+```
+]
+
+.pull-right[
+The **Normal(6, 4.2)** distribution:
+
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+set.seed(338)
+normal_samp = rnorm(n = 1000, mean = 6, sd = sqrt(4.2))
+gf_density( ~ normal_samp, binwidth = 0.5) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+]
+
+--
+
+
+> *All models are wrong, but some are useful.*
+
+> - George Box
+
+---
+
+# PDF Properties
+
+If $f(y)$ is a **density function** for a *continuous* random variable, then:
+
+**1.** $f(y)\geq 0$ for all $y$, $-\infty<y<\infty$.
+
+<br>
+
+**2.** $\int_{-\infty}^{\infty}f(y)\,dy=1$
+
+--
+
+<br>
+
+**Compare to PMF properties for *discrete* RVs**
+
+For *any* discrete probability distribution, the following must be true:
+
+**1.** $0\leq p(y)\leq 1$ for all $y$. 
+
+<br>
+
+**2.** $\sum_{y}p(y)=1$, where the summation is over all values of $y$ with nonzero probability. 
+
+---
+
+# CAUTION 🚨
+
+🚨The quantity $f(y)$ is **NOT** a probability!!!🚨
+
+- Remember, $P(Y=y)=0$ for any *continuous* RV. 
+
+<br>
+
+.center[
+**Then how can we calculate probabilities for continuous RVs?!** 🤔
+]
+
+--
+
+🤗We **integrate** the PDF over the *appropriate range*:
+
+<br>
+
+**Theorem**: If the random variable $Y$ has density function $f(y)$ and CDF $F(y)$, and $a<b$, then the probability that $Y$ falls in the *interval* $[a,b]$ is $$P(a\leq Y\leq b)=\int_{a}^{b}f(y)\,dy=F(b)-F(a)$$
+
+---
+
+# Probabilities with Continuous RVs
+
+**Example**
+
+Given $f(y)=cy^{2}$, $0\leq y\leq 2$, and $f(y)=0$ elsewhere, find the value of $c$ for which $f(y)$ is a valid density function. 
+
+--
+
+.pull-left[
+```{r, echo = FALSE, dpi = 300}
+y = seq(0, 2, by = 0.01)
+f_y = (3/8)*y^2
+gf_line(f_y~ y, size = 2) + 
+  labs(y = "f(y)") +
+  theme_bw()
+```
+
+]
+
+.pull-right[
+Using this valid PDF, find $$P(1\leq Y\leq 2)$$
+
+<br>
+
+- What about $P(1<Y<2)$?
+]
+
+---
+
+# Practice
+
+The **logistic** distribution has CDF $$F(y)=\frac{e^{y}}{1+e^{y}},\qquad-\infty<y<\infty$$
+
+Find the PDF, and use this to find $P(-2<Y<2)$. 
+
+- [**Hint**: You *could* integrate the PDF to find this probability, but you could also use the CDF directly!]
+
+.center[
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "50%"}
+y = seq(-5, 5, by = 0.01)
+f_y = exp(y)/(1+exp(y)^2)
+gf_line(f_y~ y, size = 2) + 
+  labs(y = "f(y)") +
+  theme_bw()
+```
+]
+
+---
+
+class: center, middle, frame
+
+# Expected Value
+
+---
+
+# Expected Value
+
+**Discrete RVs**
+
+Let $y$ be a *discrete random variable* with PMF $p(y)$. Then the **expected value** of $Y$, denoted as $E(Y)$, is $$E(Y)=\sum_{y}yp(y).$$
+
+--
+
+<br>
+
+**Continuous RVs**
+
+The **expected value** of a *continuous random variable* $Y$ is $$E(y)=\int_{-\infty}^{\infty}yf(y)\,dy.$$
+
+- **Note**: Sometimes these integrals will be *very difficult* to find, or even *impossible*! In these cases **R** and **simulations** can help us substantially. 
+
+---
+
+# Expected Value Theorems
+
+Let $Y$ be a continuous RV with density function $f(y)$. 
+
+**1.** (*Law of the Unconscious Statistician*) Let $g(Y)$ be a real-valued function of $Y$. Then $$E[g(Y)]=\int_{\infty}^{\infty}g(y)f(y)\,dy.$$
+
+
+**2.** Let $c$ be a constant. Then $$E(c)=c.$$
+
+
+**3.** Let $g(Y)$ be a function of $Y$, and $c$ be a constant. Then $$E[cg(Y)]=cE[g(Y)].$$
+
+
+**4.** (*Linearity of Expected Value*) Let $g_{1}(Y),g_{2}(Y),\dots,g_{k}(Y)$ be $k$ functions of $Y$. Then $$E[g_{1}(Y)+g_{2}(Y)+\cdots+g_{k}(Y)]=E[g_{1}(Y)]+E[g_{2}(Y)]+\cdots+E[g_{k}(Y)].$$
+
+---
+
+# Example
+
+(WMS 4.21)
+
+Is $Y$ has density function $$f(y)=\begin{cases}(3/2)y^2+y,&0\leq y\leq 1,\\0,&\text{elsewhere}\end{cases}$$find the **mean** and **variance** of $Y$. 
+
+--
+
+**Solution** (for *E(Y)*):
+
+\begin{align*}
+E(Y)&=\int_{0}^{1}y\left(\frac{3}{2}y^2+y\right)\,dy\\
+&=\int_{0}^{1}\frac{3}{2}y^3+y^2\,dy\\
+&=\left.\frac{3}{8}y^{4}+\frac{1}{3}y^{3}\right|_{0}^{1}\\
+&=\boxed{0.71}
+\end{align*}
+
+---
+
+# Practice
+
+Suppose $Y$ is a continuous random variable with density function $$f(y)=\begin{cases}y/2,&0<y< 2,\\0,&\text{elsewhere}\end{cases}$$
+
+- Find $E(Y)$. 
+
+--
+
+The **median** of $Y$ is given by the smallest value such that $F(\phi_{0.5})=P(Y\leq\phi_{0.5})=0.5$. Find the **median** of $Y$. 
+
+---
+
+# Example
+
+The $\text{Normal}(\mu, \sigma^{2})$ distribution has PDF $$f(y)=\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{2}}$$
+
+For the $\text{Normal}(\mu=100, \sigma^{2}=15^2)$ distribution, can we find $E(Y)$ by hand? 😨
+
+--
+
+**NOPE, BUT R CAN**
+
+```{r}
+Y = rnorm(n = 10000, mean = 100, sd = 15)
+mean(Y)
+```
+
+- **Spoiler Alert**: It turns out that $E(Y)=\mu$ if $Y\sim\text{Normal}(\mu,\sigma^{2})$!
+
+---
+
+class: center, middle, frame
+
+# The Uniform Distribution
+
+---
+
+# Uniform PDF
+
+Continuous random variables following the **uniform distribution** on an interval $(a,b)$ are *completely random numbers* between *a* and *b*. 
+
+- **Example**: Assuming the subway I take to Simmons picks me up *anytime* between 8am and 8:10am, the **length of time** I'll have to wait follows a uniform distribution. 
+
+--
+
+If $a<b$, a random variable $Y$ is said to have a continuous **uniform distribution** on the interval $(a,b)$ if the density function of $Y$ is $$f(y)=\frac{1}{b-a},\qquad a\leq y\leq b$$
+
+- We typically use $Y\sim \text{Uniform}(a,b)$ as short-hand!
+
+---
+
+# The Uniform Distribution
+
+If $a<b$, a random variable $Y$ is said to have a continuous **uniform distribution** on the interval $(a,b)$ if the density function of $Y$ is $$f(y)=\frac{1}{b-a},\qquad a\leq y\leq b$$
+
+The **Uniform(0, 10)** distribution:
+
+.center[
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "60%"}
+set.seed(338)
+uniform_samp = runif(n = 100000, min = 0, max = 10)
+gf_density( ~ uniform_samp) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+]
+
+---
+
+# A Valid PDF?
+
+Notice that the uniform PDF does *not* depend on values of $Y$, only on the *length of the interval*: $$f(y)=\frac{1}{b-a},\qquad a\leq y\leq b$$
+
+- This means we can prove this is a valid PDF quite easily: $$\int_{-\infty}^{\infty}f(y)\,dy=\int_{a}^{b}\frac{1}{b-a}\,dy=\left.\frac{y}{b-a}\right|_{a}^{b}=1$$
+
+--
+
+<br>
+
+**Note**: **Standard uniform** RVs, $Y\sim\text{Uniform}(0,1)$ fall in the interval $(0,1)$, where $$f(y)=1,\qquad 0\leq y\leq 1$$
+
+---
+
+# Expected Value and Variance
+
+**Theorem** (Expected value and variance of uniform RVs):
+
+If $a<b$ and $Y$ is a random variable uniformly distributed on the interval $(a,b)$, then $$\mu=E(Y)=\frac{a+b}{2}\qquad\text{and}\qquad\sigma^{2}=Var(Y)=\frac{(b-a)^{2}}{12}$$
+
+--
+
+**In R**: Simulating a **Uniform(10, 20)** distribution
+
+```{r}
+Y_sim = runif(n = 1000, min = 10, max = 20)
+mean(Y_sim) # simulated E(Y)
+
+(20 + 10)/2 # theoretical E(Y)
+```
+
+<br>
+
+.center[
+**Let's derive these!**
+]
+
+---
+
+# Practice
+
+(WMS 4.51)
+
+The cycle time for trucks hauling concrete to a highway construction site is uniformly distributed over the interval 50 to 70 minutes.
+
+> What is the probability that the cycle time exceeds 65 minutes, if it is known that the cycle time exceeds 55 minutes?
+
+> [**Hint**: Think *conditional* probability!]
+
+--
+
+**R Simulation**:
+
+```{r}
+Y_sim = runif(n = 10000, min = 50, max = 70)
+mean(Y_sim[Y_sim > 55] > 65)
+```
+
+---
+
+class: center, middle, frame
+
+# The Normal Distribution
+
+---
+
+# What is it?
+
+.center[
+```{r, echo = FALSE, dpi = 100}
+knitr::include_graphics("normal_curve.png")
+```
+]
+
+--
+
+- **unimodal**, **symmetric**
+
+- **bell-shaped**
+
+- Area under the Normal curve **adds up to 1**
+
+- Arises in **many applications**
+
+---
+
+# Different Normal Distributions
+
+.pull-left[
+```{r, echo = FALSE}
+set.seed(12)
+samp1 <- rnorm(1000, 100, 15)
+hist(samp1, xlab = "", main = "")
+```
+
+- N(mean = 100, sd = 15)
+]
+
+--
+
+.pull-right[
+```{r, echo = FALSE}
+set.seed(12)
+samp2 <- rnorm(1000, 0, 1)
+hist(samp2, xlab = "", main = "")
+```
+
+- N(mean = 0, sd = 1)
+- **Standard Normal distribution**
+]
+
+---
+
+# Different Normal Distributions
+
+.center[
+```{r, echo = FALSE, out.width = "65%", dpi = 300}
+samp <- data.frame(samp1, samp2)
+ggplot(samp) + 
+  geom_histogram(aes(x = samp2), fill = "gray", binwidth = 0.5) +
+  geom_histogram(aes(x = samp1), color = "white", fill = "gray", binwidth = 5) +
+  labs(x = "", y = "Count") + 
+  theme_bw()
+```
+
+]
+
+---
+
+# The Normal PDF
+
+A random variable $Y$ is said to have a **normal** distribution if, for $\sigma>0$ and $-\infty<\mu<\infty$, the density function of $Y$ is $$f(y)=\frac{1}{\sigma\sqrt{2\pi}}e^{-(y-\mu)^{2}/(2\sigma^{2})}\qquad-\infty<y<\infty$$
+
+- We typically use $Y\sim \text{Normal}(\mu,\sigma)$ as short-hand! 
+    
+--
+
+<br>
+
+**Theorem** (Expected value and variance of normal RVs):
+
+If $Y$ is normally distributed with parameters $\mu$ and $\sigma$, then $$E(Y)=\mu\qquad\text{and}\qquad Var(Y)=\sigma^{2}.$$
+
+- This means that $SD(Y)=\sigma$. 
+
+---
+
+# The Standard Normal PDF
+
+If $Y\sim\text{Normal}(\mu,\sigma)$, we can **shift** and **scale** the normal distribution so that is:
+
+- is centered at 0
+
+- has variance 1
+
+In other words... $$Z=\frac{Y-\mu}{\sigma}\sim\text{Normal}(0,1)$$ follows the **standard normal** distribution. 
+
+--
+
+If $Z\sim\text{Normal}(0,1)$, then $$f(z)=\frac{1}{\sqrt{2\pi}}e^{-z^{2}/2},\qquad -\infty<z<\infty$$
+
+---
+
+# Where does pi come from?!
+
+If turns out that $$\int_{-\infty}^{\infty}e^{-z^{2}/2}\,dz=\sqrt{2\pi},$$ though evaluating this integral involves some *multivariable calculus* and *polar coordinate* tricks...
+
+--
+
+<br>
+
+But in order for $$f(z)=\frac{1}{\sqrt{2\pi}}e^{-z^{2}/2}$$ to be a **valid PDF**, it needs to integrate to 1, which is why we use $1/\sqrt{2\pi}$ as a *normalizing constant*. 
+
+---
+
+# Normal Probabilities
+
+Suppose $Y\sim\text{Normal}(\mu,\sigma)$, and we want to find $P(a\leq Y\leq b)$. This would require us to evaluate $$\int_{a}^{b}\frac{1}{\sigma\sqrt{2\pi}}e^{-(y-\mu)^{2}/(2\sigma^{2})}, $$ which... **we can't do**!!!
+
+--
+
+Instead, we'll use ~~normal tables~~ **R**. 👍
+
+- `pnorm(y, mu = ..., sd = ...)` computes the **normal CDF**, $$P(Y\leq y)=\int_{-\infty}^{y}\frac{1}{\sigma\sqrt{2\pi}}e^{-(y-\mu)^{2}/(2\sigma^{2})}$$
+
+- The **standard normal CDF**, with $\mu=0$ and $\sigma=1$ is so widely-used that it gets its own notation: $\Phi(\cdot)$!
+
+---
+
+# Normal Quantiles
+
+Suppose $Y\sim\text{Normal}(\mu,\sigma)$, and we want to find $P(a\leq Y\leq b)$. This would require us to evaluate $$\int_{a}^{b}\frac{1}{\sigma\sqrt{2\pi}}e^{-(y-\mu)^{2}/(2\sigma^{2})}, $$ which... **we can't do**!!!
+
+Instead, we'll use ~~normal tables~~ **R**. 👍
+
+- `qnorm(p, mean = ..., sd = ...)` computes the *p*th **normal quantile**, which is the value $\phi_{p}$ such that $$P(Y\leq \phi_{p})=p,\qquad 0< p< 1$$
+
+- We can use this to find normal *percentiles*, such as the **median**, where $p=0.5$.
+
+---
+
+# Practice 
+
+(WMS 4.63)
+
+A company that manufactures and bottles apple juice uses a machine that automatically fills 16-ounce bottles. There is some variation, however, in the amounts of liquid dispensed into the bottles that are filled. The amount dispensed, $Y$, has been observed to be approximately normally distributed with mean 16 ounces and standard deviation 1 ounce. 
+
+1.  Find the probability that a randomly selected bottle will have more than 17 ounces dispensed into it. 
+
+2.  Find the *75th percentile* of amounts dispensed; that is, find $\phi_{75}$ such that $P(Y\leq \phi_{75})=0.75$. 
+
+.center[
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "45%"}
+y = seq(10, 22, by = 0.01)
+f_y = (1/sqrt(2*pi))*exp(-(y-16)^2/2^2)
+gf_line(f_y~ y, size = 2) + 
+  labs(y = "f(y)") +
+  theme_bw()
+```
+]
+
+---
+
+# Practice 
+
+(WMS 4.63)
+
+A company that manufactures and bottles apple juice uses a machine that automatically fills 16-ounce bottles. There is some variation, however, in the amounts of liquid dispensed into the bottles that are filled. The amount dispensed, $Y$, has been observed to be approximately normally distributed with mean 16 ounces and standard deviation 1 ounce. 
+
+1.  Find the probability that a randomly selected bottle will have more than 17 ounces dispensed into it. 
+
+2.  Find the *75th percentile* of amounts dispensed; that is, find $\phi_{75}$ such that $P(Y\leq \phi_{75})=0.75$. 
+
+**Solution**
+
+```{r}
+1 - pnorm(17, mean = 16, sd = 1)
+
+qnorm(0.75, mean = 16, sd = 1)
+```
+
+---
+
+# 68-95-99.7 Rule
+
+**Theorem** (68-95-99.7 Rule): If $Y\sim \text{Normal}(\mu,\sigma^{2})$, then:
+
+- $P(|Y-\mu|<\sigma)\approx 0.68$
+
+- $P(|Y-\mu|<2\sigma)\approx 0.95$
+
+- $P(|Y-\mu|<3\sigma)\approx 0.997$
+
+.center[
+```{r, echo = FALSE, dpi = 300}
+knitr::include_graphics("68_95_99_z.png")
+```
+]
+
+---
+
+class: center, middle, frame
+
+# The Gamma Distribution
+
+---
+
+# Non-skewed Distributions
+
+.pull-left[
+The **Uniform(0, 10)** distribution:
+
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+set.seed(338)
+uniform_samp = runif(n = 100000, min = 0, max = 10)
+gf_density( ~ uniform_samp) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+
+]
+
+.pull-right[
+The **Normal(0, 1)** distribution:
+
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+set.seed(338)
+norm_samp = rnorm(n = 100000, mean = 0, sd = 1)
+gf_density( ~ norm_samp) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+]
+
+---
+
+# Skewed Distributions
+
+.pull-left[
+The **Gamma(1, 5)** distribution:
+
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+set.seed(338)
+gamma_samp = rgamma(n = 100000, shape = 1, rate = 1/5)
+gf_density( ~ gamma_samp) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+
+]
+
+.pull-right[
+The **Gamma(5, 2)** distribution:
+
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+set.seed(338)
+gamma_samp = rgamma(n = 100000, shape = 5, rate = 1/2)
+gf_density( ~ gamma_samp) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+]
+
+---
+
+# The Gamma Distribution
+
+Sometimes we will want to model random variables that are:
+
+- **right-skewed** (non-symmetric)
+
+- always **nonnegative**
+
+--
+
+<br>
+
+**Examples**:
+
+- amount of rainfall accumulated in a given area per day
+
+- the time it takes a mechanic to service your car
+
+- the time Moose needs to wait in between receiving treats
+
+<br>
+
+These can all be adequately modeled by the **gamma distribution**!
+
+---
+
+# The Gamma PDF
+
+A random variable $Y$ is said to have a **gamma distribution** with *shape* parameter $\alpha>0$ and *scale* parameter $\beta>0$ if $$f(y)=\frac{1}{\beta^{\alpha}\Gamma(\alpha)}y^{\alpha-1}e^{-y/\beta},\qquad 0\leq y<\infty,$$ where $$\Gamma(\alpha)=\int_{0}^{\infty}y^{\alpha-1}e^{-y}\,dy$$
+
+- We typically use $Y\sim \text{Gamma}(\alpha,\beta)$ as short-hand!
+
+--
+
+The quantity $\Gamma(\alpha)$ is known as the **gamma function**, and it follows that:
+
+- $\Gamma(1)=1$
+
+- $\Gamma(n)=(n-1)!$, provided that $n$ is an integer
+
+- $\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)$ for any $\alpha>1$
+
+---
+
+# The Shape Parameter, α
+
+- Scale parameter $\beta=1$
+
+.center[
+```{r, echo = FALSE, fig.width = 4, fig.height = 2.5, dpi = 300}
+ggplot(data = data.frame(x = c(0, 20)), aes(x)) +
+  stat_function(fun = stats::dgamma, n = 100,
+                args = list(shape = 1, scale = 1), 
+                color = "#210711") +
+  stat_function(fun = stats::dgamma, n = 100,
+                args = list(shape = 2, scale = 1), 
+                color = "#73193a") +
+  stat_function(fun = stats::dgamma, n = 100,
+                args = list(shape = 5, scale = 1), 
+                color = "#e2799f") +
+  stat_function(fun = stats::dgamma, n = 100,
+                args = list(shape = 10, scale = 1), 
+                color = "#f4cddb") + 
+  annotate("text", label = "a=1", x = 1.5, y = 0.75) +
+  annotate("text", label = "a=2", x = 2.8, y = 0.30) +
+  annotate("text", label = "a=5", x = 6.2, y = 0.18) +
+  annotate("text", label = "a=10", x = 13.2, y = 0.1) +
+  labs(x = "y", y = "f(y)") +
+  theme_minimal()
+```
+]
+
+---
+
+# The Scale Parameter, β
+
+- Shape parameter $\alpha=1$
+
+.center[
+```{r, echo = FALSE, fig.width = 4, fig.height = 2.5, dpi = 300}
+ggplot(data = data.frame(x = c(0, 20)), aes(x)) +
+  stat_function(fun = stats::dgamma, n = 100,
+                args = list(shape = 1, scale = 1), 
+                color = "#210711") +
+  stat_function(fun = stats::dgamma, n = 100,
+                args = list(shape = 1, scale = 2), 
+                color = "#73193a") +
+  stat_function(fun = stats::dgamma, n = 100,
+                args = list(shape = 1, scale = 5), 
+                color = "#e2799f") +
+  stat_function(fun = stats::dgamma, n = 100,
+                args = list(shape = 1, scale = 10), 
+                color = "#f4cddb") + 
+  annotate("text", label = "b=1", x = 1.5, y = 0.75) +
+  annotate("text", label = "b=2", x = 2.8, y = 0.22) +
+  annotate("text", label = "b=5", x = 6.2, y = 0.12) +
+  annotate("text", label = "b=10", x = 15, y = 0.07) +
+  labs(x = "y", y = "f(y)") +
+  theme_minimal()
+```
+]
+
+---
+
+# Expected Value and Variance
+
+**Theorem** (Expected value and variance of gamma RVs):
+
+If $Y$ has a gamma distribution with parameters $\alpha$ and $\beta$, then $$\mu=E(Y)=\alpha\beta\qquad\text{and}\qquad \sigma^{2}=Var(Y)=\alpha\beta^{2}$$
+
+---
+
+# Expected Value and Variance
+
+**Simulations**
+
+- $Y\sim\text{Gamma}(10, 2)$
+
+```{r}
+Y = rgamma(n = 10000, shape = 10, scale = 2)
+mean(Y)
+var(Y)
+```
+
+.center[
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "40%"}
+ggplot(data = data.frame(x = c(0, 60)), aes(x)) +
+  stat_function(fun = stats::dgamma, n = 100,
+                args = list(shape = 10, scale = 2)) + 
+  geom_vline(xintercept = 20, color = "dodgerblue", size = 1.25, linetype = "dashed") +
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+]
+
+---
+
+# Exponential Distribution
+
+The **exponential distribution** is a *special case* of the gamma distribution where $\alpha=1$. 
+
+- That is, $Y\sim\text{Gamma}(1, \beta)$ is the same as $Y\sim\text{Exponential}(\beta)$. 
+
+--
+
+A random variable $Y$ is said to have an **exponential distribution** with parameter $\beta>0$ if the density function of $Y$ is $$f(y)=\frac{1}{\beta}e^{-y/\beta},\qquad 0\leq y<\infty$$
+
+--
+
+This is similar to the **geometric distribution**!
+
+- **Geometric distribution**: Models the the **number** of the trial on which the *first success* occurs
+
+- **Exponential distribution**: Models the first success in **continuous time**
+    - E.g., the *waiting time* until the first "success"
+    
+---
+
+# Survival Analysis Detour
+
+The exponential distribution is common in **survival analysis**, which is the analysis of *time-to-event* data. 
+
+<br>
+
+--
+
+Suppose we want to model the *time-to-event*, $T$, in a study of a treatment for type 2 diabetes (an example of the "event" could be myocardial infarction). 
+
+- The **survival function**, $S(t)$, gives the probability that a study participant can "survive" beyond time $t$: $$S(t)=1-F(t)=P(T>t)=\int_{t}^{\infty}f(x)\,dx$$
+
+- Let's find $S(t)$ if $T\sim\text{Exponential}(\beta)$. 
+
+---
+
+# Survival Analysis Detour
+
+The exponential distribution is common in **survival analysis**, which is the analysis of *time-to-event* data. 
+
+<br>
+
+Suppose we want to model the *time-to-event*, $T$, in a study of a treatment for type 2 diabetes (an example of the "event" could be myocardial infarction). 
+
+- The **hazard function**, $h(t)$, provides a *conditional density* of an event, given that the event *has not yet occurred* prior to time $t$: $$h(t)=\lim_{x\to\infty}\frac{1}{x}\frac{P(t\leq T< t+x)}{P(T\geq t)}=-\frac{d}{dt}\log S(t)=\frac{f(t)}{S(t)}$$
+
+
+- **Example**: Given that I haven't experienced symptoms yet, what are my chances of experiencing them in the next year?
+
+--
+
+<br>
+
+**Practice**: Find $h(t)$ for $T\sim\text{Exponential}(\beta)$. 
+
+- **Hint**: The hazard function is **constant** for the exponential distribution. 
+    
+---
+
+# The Memoryless Property
+
+The exponential distribution has the **memoryless property**. 
+
+> Even if you've waited for hours or days without success, the success isn't any more likely to arrive soon. In fact, you might as wekk have just started waiting 10 seconds ago. 
+
+> - Blitzstein and Hwang, 2019
+
+--
+
+**Definition**: A continuous distribution has the **memoryless property** if $$P(Y>a+b\mid Y>a)=P(Y>b).$$
+
+--
+
+- If a distribution has the memoryless property, then... $$E(Y\mid Y > a)=a+E(Y)$$
+
+---
+
+# Simulating the Memoryless Property
+
+We want to estimate $P(Y> 7\mid Y> 5)=P(Y>5+2\mid Y>5)$. 
+
+First, let's generate some data from the $\text{Exponential}(2)$ distribution:
+
+```{r, dpi = 300, out.width = "50%"}
+Y = rexp(n = 10000, rate = 1/2)
+gf_histogram( ~ Y)
+```
+
+---
+
+# Simulating the Memoryless Property
+
+Next, extract the values of `Y` that are **greater than 5**.
+
+- Compare $P(Y>5+2\mid Y>5)$ to $P(Y>2)$. 
+
+```{r}
+Y_sub = Y[Y > 5]
+
+mean(Y_sub > 5+2)
+
+mean(Y > 2)
+```
+
+---
+
+class: center, middle, frame
+
+# The Beta Distribution
+
+```{r, echo = FALSE, dpi = 300, out.width = "50%"}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) +
+  stat_function(fun = stats::dbeta, n = 100,
+                args = list(shape1 = 2, shape2 = 4), 
+                color = "#210711") +
+  stat_function(fun = stats::dbeta, n = 100,
+                args = list(shape1 = 1, shape2 = 3), 
+                color = "#73193a") +
+  stat_function(fun = stats::dbeta, n = 100,
+                args = list(shape1 = 5, shape2 = 5), 
+                color = "#e2799f") +
+  stat_function(fun = stats::dbeta, n = 100,
+                args = list(shape1 = 5, shape2 = 1), 
+                color = "#f4cddb") + 
+  stat_function(fun = stats::dbeta, n = 100,
+                args = list(shape1 = 8, shape2 = 2), 
+                color = "#ffffff") + 
+  theme_void() + theme(legend.position = "none")
+```
+
+---
+
+# Models for Proportions
+
+The **beta distribution** is used to model *proportions* - variables that can take *only* values between **0** and **1**. 
+
+- It is also a generalization of the **Uniform(0, 1)** distribution, and allows for a non-constant PDF over the interval $(0,1)$. 
+
+--
+
+.center[
+```{r, echo = FALSE, dpi = 300, out.width = "50%"}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) +
+  stat_function(fun = stats::dbeta, n = 100,
+                args = list(shape1 = 2, shape2 = 4), 
+                color = "#210711") +
+  stat_function(fun = stats::dbeta, n = 100,
+                args = list(shape1 = 1, shape2 = 3), 
+                color = "#73193a") +
+  stat_function(fun = stats::dbeta, n = 100,
+                args = list(shape1 = 5, shape2 = 5), 
+                color = "#e2799f") +
+  stat_function(fun = stats::dbeta, n = 100,
+                args = list(shape1 = 5, shape2 = 1), 
+                color = "#f4cddb") + 
+  stat_function(fun = stats::dbeta, n = 100,
+                args = list(shape1 = 8, shape2 = 2), 
+                color = "#ffffff") + 
+  labs(x = "y", y = "f(y)") +
+  theme(legend.position = "none") + 
+  theme_bw()
+```
+]
+
+---
+
+# The Beta PDF
+
+A random variable $Y$ is said to have a **beta distribution** with parameters $\alpha>0$ and $\beta>0$ if the density function of $Y$ is $$f(y)=\frac{1}{B(\alpha,\beta)}y^{\alpha-1}(1-y)^{\beta-1},\qquad 0\leq y\leq 1,$$ where $$B(\alpha,\beta)=\int_{0}^{1}y^{\alpha-1}(1-y)^{\beta-1}\,dy=\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}.$$
+
+- We typically use $Y\sim \text{Beta}(\alpha,\beta)$ as short-hand!
+
+---
+
+# Beta Distributions
+
+**Beta(0.5, 0.5)**
+
+.center[
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) +
+  stat_function(fun = stats::dbeta, n = 1000,
+                args = list(shape1 = 0.5, shape2 = 0.5)) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+]
+
+---
+
+# Beta Distributions
+
+**Beta(1, 1)** = **Uniform(0, 1)**
+
+.center[
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) +
+  stat_function(fun = stats::dbeta, n = 1000,
+                args = list(shape1 = 1, shape2 = 1)) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+]
+
+---
+
+# Beta Distributions
+
+**Beta(5, 5)**
+
+.center[
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) +
+  stat_function(fun = stats::dbeta, n = 1000,
+                args = list(shape1 = 5, shape2 = 5)) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+]
+
+---
+
+# Beta Distributions
+
+**Beta(8, 2)**
+
+.center[
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) +
+  stat_function(fun = stats::dbeta, n = 1000,
+                args = list(shape1 = 8, shape2 = 2)) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+]
+
+---
+
+# Beta Distributions
+
+**Beta(2, 8)**
+
+.center[
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) +
+  stat_function(fun = stats::dbeta, n = 1000,
+                args = list(shape1 = 2, shape2 = 8)) + 
+  labs(x = "y", y = "f(y)") + 
+  theme_bw()
+```
+]
+
+---
+
+# Expected Value and Variance
+
+**Theorem** (Expected value and variance of beta RVs):
+
+If $Y$ is a beta-distributed random variable with parameters $\alpha>0$ and $\beta>0$, then $$\mu=E(Y)=\frac{\alpha}{\alpha+\beta}$$ and $$\sigma^{2}=Var(Y)=\frac{\alpha\beta}{(\alpha+\beta)^{2}(\alpha+\beta+1)}$$
+
+--
+
+**Simulating Beta(2, 8)**
+
+```{r}
+Y = rbeta(n = 1000, shape1 = 2, shape2 = 8)
+mean(Y)
+var(Y)
+```
+
+---
+
+# Practice
+
+(WMS 4.129)
+
+During an eight-hour shift, the proportion of time $Y$ that a sheet-metal stamping machine is down for maintenance or repairs has a beta distribution with $\alpha=1$ and $\beta=2$. That is, $$f(y)=2(1-y),\quad 0\leq y\leq 1.$$ The cost (in hundreds of dollars) of this downtime, due to lost production and cost of maintenance and repair, is given by $C=10+20Y+4Y^2$. 
+
+> Find the mean (by hand) and the variance (using a simulation) of $C$. 
+
+--
+
+**Simulation**
+
+```{r}
+Y = rbeta(n = 10000, shape1 = 1, shape2 = 2)
+C = 10 + 20*Y + 4*Y^2
+
+mean(C)
+var(C)
+```
+
+---
+
+# The Beta-Binomial Conjugacy
+
+**The story**
+
+Suppose we are tossing a **biased coin**, but we don't know *how* biased it is. 
+
+- In other words, it lands Heads with some *unknown* probability, $p$.
+
+- We could *infer* the value of $p$ by tossing the coin a bunch of times. But that isn't **fun**...
+
+--
+
+In **Bayesian inference**, we treat all unknown quantities, including $p$, as random variables!
+
+- Thus, $p$ would have its own *probability distribution*, called a **prior distribution**.
+    - This distribution reflects our *uncertainty* about the true value of $p$ before actually observing a bunch of coin tosses. 
+    
+- After tossing the coin  bunch of times and we have a better idea of the value of $p$ (i.e., we collect **data**), we update the prior distribution with Bayes' Rule. 
+    - This yields the **posterior distribution**. 
+    
+---
+
+# The Beta-Binomial Conjugacy
+
+Let's assign the $Beta(\alpha,\beta)$ distribution to the *unknown* $p$. 
+
+- That is, $p\sim\text{Beta}(\alpha,\beta)$. 
+
+Let $Y$ be the number of Heads in $n$ tosses of the coin. 
+
+- This **depends on** $p$, so we would write: $$Y\mid p\sim\text{Binomial}(n,p)$$
+
+--
+
+To update the **prior distribution** of $p$ based on our "data" (*Y*), we use Bayes' Rule: $$f(p\mid Y=y)=\frac{P(Y=y\mid p)f(p)}{P(Y=y)}$$
+
+We'll look at **conditional distributions** later, but it turns out that $$p\mid Y=y\sim \text{Beta}(\alpha+y,\beta+n-y)$$
+
+- That is, if our *prior beliefs* follow the beta distribution, and our **data** follow the binomial distribution, then our *posterior distribution* **still** follows the beta!
+
+---
+
+class: center, middle, frame
+
+# Moment-Generating Functions
+
+.center[
+![](https://media.giphy.com/media/64KPpCrmE3r6CYJdcy/giphy.gif)
+]
+
+---
+
+# Moments
+
+**Moments** provide us a set of *additional* measures beyond $\mu$ and $\sigma^{2}$ that (usually) *uniquely determine* a probability distribution.  
+
+- The $k$th **moment** of a random variable $Y$ is defined to be $E(Y^{k})$ and is denoted by $\mu^{'}_{k}$. 
+
+- The $k$th **central moment** of a random variable $Y$ is defined to be $E[(Y-\mu)^{k}]$ and is denoted by $\mu_{k}$. 
+
+--
+
+We've seen some **moments** already!
+
+- $E(Y)=\mu^{'}_{1}=\mu$ is the *first moment*. 
+
+- $E(Y^{2})$ is the *second moment*. 
+    - This is used to find $Var(Y)=E[(Y-\mu)^{2}]=\mu_{2}$, the *second central moment*. 
+    
+--
+
+- The **skewness** of a random variable $&$ is the third *standardized moment*, $$Skew(Y)=E\left[\left(\frac{Y-\mu}{\sigma}\right)^{3}\right]$$
+
+---
+
+# Moment-Generating Functions
+
+For a continuous random variable $Y$, the **moment-generating function (MGF)**, $m(t)$, is defined to be $$m(t)=E(e^{tY})$$.
+
+- We can evaluate this for any **continuous distribution** with an integral: $$m(t)=E(e^{tY})=\int_{-\infty}^{\infty}e^{ty}f(y)\,dy$$
+
+--
+
+**Theorem**:
+
+If $m(t)$ exists, then for any positive integer $k$, $$\left.\frac{d^{k}m(t)}{dt^{k}}\right]_{t=0}=m^{(k)}(0)=\mu_{k}^{'}$$
+
+- In other words, find the $k$th derivative of $m(t)$, plug in 0 for $t$, and you're left with $\mu_{k}^{'}$. 
+
+---
+
+# Gamma MGF
+
+The **Gamma** PDF with *shape* parameter $\alpha>0$ and *scale* parameter $\beta>0$ if $$f(y)=\frac{1}{\beta^{\alpha}\Gamma(\alpha)}y^{\alpha-1}e^{-y/\beta},\qquad 0\leq y<\infty$$
+
+<br>
+
+Let's derive the **Gamma** MGF: $$m(t)=E(e^{tY})=\int_{0}^{\infty}e^{ty}\left[\frac{y^{\alpha-1}e^{-y/\beta}}{\beta^{\alpha}\Gamma(\alpha)}\right]\,dy=\frac{1}{(1-\beta t)^{\alpha}}$$
+
+---
+
+# Normal MGF
+
+The **Normal** PDF with mean $\mu$ and standard deviation $\sigma$ is given by: $$f(y)=\frac{1}{\sigma\sqrt{2\pi}}e^{-(y-\mu)^{2}/(2\sigma^{2})}\qquad-\infty<y<\infty$$
+
+<br>
+
+The *moment-generating function* for this distribution is: $$m(t)=e^{\mu t + t^{2}\sigma^{2}/2}$$
+
+- Let's use this to find $E(X^{3})$. 
+
+--
+
+```{r}
+Y = rnorm(10000, mean = 100, sd = 15)
+mean(Y^3)
+```
+
