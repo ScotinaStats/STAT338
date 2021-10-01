@@ -378,11 +378,11 @@ $$E(X)=\text{?}$$
 
 An instant lottery ticket costs &#36;2. Out of a total of 10,000 tickets printed for this lottery... 
 
-- 1,000 tickets contain a price of &#36;5 each 
+- 1,000 tickets contain a prize of &#36;5 each 
 
 - 100 tickets have a prize of &#36;10 each
 
-- 5 tickets have a price of &#36;1,000 each
+- 5 tickets have a prize of &#36;1,000 each
 
 - 1 ticket has a prize of &#36;5,000. 
 
@@ -839,20 +839,6 @@ gf_histogram( ~ geometric_samp, binwidth = 0.5) +
 
 If $Y\sim\text{Geometric}(p)$, then $$\mu=E(Y)=\frac{1}{p}\qquad\text{and}\qquad \sigma^{2}=Var(Y)=\frac{1-p}{p^{2}}$$
 
---
-
-Let $Y=$ trial on which we *first* observe a five after tossing a fair die
-
-**Simulating E(Y)**:
-
-```{r}
-first_five = replicate(10000, {
-  roll = sample(1:6, size = 100, replace = TRUE)
-  which(roll == 5)[1]
-})
-mean(first_five)
-```
-
 ---
 
 # Practice
@@ -863,9 +849,11 @@ Suppose that 30% of the applicants for a certain industrial job possess advanced
 
 > Find the probability that the first applicant with advanced training in programming is found on the fifth interview. 
 
-(Try this "by-hand" and via simulation!)
+--
 
-```{r, echo = FALSE, eval = FALSE}
+**Simulation**
+
+```{r}
 programming_5 = replicate(10000, {
   interviews = sample(c(TRUE, FALSE), 100, replace = TRUE, prob = c(0.3, 0.7))
   which(interviews == TRUE)[1] == 5
@@ -1289,6 +1277,7 @@ The number of typing errors made by a typist has a Poisson distribution with an 
 ppois(4, lambda = 4)
 ```
 
+```{r, echo = FALSE, eval = FALSE}
 ---
 
 # The Poisson Approximation
@@ -1327,12 +1316,12 @@ We can use the **Poisson approximation** to *approximate* the Birthday Problem f
 (Black line = *truth*, Red line = *Poisson approximation*)
 
 .center[
-```{r, echo = FALSE, dpi = 300}
+{r, echo = FALSE, dpi = 300}
 knitr::include_graphics("bday_poisson.png")
-```
+
 ]
 
-```{r, echo = FALSE, eval = FALSE}
+{r, echo = FALSE, eval = FALSE}
 bday_match_prob = c()
 bday_match_approx = c()
 
@@ -1358,6 +1347,7 @@ ggplot(data = NULL, aes(x = 2:61, y = bday_match_prob)) +
   theme(axis.text.x = element_text(size = 12, face = "bold"), 
         axis.text.y = element_text(size = 12, face = "bold"), 
         axis.title = element_text(size = 14, face = "bold"))
+
 ```
 
 ---
@@ -1505,7 +1495,11 @@ The MGF for the Poisson distribution is $$m(t)=e^{\lambda(e^{t}-1)}$$
 
 --
 
-<br>
+**Now, use the MGF to find the mean and variance of the Poisson(λ) distribution!**
+
+- Start with this: $E(Y)=m'(0)$
+
+--
 
 **Using simulations to find moments**
 
@@ -1525,13 +1519,13 @@ sum(y^3*2^y*exp(-2)/factorial(y))
 
 ---
 
-# Practice
+# Bernoulli/Binomial MGF
 
 Let $Y\sim\text{Bernoulli}(p)$; that is, $$p(y)=p^{y}(1-p)^{1-y},\ \ y = 0, 1$$
 
 Find The moment-generating function, $m(t)$, for $Y$. 
 
-- **Hint**: This is equal to $\sum_{y}e^{ty}p^{y}(1-p)^{1-y}$, where $y$ equals 0 or 1. 
+- **Hint**: This is equal to $\sum_{y=0}^{1}e^{ty}p^{y}(1-p)^{1-y}$, where $y$ equals 0 or 1. 
 
 --
 
