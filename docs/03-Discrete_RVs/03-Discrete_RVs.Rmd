@@ -1364,13 +1364,13 @@ Find $P(Y\leq y)$ for $y=0, 1, 2, 3$ (i.e., you'll find four different probabili
 
 **Solution**:
 
-- $P(Y\leq 0)=P(Y=0)=p(0)=e^{-1}$
+- $P(Y\leq 0)=P(Y=0)=p(0)=e^{-1}=0.37$
 
-- $P(Y\leq 1)=P(Y=0)+P(Y=1)=p(0)+p(1)=e^{-1}+e^{-1}$
+- $P(Y\leq 1)=P(Y=0)+P(Y=1)=p(0)+p(1)=e^{-1}+e^{-1}=0.74$
 
-- $P(Y\leq 2)=p(0)+p(1)+p(2)=e^{-1}+e^{-1}+\frac{1}{2}e^{-1}$
+- $P(Y\leq 2)=p(0)+p(1)+p(2)=e^{-1}+e^{-1}+\frac{1}{2}e^{-1}=0.92$
 
-- $P(Y\leq 3)=p(0)+p(1)+p(2)+p(3)=e^{-1}+e^{-1}+\frac{1}{2}e^{-1}+\frac{1}{6}e^{-1}$
+- $P(Y\leq 3)=p(0)+p(1)+p(2)+p(3)=e^{-1}+e^{-1}+\frac{1}{2}e^{-1}+\frac{1}{6}e^{-1}=0.98$
 
 The quantity $P(Y\leq y)$ is known as the **cumulative distribution function**, and will be very useful to us as we begin working with *continuous* random variables. 
 
