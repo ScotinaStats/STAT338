@@ -1120,7 +1120,7 @@ By the **multiplication rule**, there are $$\binom{r}{y}\binom{N-r}{n-y}$$ possi
 
 # Hypergeometric PMF
 
-A random variable $Y$ is said to have a **hypergeometric distribution** if $$P(Y=y)=p(y)=\frac{\binom{r}{y}\binom{N-r}{n-y}}{\binom{N}{y}},$$ where $y$ is an integer $0,1,2,\dots,n$ such that $y\leq r$ and $n-y\leq N-r$. 
+A random variable $Y$ is said to have a **hypergeometric distribution** if $$P(Y=y)=p(y)=\frac{\binom{r}{y}\binom{N-r}{n-y}}{\binom{N}{n}},$$ where $y$ is an integer $0,1,2,\dots,n$ such that $y\leq r$ and $n-y\leq N-r$. 
 
 - We typically use $Y\sim \text{HGeom}(N,r,n)$ as short-hand!
 
@@ -1169,15 +1169,11 @@ and three who enrolled in traditional student teaching programs. All eight candi
 to be equally qualified, so three are randomly selected to fill the open positions. Let *Y* be the
 number of internship trained candidates who are hired.
 
-**(a)** Does *Y* have a binomial or hypergeometric distribution? Why?
+> Find the probability that two or more internship trained candidates are hired. What are the mean of *Y*?
 
-**(b)** Find the probability that two or more internship trained candidates are hired. 
+**Simulation**
 
-**(c)** What are the mean and standard deviation of *Y*?
-
-(Calculate these by-hand or via simulation!)
-
-```{r, echo = FALSE, eval = FALSE}
+```{r}
 applicants = c("intern", "intern", "intern", "intern", "intern", "traditional", "traditional", "traditional")
 num_interns_hired = replicate(10000, {
   hired = sample(applicants, size = 3, replace = FALSE)
@@ -1185,7 +1181,6 @@ num_interns_hired = replicate(10000, {
   sum(hired == "intern")
 })
 mean(num_interns_hired)
-sd(num_interns_hired)
 ```
 
 ---
