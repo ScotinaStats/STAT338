@@ -1448,7 +1448,7 @@ We've seen some **moments** already!
     
 --
 
-- The **skewness** of a random variable $&$ is the third *standardized moment*, $$Skew(Y)=E\left[\left(\frac{Y-\mu}{\sigma}\right)^{3}\right]$$
+- The **skewness** of a random variable $Y$ is the third *standardized moment*, $$Skew(Y)=E\left[\left(\frac{Y-\mu}{\sigma}\right)^{3}\right]$$
     
 ---
 
