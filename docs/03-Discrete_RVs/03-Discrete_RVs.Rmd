@@ -1486,11 +1486,7 @@ If $m(t)$ exists, then for any positive integer $k$, $$\left.\frac{d^{k}m(t)}{dt
 
 The MGF for the Poisson distribution is $$m(t)=e^{\lambda(e^{t}-1)}$$
 
-- Let's derive this using the definition: $m(t)=E(e^{tY})$
-
---
-
-**Now, use the MGF to find the mean and variance of the Poisson(λ) distribution!**
+**Let's use the MGF to find the mean and variance of the Poisson(λ) distribution!**
 
 - Start with this: $E(Y)=m'(0)$
 
