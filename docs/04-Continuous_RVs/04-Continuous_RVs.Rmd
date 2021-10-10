@@ -343,7 +343,7 @@ Let $Y$ be a continuous RV with density function $f(y)$.
 
 (WMS 4.21)
 
-Is $Y$ has density function $$f(y)=\begin{cases}(3/2)y^2+y,&0\leq y\leq 1,\\0,&\text{elsewhere}\end{cases}$$find the **mean** and **variance** of $Y$. 
+If $Y$ has density function $$f(y)=\begin{cases}(3/2)y^2+y,&0\leq y\leq 1,\\0,&\text{elsewhere}\end{cases}$$find the **mean** and **variance** of $Y$. 
 
 --
 
