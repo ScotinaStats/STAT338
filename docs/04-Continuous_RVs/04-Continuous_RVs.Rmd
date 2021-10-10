@@ -46,8 +46,6 @@ class: center, middle, frame
 
 # Continuous vs Discrete
 
-(From my **STAT 118** slides...)
-
 **Numerical (Quantitative) Variables**
 
 - **Discrete**: Numerical variable that can *only take whole, non-negative numbers* (0, 1, 2, ...)
@@ -58,35 +56,9 @@ class: center, middle, frame
 
 --
 
-<br>
-
-(Not from my **STAT 118** slides...)
-
 We can find $P(X=2)$ if $X$ is **discrete** (whatever $X$ may be). 
 
 - But if $Y$ is **continuous** and can *take an infinite range of numbers*, what is $P(Y=2)$?
-
----
-
-# An Old Phone Example
-
-Suppose the number of calls received in a call center, $Y$, follow a $\text{Poisson}(1)$ distribution. 
-
-- That is, $P(Y=y)=p(y)=\frac{1^{y}}{y!}e^{-1}$, $y=0,1,2\dots$
-
-Find $P(Y\leq y)$ for $y=0, 1, 2, 3$ (i.e., you'll find four different probabilities).
-
-**Solution**:
-
-- $P(Y\leq 0)=P(Y=0)=p(0)=e^{-1}=\boxed{0.37}$
-
-- $P(Y\leq 1)=P(Y=0)+P(Y=1)=p(0)+p(1)=e^{-1}+e^{-1}=\boxed{0.74}$
-
-- $P(Y\leq 2)=p(0)+p(1)+p(2)=e^{-1}+e^{-1}+\frac{1}{2}e^{-1}=\boxed{0.92}$
-
-- $P(Y\leq 3)=p(0)+p(1)+p(2)+p(3)=e^{-1}+e^{-1}+\frac{1}{2}e^{-1}+\frac{1}{6}e^{-1}=\boxed{0.98}$
-
-The quantity $P(Y\leq y)$ is known as the **cumulative distribution function**, and will be very useful to us as we begin working with *continuous* random variables. 
 
 ---
 
@@ -96,7 +68,24 @@ Let $Y$ denote any random variable. The **cumulative distribution function (CDF)
 
 --
 
-For $Y\sim \text{Poisson}(1)$, $$F(y)=P(Y\leq y)=\begin{cases}0&y<0\\0.37&0\leq y<1\\0.74& 1\leq y<2\\0.92& 2\leq y<3\\0.98&3\leq y<4\\ \dots&\dots\end{cases}$$
+For $Y\sim Binomial(n=2, p=0.5)$...
+
+- $P(Y\leq0)=P(Y=0)=\binom{2}{0}0.5^0(1-0.5)^2=\boxed{0.25}$
+
+- $P(Y\leq1)=P(Y=0)+P(Y=1)=0.25+\binom{2}{1}0.5^1(1-0.5)^1=\boxed{0.75}$
+
+- $P(Y\leq2)=P(Y=0)+P(Y=1)+P(Y=2)=\boxed{1}$
+
+---
+
+# Cumulative Distribution Function
+
+Let $Y$ denote any random variable. The **cumulative distribution function (CDF)** of $Y$, denoted by $F(Y)$, is such that $$F(y)=P(Y\leq y),\quad -\infty<y<\infty$$
+
+For $Y\sim Binomial(n=2, p=0.5)$...
+
+$$P(Y\leq y)=\begin{cases}0,&\text{for}\ y<0\\0.25,&\text{for}\ 0\leq y<1\\0.75,&\text{for}\ 1\leq y<2\\1,&\text{for}\ y\geq2\end{cases}$$
+
 
 <br>
 
@@ -118,11 +107,29 @@ If $F(y)$ is a *cumulative distribution function*, then:
 
 ---
 
-# A New Phone Example
+# Phone Example 1
+
+Suppose the number of calls received in a call center, $Y$, follows a $\text{Poisson}(1)$ distribution. 
+
+- That is, $P(Y=y)=p(y)=\frac{1^{y}}{y!}e^{-1}$, $y=0,1,2\dots$
+
+The CDF, $P(Y\leq y)$, for $y=0, 1, 2, 3$ is...
+
+- $P(Y\leq 0)=P(Y=0)=\boxed{0.37}$
+
+- $P(Y\leq 1)=P(Y=0)+P(Y=1)=\boxed{0.74}$
+
+- $P(Y\leq 2)=P(Y=0)+P(Y=1)+P(Y=2)=\boxed{0.92}$
+
+- $P(Y\leq 3)=P(Y=0)+P(Y=1)+P(Y=2)+P(Y=3)=\boxed{0.98}$
+
+- $P(Y\leq 4)=\dots$
+
+---
+
+# Phone Example 2
 
 Instead of modeling the **number** of calls received in an hour, what if we modeled the **lengths** of calls?
-
---
 
 - The **number** of calls *has* to be an **integer** (0, 1, 2, ...)
 
@@ -161,7 +168,7 @@ Let $F(y)$ be the distribution function for a *continuous* random variable $Y$. 
 
 # Probability Density Function
 
-**Probability density functions**, like *probability mass functions*, are *theoretical models for some frequency distribution of a *population*:
+**Probability density functions**, like *probability mass functions*, are *theoretical models for some frequency distribution of a population*:
 
 .pull-left[
 The **Binomial(20, 0.3)** distribution:
@@ -201,11 +208,9 @@ gf_density( ~ normal_samp, binwidth = 0.5) +
 
 If $f(y)$ is a **density function** for a *continuous* random variable, then:
 
-**1.** $f(y)\geq 0$ for all $y$, $-\infty<y<\infty$.
+1. $f(y)\geq 0$ for all $y$, $-\infty<y<\infty$.
 
-<br>
-
-**2.** $\int_{-\infty}^{\infty}f(y)\,dy=1$
+2. $\int_{-\infty}^{\infty}f(y)\,dy=1$
 
 --
 
@@ -215,11 +220,9 @@ If $f(y)$ is a **density function** for a *continuous* random variable, then:
 
 For *any* discrete probability distribution, the following must be true:
 
-**1.** $0\leq p(y)\leq 1$ for all $y$. 
+1. $0\leq p(y)\leq 1$ for all $y$. 
 
-<br>
-
-**2.** $\sum_{y}p(y)=1$, where the summation is over all values of $y$ with nonzero probability. 
+2. $\sum_{y}p(y)=1$, where the summation is over all values of $y$ with nonzero probability. 
 
 ---
 
@@ -239,9 +242,7 @@ For *any* discrete probability distribution, the following must be true:
 
 🤗We **integrate** the PDF over the *appropriate range*:
 
-<br>
-
-**Theorem**: If the random variable $Y$ has density function $f(y)$ and CDF $F(y)$, and $a<b$, then the probability that $Y$ falls in the *interval* $[a,b]$ is $$P(a\leq Y\leq b)=\int_{a}^{b}f(y)\,dy=F(b)-F(a)$$
+- **Theorem**: If the random variable $Y$ has density function $f(y)$ and CDF $F(y)$, and $a<b$, then the probability that $Y$ falls in the *interval* $[a,b]$ is $$P(a\leq Y\leq b)=\int_{a}^{b}f(y)\,dy=F(b)-F(a)$$
 
 ---
 
@@ -272,6 +273,8 @@ Using this valid PDF, find $$P(1\leq Y\leq 2)$$
 - What about $P(1<Y<2)$?
 ]
 
+```{r, echo = FALSE, eval = FALSE}
+
 ---
 
 # Practice
@@ -283,14 +286,15 @@ Find the PDF, and use this to find $P(-2<Y<2)$.
 - [**Hint**: You *could* integrate the PDF to find this probability, but you could also use the CDF directly!]
 
 .center[
-```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "50%"}
+{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "50%"}
 y = seq(-5, 5, by = 0.01)
 f_y = exp(y)/(1+exp(y)^2)
 gf_line(f_y~ y, size = 2) + 
   labs(y = "f(y)") +
   theme_bw()
-```
+
 ]
+```
 
 ---
 
