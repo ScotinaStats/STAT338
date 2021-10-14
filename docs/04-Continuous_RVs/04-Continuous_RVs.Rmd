@@ -107,6 +107,7 @@ If $F(y)$ is a *cumulative distribution function*, then:
 
 ---
 
+```{r, echo = FALSE, eval = FALSE}
 # Phone Example 1
 
 Suppose the number of calls received in a call center, $Y$, follows a $\text{Poisson}(1)$ distribution. 
@@ -126,10 +127,11 @@ The CDF, $P(Y\leq y)$, for $y=0, 1, 2, 3$ is...
 - $P(Y\leq 4)=\dots$
 
 ---
+```
 
-# Phone Example 2
+# Phone Example
 
-Instead of modeling the **number** of calls received in an hour, what if we modeled the **lengths** of calls?
+Instead of modeling (for example) the **number** of calls received in an hour, what if we modeled the **lengths** of calls?
 
 - The **number** of calls *has* to be an **integer** (0, 1, 2, ...)
 

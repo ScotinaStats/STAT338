@@ -102,29 +102,11 @@ If `\(F(y)\)` is a *cumulative distribution function*, then:
 
 ---
 
-# Phone Example 1
 
-Suppose the number of calls received in a call center, `\(Y\)`, follows a `\(\text{Poisson}(1)\)` distribution. 
 
-- That is, `\(P(Y=y)=p(y)=\frac{1^{y}}{y!}e^{-1}\)`, `\(y=0,1,2\dots\)`
+# Phone Example
 
-The CDF, `\(P(Y\leq y)\)`, for `\(y=0, 1, 2, 3\)` is...
-
-- `\(P(Y\leq 0)=P(Y=0)=\boxed{0.37}\)`
-
-- `\(P(Y\leq 1)=P(Y=0)+P(Y=1)=\boxed{0.74}\)`
-
-- `\(P(Y\leq 2)=P(Y=0)+P(Y=1)+P(Y=2)=\boxed{0.92}\)`
-
-- `\(P(Y\leq 3)=P(Y=0)+P(Y=1)+P(Y=2)+P(Y=3)=\boxed{0.98}\)`
-
-- `\(P(Y\leq 4)=\dots\)`
-
----
-
-# Phone Example 2
-
-Instead of modeling the **number** of calls received in an hour, what if we modeled the **lengths** of calls?
+Instead of modeling (for example) the **number** of calls received in an hour, what if we modeled the **lengths** of calls?
 
 - The **number** of calls *has* to be an **integer** (0, 1, 2, ...)
 
@@ -168,13 +150,13 @@ Let `\(F(y)\)` be the distribution function for a *continuous* random variable `
 .pull-left[
 The **Binomial(20, 0.3)** distribution:
 
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
 The **Normal(6, 4.2)** distribution:
 
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 ]
 
 --
@@ -237,7 +219,7 @@ Given `\(f(y)=cy^{2}\)`, `\(0\leq y\leq 2\)`, and `\(f(y)=0\)` elsewhere, find t
 --
 
 .pull-left[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -376,7 +358,7 @@ If `\(a&lt;b\)`, a random variable `\(Y\)` is said to have a continuous **unifor
 The **Uniform(0, 10)** distribution:
 
 .center[
-&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-8-1.png" width="60%" /&gt;
+&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-9-1.png" width="60%" /&gt;
 ]
 
 ---
@@ -484,7 +466,7 @@ class: center, middle, frame
 # Different Normal Distributions
 
 .pull-left[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
 
 - N(mean = 100, sd = 15)
 ]
@@ -492,7 +474,7 @@ class: center, middle, frame
 --
 
 .pull-right[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
 
 - N(mean = 0, sd = 1)
 - **Standard Normal distribution**
@@ -503,7 +485,7 @@ class: center, middle, frame
 # Different Normal Distributions
 
 .center[
-&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-14-1.png" width="65%" /&gt;
+&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-15-1.png" width="65%" /&gt;
 
 ]
 
@@ -592,7 +574,7 @@ A company that manufactures and bottles apple juice uses a machine that automati
 2.  Find the *75th percentile* of amounts dispensed; that is, find `\(\phi_{75}\)` such that `\(P(Y\leq \phi_{75})=0.75\)`. 
 
 .center[
-&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-15-1.png" width="45%" /&gt;
+&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-16-1.png" width="45%" /&gt;
 ]
 
 ---
@@ -655,14 +637,14 @@ class: center, middle, frame
 .pull-left[
 The **Uniform(0, 10)** distribution:
 
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
 The **Normal(0, 1)** distribution:
 
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -672,14 +654,14 @@ The **Normal(0, 1)** distribution:
 .pull-left[
 The **Gamma(1, 5)** distribution:
 
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
 The **Gamma(5, 2)** distribution:
 
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -733,7 +715,7 @@ The quantity `\(\Gamma(\alpha)\)` is known as the **gamma function**, and it fol
 - Scale parameter `\(\beta=1\)`
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -743,7 +725,7 @@ The quantity `\(\Gamma(\alpha)\)` is known as the **gamma function**, and it fol
 - Shape parameter `\(\alpha=1\)`
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -781,7 +763,7 @@ var(Y)
 ```
 
 .center[
-&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-25-1.png" width="40%" /&gt;
+&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-26-1.png" width="40%" /&gt;
 ]
 
 ---
@@ -876,7 +858,7 @@ Y = rexp(n = 10000, rate = 1/2)
 gf_histogram( ~ Y)
 ```
 
-&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-26-1.png" width="50%" /&gt;
+&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-27-1.png" width="50%" /&gt;
 
 ---
 
@@ -911,7 +893,7 @@ class: center, middle, frame
 
 # The Beta Distribution
 
-&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-28-1.png" width="50%" /&gt;
+&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-29-1.png" width="50%" /&gt;
 
 ---
 
@@ -924,7 +906,7 @@ The **beta distribution** is used to model *proportions* - variables that can ta
 --
 
 .center[
-&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-29-1.png" width="50%" /&gt;
+&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-30-1.png" width="50%" /&gt;
 ]
 
 ---
@@ -942,7 +924,7 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Beta(0.5, 0.5)**
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -952,7 +934,7 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Beta(1, 1)** = **Uniform(0, 1)**
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -962,7 +944,7 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Beta(5, 5)**
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -972,7 +954,7 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Beta(8, 2)**
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -982,7 +964,7 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Beta(2, 8)**
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
 ]
 
 ---
