@@ -275,8 +275,6 @@ Using this valid PDF, find $$P(1\leq Y\leq 2)$$
 - What about $P(1<Y<2)$?
 ]
 
-```{r, echo = FALSE, eval = FALSE}
-
 ---
 
 # Practice
@@ -288,15 +286,18 @@ Find the PDF, and use this to find $P(-2<Y<2)$.
 - [**Hint**: You *could* integrate the PDF to find this probability, but you could also use the CDF directly!]
 
 .center[
-{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "50%"}
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "45%"}
 y = seq(-5, 5, by = 0.01)
 f_y = exp(y)/(1+exp(y)^2)
 gf_line(f_y~ y, size = 2) + 
   labs(y = "f(y)") +
   theme_bw()
-
-]
 ```
+]
+
+--
+
+**Solution**: $P(-2<Y<2)=F(2)-F(-2)=0.762$
 
 ---
 
