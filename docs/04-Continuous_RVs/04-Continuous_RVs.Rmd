@@ -275,6 +275,7 @@ Using this valid PDF, find $$P(1\leq Y\leq 2)$$
 - What about $P(1<Y<2)$?
 ]
 
+```{r, echo = FALSE, eval = FALSE}
 ---
 
 # Practice
@@ -286,18 +287,19 @@ Find the PDF, and use this to find $P(-2<Y<2)$.
 - [**Hint**: You *could* integrate the PDF to find this probability, but you could also use the CDF directly!]
 
 .center[
-```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "45%"}
+{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "45%"}
 y = seq(-5, 5, by = 0.01)
 f_y = exp(y)/(1+exp(y)^2)
 gf_line(f_y~ y, size = 2) + 
   labs(y = "f(y)") +
   theme_bw()
-```
+
 ]
 
 --
 
 **Solution**: $P(-2<Y<2)=F(2)-F(-2)=0.762$
+```
 
 ---
 
@@ -670,24 +672,6 @@ A company that manufactures and bottles apple juice uses a machine that automati
 
 qnorm(0.75, mean = 16, sd = 1)
 ```
-
----
-
-# 68-95-99.7 Rule
-
-**Theorem** (68-95-99.7 Rule): If $Y\sim \text{Normal}(\mu,\sigma^{2})$, then:
-
-- $P(|Y-\mu|<\sigma)\approx 0.68$
-
-- $P(|Y-\mu|<2\sigma)\approx 0.95$
-
-- $P(|Y-\mu|<3\sigma)\approx 0.997$
-
-.center[
-```{r, echo = FALSE, dpi = 300}
-knitr::include_graphics("68_95_99_z.png")
-```
-]
 
 ---
 
