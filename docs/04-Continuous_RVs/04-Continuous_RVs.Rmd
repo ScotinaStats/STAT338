@@ -463,12 +463,6 @@ mean(Y_sim) # simulated E(Y)
 (20 + 10)/2 # theoretical E(Y)
 ```
 
-<br>
-
-.center[
-**Let's derive these!**
-]
-
 ---
 
 # Practice
@@ -506,8 +500,6 @@ knitr::include_graphics("normal_curve.png")
 ```
 ]
 
---
-
 - **unimodal**, **symmetric**
 
 - **bell-shaped**
@@ -530,7 +522,6 @@ hist(samp1, xlab = "", main = "")
 - N(mean = 100, sd = 15)
 ]
 
---
 
 .pull-right[
 ```{r, echo = FALSE}
