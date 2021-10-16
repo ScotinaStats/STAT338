@@ -595,6 +595,7 @@ If $Z\sim\text{Normal}(0,1)$, then $$f(z)=\frac{1}{\sqrt{2\pi}}e^{-z^{2}/2},\qqu
 
 ---
 
+```{r, echo = FALSE, eval = FALSE}
 # Where does pi come from?!
 
 If turns out that $$\int_{-\infty}^{\infty}e^{-z^{2}/2}\,dz=\sqrt{2\pi},$$ though evaluating this integral involves some *multivariable calculus* and *polar coordinate* tricks...
@@ -606,6 +607,7 @@ If turns out that $$\int_{-\infty}^{\infty}e^{-z^{2}/2}\,dz=\sqrt{2\pi},$$ thoug
 But in order for $$f(z)=\frac{1}{\sqrt{2\pi}}e^{-z^{2}/2}$$ to be a **valid PDF**, it needs to integrate to 1, which is why we use $1/\sqrt{2\pi}$ as a *normalizing constant*. 
 
 ---
+```
 
 # Normal Probabilities
 
