@@ -1,0 +1,2711 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>MATH/STAT 338: Probability</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Anthony Scotina" />
+    <script src="libs/header-attrs-2.6/header-attrs.js"></script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <link rel="stylesheet" href="my-theme.css" type="text/css" />
+    <link rel="stylesheet" href="my-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# MATH/STAT 338: Probability
+## Multivariate Distributions
+### Anthony Scotina
+
+---
+
+
+
+
+
+
+
+
+
+
+&lt;!--
+pagedown::chrome_print("~/Dropbox/Teaching/03-Simmons Courses/MATH228-Introduction to Data Science/Lecture Slides/01-Introduction/01-Introduction.html")
+--&gt;
+
+class: center, middle, frame
+
+# Joint Distributions
+
+---
+
+# Multiple Random Variables
+
+So far, we have looked at a **single random variable**, *Y*. 
+
+- The distribution of *Y* provides *complete information* about **probabilities** associated with *Y*. 
+
+But in many applications, we care about the relationship between **multiple random variables** in the same experiment!
+
+- **Joint/Multivariate distributions** allow us to learn about how multiple random variables are related, by studying the probability distribution associated with the *intersection* of multiple random variables: `$$(Y_{1}=y_{1}),(Y_{2}=y_{2}),\dots,(Y_{n}=y_{n})$$`
+
+--
+
+&lt;br&gt;
+
+Other types of distributions we'll look at:
+
+- **Marginal distributions**: Individual distribution of `\(Y_{1}\)`, ignoring the values of `\(Y_{2}, Y_{3},\dots\)`
+
+- **Conditional distributions** of `\(Y_{1}\)`, given `\(Y_{2}=y_{2}\)`: The updated distribution for `\(Y_{1}\)` after observing `\(Y_{2}=y_{2}\)`
+
+---
+
+# Extending to Multivariate Distributions
+
+.pull-left[
+- `\(Y\sim\text{Normal}(100, 15)\)`
+
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+- `\(\binom{X}{Y}\sim\text{Multivariate Normal}\)`
+
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+]
+
+---
+
+# Discrete Joint Distributions
+
+**Example**
+
+Suppose we make our way back to *Piéchart Casino* and play a game where we toss three *balanced* coins *independently* (no, this game isn't rigged):
+
+- `\(X=\)` number of heads
+
+- `\(Y=\dots\)`
+    - &amp;#36;1 if first head is on toss 1
+    - &amp;#36;2 if first head is on toss 2
+    - &amp;#36;3 if first head is on toss 3
+    - -&amp;#36;1 if no heads
+    
+--
+
+**Outcomes**
+
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#ymzdbsnwxi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ymzdbsnwxi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ymzdbsnwxi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ymzdbsnwxi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ymzdbsnwxi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ymzdbsnwxi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ymzdbsnwxi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ymzdbsnwxi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ymzdbsnwxi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ymzdbsnwxi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ymzdbsnwxi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ymzdbsnwxi .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ymzdbsnwxi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ymzdbsnwxi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ymzdbsnwxi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ymzdbsnwxi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ymzdbsnwxi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#ymzdbsnwxi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ymzdbsnwxi .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#ymzdbsnwxi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ymzdbsnwxi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ymzdbsnwxi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ymzdbsnwxi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ymzdbsnwxi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ymzdbsnwxi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ymzdbsnwxi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ymzdbsnwxi .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ymzdbsnwxi .gt_left {
+  text-align: left;
+}
+
+#ymzdbsnwxi .gt_center {
+  text-align: center;
+}
+
+#ymzdbsnwxi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ymzdbsnwxi .gt_font_normal {
+  font-weight: normal;
+}
+
+#ymzdbsnwxi .gt_font_bold {
+  font-weight: bold;
+}
+
+#ymzdbsnwxi .gt_font_italic {
+  font-style: italic;
+}
+
+#ymzdbsnwxi .gt_super {
+  font-size: 65%;
+}
+
+#ymzdbsnwxi .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="ymzdbsnwxi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Outcome</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HHH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">THH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HTH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HHT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">TTH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">THT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HTT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">TTT</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">X</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Y</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">-1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+
+---
+
+# Joint PMF
+
+Let `\(X\)` and `\(Y\)` be **discrete** random variables. The **joint (bivariate) probability function** for `\(X\)` and `\(Y\)` is given by `$$p(x,y)=P(X=x,Y=y).$$`
+
+--
+
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#xghwvppnav .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xghwvppnav .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xghwvppnav .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xghwvppnav .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xghwvppnav .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xghwvppnav .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xghwvppnav .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xghwvppnav .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xghwvppnav .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xghwvppnav .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xghwvppnav .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xghwvppnav .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xghwvppnav .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xghwvppnav .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xghwvppnav .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xghwvppnav .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xghwvppnav .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#xghwvppnav .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xghwvppnav .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#xghwvppnav .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xghwvppnav .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xghwvppnav .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xghwvppnav .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xghwvppnav .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xghwvppnav .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#xghwvppnav .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xghwvppnav .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#xghwvppnav .gt_left {
+  text-align: left;
+}
+
+#xghwvppnav .gt_center {
+  text-align: center;
+}
+
+#xghwvppnav .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xghwvppnav .gt_font_normal {
+  font-weight: normal;
+}
+
+#xghwvppnav .gt_font_bold {
+  font-weight: bold;
+}
+
+#xghwvppnav .gt_font_italic {
+  font-style: italic;
+}
+
+#xghwvppnav .gt_super {
+  font-size: 65%;
+}
+
+#xghwvppnav .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="xghwvppnav" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Outcome</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HHH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">THH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HTH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HHT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">TTH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">THT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HTT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">TTT</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">X</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Y</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">-1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+
+In the *Piéchart Casino* example, a visual of the joint PMF is given below:
+
+.center[
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-7-1.png" width="50%" /&gt;
+
+]
+
+---
+
+# Joint PMF
+
+Similar to the single variable (**univariate**) case, a *valid* PMF must be nonnegative and sum to 1. 
+
+**Theorem**: If `\(X\)` and `\(Y\)` are discrete random variables with joint probability function `\(p(x,y)\)`, then...
+
+1. `\(p(x,y)\geq 0\)` for all `\(x,y\)`. 
+
+2. `\(\sum_{x,y}p(x,y)=1\)`, where the sum is over all values `\((x,y)\)` that are assigned non-zero probabilities.
+
+&lt;br&gt;
+
+🤔 Is our PMF from the *Piéchart Casino* example a *valid* PMF?
+
+---
+
+# Joint Distribution Function
+
+For any random variables `\(X\)` and `\(Y\)`, the **joint (bivariate) distribution function**, `\(F(x,y)\)`, is `$$F(x,y)=P(X\leq x, Y\leq y),\qquad -\infty&lt;x&lt;\infty,\ -\infty&lt;y&lt;\infty.$$`
+
+--
+
+&lt;br&gt;
+
+**Practice**
+
+In the *Piéchart Casino* example, find `\(F(2,1)=P(X\leq2,Y\leq1)\)`.
+
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#agwehpbfvh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#agwehpbfvh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#agwehpbfvh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#agwehpbfvh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#agwehpbfvh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#agwehpbfvh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#agwehpbfvh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#agwehpbfvh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#agwehpbfvh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#agwehpbfvh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#agwehpbfvh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#agwehpbfvh .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#agwehpbfvh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#agwehpbfvh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#agwehpbfvh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#agwehpbfvh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#agwehpbfvh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#agwehpbfvh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#agwehpbfvh .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#agwehpbfvh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#agwehpbfvh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#agwehpbfvh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#agwehpbfvh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#agwehpbfvh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#agwehpbfvh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#agwehpbfvh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#agwehpbfvh .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#agwehpbfvh .gt_left {
+  text-align: left;
+}
+
+#agwehpbfvh .gt_center {
+  text-align: center;
+}
+
+#agwehpbfvh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#agwehpbfvh .gt_font_normal {
+  font-weight: normal;
+}
+
+#agwehpbfvh .gt_font_bold {
+  font-weight: bold;
+}
+
+#agwehpbfvh .gt_font_italic {
+  font-style: italic;
+}
+
+#agwehpbfvh .gt_super {
+  font-size: 65%;
+}
+
+#agwehpbfvh .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="agwehpbfvh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Outcome</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HHH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">THH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HTH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HHT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">TTH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">THT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HTT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">TTT</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">X</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Y</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">-1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+
+---
+
+# Continuous Joint Distributions
+
+Let `\(X\)` and `\(Y\)` be **continuous** random variables with joint distribution function `\(F(x,y)\)`. If there exists a nonnegative function `\(f(x,y)\)`, such that `$$F(x,y)=\int^{x}_{-\infty}\int^{y}_{-\infty}f(t_{1},t_{2})\,dt_{2}dt_{1},$$` for all `\(-\infty&lt;x&lt;\infty\)`, `\(-\infty&lt;y&lt;\infty\)`, then `\(X\)` and `\(Y\)` are **jointly continuous random variables**. 
+
+- The function `\(f(x,y)\)` is called the **joint probability density function (PDF)**. 
+
+--
+
+Similar to joint discrete random variables, if `\(X\)` and `\(Y\)` are jointly continuous, then...
+
+1. `\(f(x,y)\geq0\)` for all `\(x,y\)`. 
+
+2. `\(\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(x,y)\,dxdy=1\)`
+
+---
+
+# Continuous Joint Distributions 
+
+**Example** (WMS 5.7)
+
+Let `\(Y_{1}\)` and `\(Y_{2}\)` have the joint probability density function `$$f(y_{1},y_{2})=\begin{cases}e^{-(y_{1}+y_{2})},&amp;y_{1}&gt;0,y_{2}&gt;0\\0,&amp;\text{elsewhere}.\end{cases}$$`
+
+1. What is `\(P(Y_{1}&lt;1, Y_{2}&gt;5)\)`?
+
+2. What is `\(P(Y_{1}+Y_{2}&lt;3)\)`?
+
+.center[
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-9-1.png" width="50%" /&gt;
+]
+
+---
+
+# Practice
+
+Let `\(X\)` and `\(Y\)` be random variables with joint probability density function `$$f(x,y)=\begin{cases}x+y,&amp;0&lt;x&lt;1,0&lt;y&lt;1\\0,&amp;\text{elsewhere}.\end{cases}$$`
+
+- Find `\(P(X&gt;0.5)\)`. 
+
+.center[
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-10-1.png" width="50%" /&gt;
+]
+
+---
+
+class: center, middle, frame
+
+# Marginal Distributions
+
+---
+
+# Piéchart Casino
+
+Recall the *Piéchart Casino* from earlier. 
+
+- `\(X=\)` number of heads
+
+- `\(Y=\dots\)`
+    - &amp;#36;1 if first head is on toss 1
+    - &amp;#36;2 if first head is on toss 2
+    - &amp;#36;3 if first head is on toss 3
+    - -&amp;#36;1 if no heads
+
+**Outcomes**
+
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#aihtxbrlyu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#aihtxbrlyu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aihtxbrlyu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#aihtxbrlyu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#aihtxbrlyu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aihtxbrlyu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aihtxbrlyu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#aihtxbrlyu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#aihtxbrlyu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#aihtxbrlyu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#aihtxbrlyu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#aihtxbrlyu .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#aihtxbrlyu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#aihtxbrlyu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#aihtxbrlyu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#aihtxbrlyu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#aihtxbrlyu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#aihtxbrlyu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aihtxbrlyu .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#aihtxbrlyu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aihtxbrlyu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#aihtxbrlyu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#aihtxbrlyu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aihtxbrlyu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aihtxbrlyu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#aihtxbrlyu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aihtxbrlyu .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#aihtxbrlyu .gt_left {
+  text-align: left;
+}
+
+#aihtxbrlyu .gt_center {
+  text-align: center;
+}
+
+#aihtxbrlyu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#aihtxbrlyu .gt_font_normal {
+  font-weight: normal;
+}
+
+#aihtxbrlyu .gt_font_bold {
+  font-weight: bold;
+}
+
+#aihtxbrlyu .gt_font_italic {
+  font-style: italic;
+}
+
+#aihtxbrlyu .gt_super {
+  font-size: 65%;
+}
+
+#aihtxbrlyu .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="aihtxbrlyu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Outcome</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HHH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">THH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HTH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HHT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">TTH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">THT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HTT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">TTT</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">X</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">0</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Y</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">-1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+
+--
+
+What if we only wanted to find a probability *associated with X*, such as `\(P(X = 2)\)`?
+
+- To find the distribution of *X* **alone**, we need to sum over *all possible values of Y*: `\(P(X=2)=p(2,-1)+p(2,1)+p(2,2)+p(2,3)\)`
+
+---
+
+# Marginal Probability Functions (Discrete)
+
+We just found a *marginal probability*! 
+
+For **discrete** random variables `\(X\)` and `\(Y\)`, the **marginal probability function** of `\(X\)` is `$$P(X=x)=\sum_{y}P(X=x,Y=y).$$` 
+
+.pull-left[
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+]
+
+---
+
+# Marginal Probability Functions (Continuous)
+
+For **continuous** random variables `\(X\)` and `\(Y\)`, the **marginal probability functions** of `\(X\)` and `\(Y\)`, respectively, are `$$f_{X}(x)=\int_{-\infty}^{\infty}f(x,y)\,dy\qquad\text{and}\qquad f_{Y}(y)=\int_{-\infty}^{\infty}f(x,y)\,dx.$$` 
+
+.pull-left[
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+# Practice
+
+Let `\(X\)` and `\(Y\)` be random variables with joint probability density function `$$f(x,y)=\begin{cases}x+y,&amp;0&lt;x&lt;1,0&lt;y&lt;1\\0,&amp;\text{elsewhere}.\end{cases}$$`
+
+- Find the marginal distribution for `\(X\)`, `\(f_{X}(x)\)`. 
+
+---
+
+# Marginal Probability Functions (Continuous)
+
+**Example**
+
+Let `\(X\)` and `\(Y\)` be random variables with joint probability density function `$$f(x,y)=\begin{cases}\frac{e^{-y}}{\sqrt{2\pi}}e^{-x^2/2},&amp;-\infty&lt;x&lt;\infty,y&gt;0\\0,&amp;\text{elsewhere}.\end{cases}$$`
+
+- Find the marginal distributions `\(f_{X}(x)\)` and `\(f_{Y}(y)\)`. 
+
+--
+
+&lt;br&gt;
+
+**Solution**
+
+It turns out...
+
+- `\(X\sim\text{Normal}(0,1)\)`
+
+- `\(Y\sim\text{Exponential}(1)\)`
+
+---
+
+class: center, middle, frame
+
+# Conditional Distributions
+
+---
+
+# Condtional Probability
+
+Suppose we have two random variables, `\(X\)` and `\(Y\)`. We *observe* some value of `\(X\)`, and we want to use this to *update* our distribution of `\(Y\)` to reflect this information. 
+
+- The **marginal distributions**, `\(P(Y=y)\)` and `\(f_{Y}(y)\)`, do not take into account *any* information about `\(X\)`. 
+
+&lt;br&gt;
+
+--
+
+**Recall** some properties of **conditional probabilities** that we studied previously:
+
+- `\(P(A\mid B)=\frac{P(A\cap B)}{P(B)}\)`
+
+- `\(P(A\cap B)=P(A)P(B\mid A)=P(B)P(A\mid B)\)`
+
+- `\(P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}\)` (**Bayes' Rule**)
+
+---
+
+# Conditional Distributions
+
+We can extend the properties of **conditional probability** to settings involving random variables!
+
+**Discrete case**
+
+If `\(X\)` and `\(Y\)` are jointly **discrete** random variables with *joint* probability function `\(p(x,y)\)` and *marginal* probability functions `\(p_X(x)\)` and `\(p_{Y}(y)\)`, respectively, then the **conditional probability function** of `\(X\)` *given* `\(Y=y\)` is: `$$p(x\mid y)=P(X=x\mid Y=y)=\frac{P(X=x, Y=y)}{P(Y=y)}=\frac{p(x,y)}{p_{Y}(y)}$$`
+
+--
+
+**Continuous case**
+
+For **continuous** random variables `\(X\)` and `\(Y\)` with *joint* density function `\(f(x,y)\)` and *marginal* density functions `\(f_{X}(x)\)` and `\(f_{Y}(y)\)`, the **conditional density function** of `\(X\)` *given* `\(Y=y\)` is: `$$f(x\mid y)=\frac{f(x,y)}{f_{Y}(y)}$$`
+
+
+---
+
+# Practice
+
+(WMS 5.25)
+
+Let `\(Y_{1}\)` and `\(Y_{2}\)` have the joint probability density function `$$f(y_{1},y_{2})=\begin{cases}e^{-(y_{1}+y_{2})},&amp;y_{1}&gt;0,y_{2}&gt;0\\0,&amp;\text{elsewhere}.\end{cases}$$`
+
+1. Find the marginal density functions for `\(Y_{1}\)` and `\(Y_{2}\)`. 
+
+2. For `\(y_{2}&gt;0\)`, what is the conditional density function of `\(Y_{1}\)` given that `\(Y_{2}=y_{2}\)`?
+
+---
+
+# Conditional Distributions (Continuous)
+
+**Example**
+
+Let `\(Y_{1}\)` and `\(Y_{2}\)` have the joint probability density function `$$f(y_{1},y_{2})=\begin{cases}6y_{1}^{2}y_{2},&amp;0\leq y_{1}\leq y_{2}\ \text{and}\ y_{1}+y_{2}\leq 2\\0,&amp;\text{elsewhere}.\end{cases}$$`
+
+1. Find the marginal distribution of `\(Y_{1}\)`, `\(f_{1}(y_{1})\)`. What *named* probability distribution does this follow?
+
+2. Find `\(f(y_{2}\mid y_{1})\)` and use this to find `\(P(Y_{2}\leq 1\mid Y_{1}=1/2)\)`. 
+
+---
+
+
+
+class: center, middle, frame
+
+# Independent Random Variables
+
+---
+
+# Independent Events
+
+Two events are said to be **independent** if knowledge that one event occurs does not indicate whether the other event is more likely to occur. 
+
+Formally, two events are **independent** if *any* one of the following holds:
+
+- `\(P(A\mid B)=P(A)\)`
+
+- `\(P(B\mid A)=P(B)\)`
+
+- `\(P(A\cap B)=P(A)P(B)\)`
+
+Otherwise, the events are said to be *dependent*. 
+
+--
+
+This was from the first month of class, but we can extend it to a setting involving *random variables*. 
+
+- In fact, we've already seen joint distributions where...
+    - the probabilities associated with `\(X\)` depended on the observed value of `\(Y\)`
+    - the probabilities associated with `\(X\)` are completely independent of `\(Y\)`
+    
+---
+
+# Independent Random Variables
+
+The *technical* definition of **independence** involves *cumulative distribution functions*...
+
+Let `\(X\)` have distribution function `\(F_{X}(x)\)`, `\(Y\)` have distribution function `\(F_{Y}(y)\)`, and `\(X\)` and `\(Y\)` have *joint* distribution function `\(F(x,y)\)`. Then `\(X\)` and `\(Y\)` are said to be **independent** if and only if `$$F(x,y)=F_{X}(x)F_{Y}(y).$$` If `\(X\)` and `\(Y\)` are not independent, they are said to be **dependent**. 
+
+--
+
+&lt;br&gt;
+
+This is equivalent to the following, involving *probability functions*:
+
+- **Discrete RVs**: Independence `\(\iff\)` `\(p(x,y)=p_{X}(x)p_{Y}(y)\)`
+
+- **Continuous RVs**: Independence `\(\iff\)` `\(f(x,y)=f_{X}(x)f_{Y}(y)\)`
+
+---
+
+# Independence in 2x2 Tables
+
+[Are SSRIs associated with increased risk of bone fractures among the elderly?](https://www.mcgill.ca/channels/news/new-muhc-study-shows-increased-risk-bone-fracture-elderly-people-daily-medication-depression-23574)
+
+- `\(n=5008\)` adults over the age of 50, followed for five years
+
+**Study Results**
+
+.center[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Taking SSRI &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; No SSRI &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Total &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Experiences Fractures &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 244 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; No Fractures &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 123 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4627 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4750 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 137 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4871 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5008 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+--
+
+For each study participant, we can understand the events "*Taking SSRI*" and "*Experiences Fractures*" (and their counterparts) as results of **Bernoulli trials**. 
+
+- We can find *joint*, *marginal*, and *conditional* distributions using the 2x2 table!
+
+---
+
+# Independence in 2x2 Tables
+
+[Are SSRIs associated with increased risk of bone fractures among the elderly?](https://www.mcgill.ca/channels/news/new-muhc-study-shows-increased-risk-bone-fracture-elderly-people-daily-medication-depression-23574)
+
+- `\(n=5008\)` adults over the age of 50, followed for five years
+
+**Study Results**
+
+.center[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Y = 1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Y = 0 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Total &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; X = 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 244 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; X = 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 123 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4627 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4750 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 137 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4871 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5008 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+&lt;br&gt;
+
+&gt; Are *X* and *Y* independent?
+
+---
+
+# Practice 
+
+(WMS 5.53)
+
+Let `\(Y_{1}\)` and `\(Y_{2}\)` have the joint probability density function `$$f(y_{1},y_{2})=\begin{cases}6(1-y_{2}),&amp;0\leq y_{1}\leq y_{2}\leq1\\0,&amp;\text{elsewhere}.\end{cases}$$`
+
+- By finding `\(f_{1}(y_{1})\)` and `\(f_{2}(y_{2})\)`, show that `\(Y_{1}\)` and `\(Y_{2}\)` are **dependent**. 
+
+--
+
+**Solution**:
+
+- `\(f_{1}(y_{1})=3-6y_{1}+3y_{1}^{2},\ 0\leq y_{1}\leq 1\)`
+
+- `\(f_{2}(y_{2})=6y_{2}(1-y_{2}),\ 0\leq y_{2}\leq 1\)`
+
+Therefore, `\(f(y_{1},y_{2})\neq f_{1}(y_{1})f_{2}(y_{2})\)`. 
+
+---
+
+# One Simple Trick ™️
+
+**Theorem**: Let `\(Y_{1}\)` and `\(Y_{2}\)` have a joint density `\(f(y_{1},y_{2})\)` that is positive if and only if `\(a\leq y_{1}\leq b\)` and `\(c\leq y_{2} \leq d\)`, for constants `\(a\)`, `\(b\)`, `\(c\)`, and `\(d\)`. Then `\(Y_{1}\)` and `\(Y_{2}\)` are independent if and only if `$$f(y_{1},y_{2})=g(y_{1})h(y_{2}),$$` where `\(g(y_{1})\)` is a nonnegative function of `\(y_{1}\)` *alone* and `\(h(y_{2})\)` is a nonnegative function of `\(y_{2}\)` *alone*. 
+
+- In some cases, we don't need to derive marginal densities to prove independence! We just need to break the joint density function into separate pieces involving `\(y_{1}\)` and `\(y_{2}\)` alone. 
+
+--
+
+**Example**
+
+Suppose `\(Y_{1}\)` and `\(Y_{2}\)` denote the lengths of life, in hundreds of hours, for components of types I and II, respectively, in an electronic system. The joint density of `\(Y_{1}\)` and `\(Y_{2}\)` is `$$f(y_{1},y_{2})=\begin{cases}(1/8)y_{1}e^{-(y_{1}+y_{2})/2},&amp; y_{1}&gt;0, y_{2}&gt;0,\\0,&amp;\text{elsewhere}.\end{cases}$$`
+
+- Using the previous theorem, prove that `\(Y_{1}\)` and `\(Y_{2}\)` are independent. 
+
+
+---
+
+class: center, middle, frame
+
+# The Expected Value of a Function of Random Variables
+
+## Multivariate LOTUS
+
+---
+
+# Multivariate LOTUS
+
+**Discrete**
+
+Let `\(g(Y_{1},Y_{2},\dots,Y_{k})\)` be a function of discrete RVs with joint probability function `\(p(y_{1},y_{2},\dots,y_{k})\)`. Then the **expected value** of `\(g(Y_{1},Y_{2},\dots,Y_{k})\)` is `$$E[g(Y_{1},Y_{2},\dots,Y_{k})]=\sum_{y_{k}}\cdots\sum_{y_{2}}\sum_{y_{1}}g(y_{1},y_{2},\dots,y_{k})p(y_{1},y_{2},\dots,y_{k}).$$`
+
+&lt;br&gt;
+
+**Continuous**
+
+If `\(Y_{1},Y_{2},\dots,Y_{k}\)` are continuous RVs with joint density function `\(f(y_{1},y_{2},\dots,y_{k})\)`, then `$$E[g(Y_{1},Y_{2},\dots,Y_{k})]=\int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g(y_{1},y_{2},\dots,y_{k})f(y_{1},y_{2},\dots,y_{k})\,dy_{1}dy_{2}\dots dy_{k}.$$`
+
+---
+
+# Multivariate LOTUS
+
+**Example** 
+
+Certain electrical fuses operate *independently* with lifetimes `\(Y_{i}\sim\text{Exp}(\beta=3)\)`, `\(i=1,2\)`. In other words, `$$f(y_{1},y_{2})=\begin{cases}\left(\frac{1}{3}e^{-y_{1}/3}\right)\left(\frac{1}{3}e^{-y_{2}/3}\right),&amp;y_{1}&gt;0,y_{2}&gt;0\\0,&amp;\text{elsewhere}.\end{cases}$$`
+
+Find `\(E(Y_{1}+Y_{2})\)` and `\(E(Y_{1}Y_{2})\)`. 
+
+---
+
+# Two Simple Tricks ™️
+
+**Theorems**
+
+1. Let `\(Y_{1}\)` and `\(Y_{2}\)` be random variables and `\(g_{1}(Y_{1},Y_{2}),g_{2}(Y_{1},Y_{2}),\dots,g_{k}(Y_{1},Y_{2})\)` be functions of `\(Y_{1}\)` and `\(Y_{2}\)`. Then 
+`\begin{align*}
+&amp; E[g_{1}(Y_{1},Y_{2})+g_{2}(Y_{1},Y_{2})+\cdots+g_{k}(Y_{1},Y_{2})]\\
+&amp;\ \ \ \ =E[g_{1}(Y_{1},Y_{2})]+E[g_{2}(Y_{1},Y_{2})]+\cdots+E[g_{k}(Y_{1},Y_{2})]
+\end{align*}`
+
+2. Let `\(Y_{1}\)` and `\(Y_{2}\)` be **independent** random variables and `\(g(Y_{1})\)` and `\(h(Y_{2})\)` be functions of *only* `\(Y_{1}\)` and `\(Y_{2}\)`, respectively. Then `$$E[g(Y_{1})h(Y_{2})]=E[g(Y_{1})]E[h(Y_{2})],$$` provided that the expectations exist. 
+
+---
+
+# Practice
+
+(WMS 5.81)
+
+Suppose `\(Y_{1}\)` and `\(Y_{2}\)` denote the lengths of life, in hundreds of hours, for components of types I and II, respectively, in an electronic system. The joint density of `\(Y_{1}\)` and `\(Y_{2}\)` is `$$f(y_{1},y_{2})=\begin{cases}(1/8)y_{1}e^{-(y_{1}+y_{2})/2},&amp; y_{1}&gt;0, y_{2}&gt;0,\\0,&amp;\text{elsewhere}.\end{cases}$$`
+
+One way to measure the relative efficiency of the two components is to compute the ratio `\(Y_{2}/Y_{1}\)`. Find `\(E(Y_{2}/Y_{1})\)`. 
+
+- **Hint**: Use the fact that `\(Y_{1}\)` and `\(Y_{2}\)` are *independent*. The *Gamma* and *Exponential* PDFs will also help!
+
+---
+
+class: center, middle, frame
+
+# Covariance and Correlation
+
+
+
+---
+
+# Dependent Random Variables
+
+.center[
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-20-1.png" width="45%" /&gt;
+]
+
+- `\(E(X)=\mu_{X}=0.0818\)`
+
+- `\(E(Y)=\mu_{Y}=5.3403\)`
+
+---
+
+# Dependent Random Variables
+
+.center[
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-21-1.png" width="45%" /&gt;
+]
+
+Because `\(X\)` and `\(Y\)` tend to move in the same direction...
+
+- `\(X-E(X)\)` and `\(Y-E(Y)\)` with *both* be either **positive** or **negative**
+
+--
+
+This implies that the **covariance** between `\(X\)` and `\(Y\)` will be positive!
+
+---
+
+# Independent Random Variables
+
+.center[
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-22-1.png" width="45%" /&gt;
+]
+
+- `\(E(X)=\mu_{X}=-0.0309\)`
+
+- `\(E(Y)=\mu_{Y}=0.0188\)`
+
+---
+
+# Independent Random Variables
+
+.center[
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-23-1.png" width="45%" /&gt;
+]
+
+Because `\(X\)` and `\(Y\)` don't really have any relationship in *either* direction...
+
+- `\(X-E(X)\)` and `\(Y-E(Y)\)` with have the **same** sign for some points, and the **opposite** sign for others
+    - This means that `\((X-E(X))(Y-E(Y))\)` will average to (approx.) zero. 
+
+--
+
+This implies that the **covariance** between `\(X\)` and `\(Y\)` will be near zero!
+
+---
+
+# Covariance
+
+If `\(X\)` and `\(Y\)` are random variables with means `\(\mu_{X}\)` and `\(\mu_{Y}\)`, respectively, the **covariance** of `\(X\)` and `\(Y\)` is `$$Cov(X,Y)=E[(X-\mu_{X})(Y-\mu_{Y})]=E(XY)-E(X)E(Y).$$`
+
+--
+
+&lt;br&gt;
+
+We sometimes use the *standardized form* of the covariance, called the **correlation coefficient**: `$$\rho=\frac{Cov(X,Y)}{\sigma_{X}\sigma_{Y}},$$` where `\(\sigma_{X}\)` and `\(\sigma_{Y}\)` are the *standard deviations* of `\(X\)` and `\(Y\)`. 
+
+- `\(\rho\)` ranges between -1 and +1
+    - `\(\rho=1\)` implies a *perfect positive (linear) correlation*
+    - `\(\rho=-1\)` implies a *perfect negative (linear) correlation*
+
+---
+
+# Practice
+
+Suppose that `\(Y_{1}\)` and `\(Y_{2}\)` are jointly continuous with PDF given by `$$f(y_{1},y_{2})=\begin{cases}4y_{1}y_{2},&amp;0\leq y_{1}\leq 1,0\leq y_{2}\leq 1,\\0,&amp;\text{elsewhere.}\end{cases}$$`
+
+Find `\(Cov(Y_{1},Y_{2})\)`. 
+
+&gt; Is this result surprising? Why or why not?
+
+---
+
+# Covariance and Independence
+
+**Theorem**
+
+If `\(X\)` and `\(Y\)` are **independent** random variables, then `$$Cov(X,Y)=0.$$` Thus, the variables must be *uncorrelated*.
+
+--
+
+🚨🚨The *converse* is not true!!!🚨🚨
+
+- If `\(Cov(X,Y)=0\)`, then `\(X\)` and `\(Y\)` are *not necessarily* independent!
+
+--
+
+**Example**
+
+Let `\(X\sim\text{Normal}(0, 1)\)` and `\(Y=X^{2}\)`. Prove that `\(Cov(X,Y)=0\)` but `\(X\)` and `\(Y\)` are **not** independent. 
+
+- We'll use the fact that `\(\text{Skew}(X)=0\)` for a `\(\text{Normal}(0,1)\)` distribution. 
+
+---
+
+# Covariance in R
+
+Let's simulate `\(X\)` and `\(Y\)` from the previous example!
+
+
+```r
+X = rnorm(10000)
+Y = X^2
+data = data.frame(X, Y)
+```
+
+--
+
+Using the `cov()` function on a *data frame* will produce a **covariance matrix**:
+
+
+```r
+cov(data)
+```
+
+```
+##              X            Y
+## X  0.991641551 -0.003753336
+## Y -0.003753336  1.969326686
+```
+
+--
+
+*Clearly* not independent!
+
+.center[
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-26-1.png" width="30%" /&gt;
+]
+
+---
+
+class: center, middle, frame
+
+# The Expected Value and Variance of Linear Functions of Random Variables
+
+---
+
+# Coupon Collector's Problem
+
+Moose's **favorite** toys are pictured below. 
+
+.pull-left[
+- Suppose there are **12** types of toys, which you collect one by one, with the goal of getting a complete set. 
+
+- When collecting toys, the toy types are **random** and *equally likely*.
+
+&gt; What is the expected number of toys I need to collect until Moose has a complete set?
+]
+
+.pull-right[
+
+&lt;img src="cat_toy.jpg" width="50%" /&gt;
+&lt;img src="moose_toy.jpg" width="75%" /&gt;
+]
+
+---
+
+# Coupon Collector's Problem
+
+.pull-left[
+&lt;img src="moose_toy.jpg" width="75%" /&gt;
+]
+
+.pull-right[
+In *this* problem that we worked through earlier in the semester, we let `$$N=N_{1}+\cdots+N_{12}$$`
+
+- `\(N=\)` number of toys needed until we get all 12
+
+- `\(N_{i}=\)` number of toys needed, starting from `\(N_{i-1}\)`, until we get `\(i\)` toys
+
+Then `$$E(N)=E(N_{1})+\cdots+E(N_{12})$$`
+
+- **Note**: The `\(N_{i}\)` are **independent** from one another!
+]
+
+---
+
+# Linear Functions of Random Variables
+
+For random variables `\(Y_{1},Y_{2},\dots,Y_{n}\)` and constants `\(a_{1},a_{2},\dots,a_{n}\)`, a **linear function** of the `\(Y_{i}\)` random variables is: `$$U_{1}=a_{1}Y_{1}+a_{2}Y_{2}+\cdots+a_{n}Y_{n}=\sum_{i=1}^{n}a_{i}Y_{i}$$`
+
+- Many problems in *statistical inference* (see, 😎**STAT 339**😎) involve estimators that are linear functions of measurements in a sample. 
+
+--
+
+We might be interested in:
+
+- The **expected value** and **variance** of `\(U_{1}\)`
+
+- The **covariance** between `\(U_{1}\)` and a second linear combination of RVs, `\(U_{2}\)`. 
+
+---
+
+# Linear RVs Theorem
+
+Let `\(Y_{1}, Y_{2},\dots,Y_{n}\)` and `\(X_{1},X_{2},\dots,X_{m}\)` be random varibles with `\(E(Y_{i})=\mu_{i}\)` and `\(E(X_{i})=\xi_{i}\)`. Define `$$U_{1}=\sum_{i=1}^{n}a_{i}Y_{i}\quad\text{and}\quad U_{2}=\sum_{j=1}^{m}b_{j}X_{j}$$` for constants `\(a_{1},a_{2},\dots,a_{n}\)` and `\(b_{1},b_{2},\dots,b_{m}\)`. Then:
+
+1. `\(E(U_{1})=\sum_{i=1}^{n}a_{i}E(Y_{i})\)`
+
+2. `\(Var(U_{1})=\sum_{i=1}^{n}a_{i}^{2}Var(Y_{i})+2\sum\sum_{1\leq i&lt;j\leq n}a_{i}a_{j}Cov(Y_{i},Y_{j})\)`, where the double sum is over all pairs `\((i,j)\)` with `\(i&lt;j\)`. 
+
+3. `\(Cov(U_{1},U_{2})=\sum_{i=1}^{n}\sum_{j=1}^{m}a_{i}b_{j}Cov(Y_{i},X_{j})\)`
+
+---
+
+# Example
+
+Let `\(Y_{1},Y_{2},\dots,Y_{n}\)` be *independent* random variables with `\(E(Y_{i})=\mu\)` and `\(Var(Y_{i})=\sigma^{2}\)`. Define the **sample mean** as `$$\bar{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_{i}.$$` Show that `\(E(\bar{Y})=\mu\)` and `\(Var(\bar{Y})=\sigma^{2}/n\)`. 
+
+- `\(\bar{Y}=\left(\frac{1}{n}\right)Y_{1}+\cdots+\left(\frac{1}{n}\right)Y_{n}\)`
+
+---
+
+# Correlated Normal RVs
+
+Let's *simulate* correlated Normal random variables!
+
+.pull-left[
+
+```r
+library(faux)
+fake_data = rnorm_multi(
+  n = 10000, 
+  mu = c(0, 20), 
+  sd = c(1, 2), 
+  r = 0.75
+)
+```
+
+- `\(X_{1}\sim Normal\)`, `\(X_{2}\sim Normal\)`
+
+- `\(E(X_{1})=0\)`, `\(Var(X_{1})=1\)`
+
+- `\(E(X_{2})=20\)`, `\(Var(X_{2})=4\)`
+
+- `\(Corr(X_{1},X_{2})=0.75\implies Cov(X_{1},X_{2})=0.75\sqrt{1}\sqrt{4}=1.5\)`
+]
+
+.pull-right[
+
+```r
+gf_point(X2 ~ X1, data = fake_data)
+```
+
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
+]
+
+---
+
+# Correlated Normal RVs
+
+First, find `\(Var(X_{1}-X_{2})\)` and `\(Var(X_{1}+X_{2})\)` by hand. 
+
+--
+
+- `\(Var(X_{1}-X_{2})=Var(X_{1})+Var(X_{2})-2Cov(X_{1},X_{2}) = 2\)`
+
+- `\(Var(X_{1}+X_{2})=Var(X_{1})+Var(X_{2})+2Cov(X_{1},X_{2}) = 8\)`
+
+--
+
+**Check**:
+
+
+```r
+var(fake_data$X1 - fake_data$X2)
+```
+
+```
+## [1] 1.994268
+```
+
+```r
+var(fake_data$X1 + fake_data$X2)
+```
+
+```
+## [1] 8.124726
+```
+
+---
+
+# Hypergeometric Variance
+
+Another one of Moose's **favorite** toys is pictured below. Her *favorite* color toy is red.
+
+.pull-left[
+If this box of size `\(N=r+b\)` is filled with `\(r\)` red toys and `\(b\)` blue toys, and we draw `\(n\)` toys **without replacement**, then the number of **red toys**, `\(Y\)` follows a...
+
+- `\(\text{HGeom}(N, r, n)\)` distribution!
+
+&lt;br&gt;
+
+🤔Let's derive `\(Var(Y)\)`. 
+]
+
+.pull-right[
+&lt;img src="cat_ball_toys.jpg" width="375" /&gt;
+]
+
+---
+
+# Hypergeometric Variance
+
+First, represent `\(Y\)` as a sum of **indicator variables**, `$$Y=I_{1}+\cdots+I_{n},$$` where `\(I_{j}\)` is the indicator of the `\(j\)`th toy in the sample being red ( `\(I_{j}=1\)` if red, `\(I_{j}=0\)` if blue). 
+
+- For each `\(I_{j}\)`, `\(E(I_{j})=r/N\)`, which we'll define as `\(p\)`. 
+    - Therefore, `\(Var(I_{j})=p(1-p)\)` if we think of the `\(I_{j}\)` as *Bernoulli* trials.
+
+Therefore, 
+
+`\begin{align*}
+Var(Y)&amp;=Var\left(\sum_{j=1}^{n}I_{j}\right)\\
+&amp;=Var(I_{1})+\cdots+Var(I_{n})+2\sum_{i&lt;j}Cov(I_{i},I_{j})\\
+&amp;=np(1-p)+2\binom{n}{2}Cov(I_{1},I_{2}),
+\end{align*}`
+
+since there are `\(\binom{n}{2}\)` combinations of `\(I_{i}\)` and `\(I_{j}\)`, and the covariance between each of the pairs is the same. 
+
+---
+
+# Hypergeometric Variance
+
+For `\(Cov(I_{1},I_{2})\)`, use the following:
+
+`\begin{align*}
+Cov(I_{1},I_{2})&amp;=E(I_{1}I_{2})-E(I_{1})E(I_{2})\\
+&amp;=P(\text{1st and 2nd toys are both red})-P(\text{1st toy red})P(\text{2nd toy red})\\
+&amp;=\left(\frac{r}{N}\right)\left(\frac{r-1}{N-1}\right)-p^{2}
+\end{align*}`
+
+--
+
+Plugging this in for `\(Cov(I_{1},I_{2})\)`, the variance simplifies to: `$$Var(Y)=np(1-p)\left(\frac{N-n}{N-1}\right)$$`
+
+- The `\(\frac{N-n}{N-1}\)` is known as a **finite population correction**, and adjusts the *binomial variance* for the fact that we are now sampling *without replacement*. 
+
+---
+
+class: center, middle, frame
+
+# Conditional Expectation
+
+## and Hierarchical Models
+ 
+---
+
+# Conditional Expectation
+
+If `\(Y_{1}\)` and `\(Y_{2}\)` are any two random variables, the **conditional expectation** of `\(g(Y_{1})\)`, given that `\(Y_{2}=y_{2}\)`, is
+
+- `\(E(g(Y_{1})\mid Y_{2}=y_{2})=\int_{-\infty}^{\infty}g(y_{1})f(y_{1}\mid y_{2})\,dy_{1}\)` if `\(Y_{1}\)` and `\(Y_{2}\)` are **jointly continuous**. 
+
+- `\(E(g(Y_{1})\mid Y_{2}=y_{2})=\sum_{y_{1}}g(y_{1})p(y_{1}\mid y_{2})\)` if `\(Y_{1}\)` and `\(Y_{2}\)` are **jointly discrete**. 
+
+--
+
+**Laws of Total Expectation and Variance**
+
+Let `\(Y_{1}\)` and `\(Y_{2}\)` denote random variables. Then:
+
+1. `\(E(Y_{1})=E[E(Y_{1}\mid Y_{2})]\)`
+
+2. `\(Var(Y_{1})=E[Var(Y_{1}\mid Y_{2})]+Var[E(Y_{1}\mid Y_{2})]\)`
+
+---
+
+# Beta-Binomial Hierarchy
+
+Sometimes when working with the **binomial** distribution, we allow the *success probability*, `\(p\)`, to vary according to a **beta** distribution:
+
+- `\(Y\mid P\sim Binomial(n, P)\)`
+
+- `\(P\sim Beta(\alpha,\beta)\)`. 
+
+--
+
+&lt;br&gt;
+
+Using the **Laws of Total Expectation and Variance**, 
+
+- `\(E(Y)=E[E(Y\mid P)]=E(nP)=nE(P)=n\left(\frac{\alpha}{\alpha+\beta}\right)\)`
+
+- `\(Var(Y)=n\left(\frac{\alpha\beta(\alpha+\beta+n)}{(\alpha+\beta)^{2}(\alpha+\beta+1)}\right)\)`
+    - Let's show this...
+
+---
+
+# Binomial-Poisson Hierarchy
+
+An insect lays a large number of eggs, each surviving with probability `\(p\)`. Let `\(X=\)` the number of eggs that survived, and `\(Y=\)` the number of eggs laid. 
+
+Assuming that each egg's survival is independent from the next, we can treat them as *Bernoulli* trials with survival probability `\(p\)`, so the total number of survivors out of `\(Y\)` eggs laid is **binomial**. 
+
+- We model `\(Y\)` with a `\(Poisson(\lambda)\)` distribution to reflect the variability in eggs laid across litters from the same mother.
+
+Assume the following hierarchy:
+
+- `\(X\mid Y\sim Binomial(Y, p)\)`
+
+- `\(Y\sim Poisson(\lambda)\)`
+
+🤔 Find `\(E(X)\)` and `\(Var(X)\)`. 
+
+---
+
+# Binomial-Poisson Hierarchy
+
+Assume the following hierarchy:
+
+- `\(X\mid Y\sim Binomial(Y, p)\)`
+
+- `\(Y\sim Poisson(\lambda)\)`
+
+
+```r
+p = 0.75
+lambda = 100
+
+Y = rpois(10000, lambda = 100)
+X = rbinom(10000, size = Y, prob = 0.75)
+
+mean(X)
+```
+
+```
+## [1] 74.9719
+```
+
+```r
+var(X)
+```
+
+```
+## [1] 74.38135
+```
+
+---
+
+# Binomial-Poisson-Exponential Hierarchy
+
+What if instead we selected one mother insect from a large sample of mothers?
+
+Assume the following hierarchy, where we account for variability across different mothers with a *third stage*:
+
+- `\(X\mid Y\sim Binomial(Y, p)\)`
+
+- `\(Y\mid\Lambda\sim Poisson(\Lambda)\)`
+
+- `\(\Lambda\sim Exponential(\beta)\)`
+
+🤔 Find `\(E(X)\)`.
+
+--
+
+
+```r
+p = 0.75
+beta = 2
+
+L = rexp(10000, rate = 1/2)
+Y = rpois(10000, lambda = L)
+X = rbinom(10000, size = Y, prob = 0.75)
+
+mean(X)
+```
+
+```
+## [1] 1.4835
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"countIncrementalSlides": false,
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

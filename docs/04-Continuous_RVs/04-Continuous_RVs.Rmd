@@ -619,8 +619,6 @@ Instead, we'll use ~~normal tables~~ **R**. 👍
 
 - `pnorm(y, mu = ..., sd = ...)` computes the **normal CDF**, $$P(Y\leq y)=\int_{-\infty}^{y}\frac{1}{\sigma\sqrt{2\pi}}e^{-(y-\mu)^{2}/(2\sigma^{2})}$$
 
-- The **standard normal CDF**, with $\mu=0$ and $\sigma=1$ is so widely-used that it gets its own notation: $\Phi(\cdot)$!
-
 ---
 
 # Normal Quantiles
