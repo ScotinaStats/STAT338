@@ -886,7 +886,7 @@ The exponential distribution is common in **survival analysis**, which is the an
 
 Suppose we want to model the *time-to-event*, $T$, in a study of a treatment for type 2 diabetes (an example of the "event" could be myocardial infarction). 
 
-- The **hazard function**, $h(t)$, provides a *conditional density* of an event, given that the event *has not yet occurred* prior to time $t$: $$h(t)=\lim_{x\to\infty}\frac{1}{x}\frac{P(t\leq T< t+x)}{P(T\geq t)}=\frac{f(t)}{S(t)}$$
+- The **hazard function**, $h(t)$, provides a *conditional density* of an event, given that the event *has not yet occurred* prior to time $t$: $$h(t)=\frac{f(t)}{S(t)}$$
 
 
 - **Example**: Given that I haven't experienced symptoms yet, what are my chances of experiencing them in the next year?
@@ -905,7 +905,7 @@ Suppose we want to model the *time-to-event*, $T$, in a study of a treatment for
 
 The exponential distribution has the **memoryless property**. 
 
-> Even if you've waited for hours or days without success, the success isn't any more likely to arrive soon. In fact, you might as wekk have just started waiting 10 seconds ago. 
+> Even if you've waited for hours or days without success, the success isn't any more likely to arrive soon. In fact, you might as well have just started waiting 10 seconds ago. 
 
 > - Blitzstein and Hwang, 2019
 
@@ -1108,20 +1108,28 @@ If $Y$ is a beta-distributed random variable with parameters $\alpha>0$ and $\be
 
 (WMS 4.129)
 
-During an eight-hour shift, the proportion of time $Y$ that a sheet-metal stamping machine is down for maintenance or repairs has a beta distribution with $\alpha=1$ and $\beta=2$. That is, $$f(y)=2(1-y),\quad 0\leq y\leq 1.$$ The cost (in hundreds of dollars) of this downtime, due to lost production and cost of maintenance and repair, is given by $C=10+20Y+4Y^2$. 
+During an eight-hour shift, the proportion of time $Y$ that a sheet-metal stamping machine is down for maintenance or repairs has a beta distribution with $\alpha=1$ and $\beta=2$. That is, $$f(y)=2(1-y),\quad 0\leq y\leq 1.$$ 
 
-> Find the mean (by hand) and the variance (using a simulation) of $C$. 
+1. Find $P(0.5 < Y < 0.8)$. 
 
---
+2. The cost (in hundreds of dollars) of this downtime, due to lost production and cost of maintenance and repair, is given by $C=10+20Y+4Y^2$. Find the mean of $C$. 
+
+---
+
+# Practice
+
+(WMS 4.129)
 
 **Simulation**
 
 ```{r}
+## 1
 Y = rbeta(n = 10000, shape1 = 1, shape2 = 2)
-C = 10 + 20*Y + 4*Y^2
+mean((Y > 0.5) & (Y < 0.8))
 
+## 2
+C = 10 + 20*Y + 4*Y^2
 mean(C)
-var(C)
 ```
 
 ---
