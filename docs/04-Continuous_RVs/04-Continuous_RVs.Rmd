@@ -730,32 +730,6 @@ gf_density( ~ gamma_samp) +
 
 ---
 
-# The Gamma Distribution
-
-Sometimes we will want to model random variables that are:
-
-- **right-skewed** (non-symmetric)
-
-- always **nonnegative**
-
---
-
-<br>
-
-**Examples**:
-
-- amount of rainfall accumulated in a given area per day
-
-- the time it takes a mechanic to service your car
-
-- the time Moose needs to wait in between receiving treats
-
-<br>
-
-These can all be adequately modeled by the **gamma distribution**!
-
----
-
 # The Gamma PDF
 
 A random variable $Y$ is said to have a **gamma distribution** with *shape* parameter $\alpha>0$ and *scale* parameter $\beta>0$ if $$f(y)=\frac{1}{\beta^{\alpha}\Gamma(\alpha)}y^{\alpha-1}e^{-y/\beta},\qquad 0\leq y<\infty,$$ where $$\Gamma(\alpha)=\int_{0}^{\infty}y^{\alpha-1}e^{-y}\,dy$$
@@ -912,7 +886,7 @@ The exponential distribution is common in **survival analysis**, which is the an
 
 Suppose we want to model the *time-to-event*, $T$, in a study of a treatment for type 2 diabetes (an example of the "event" could be myocardial infarction). 
 
-- The **hazard function**, $h(t)$, provides a *conditional density* of an event, given that the event *has not yet occurred* prior to time $t$: $$h(t)=\lim_{x\to\infty}\frac{1}{x}\frac{P(t\leq T< t+x)}{P(T\geq t)}=-\frac{d}{dt}\log S(t)=\frac{f(t)}{S(t)}$$
+- The **hazard function**, $h(t)$, provides a *conditional density* of an event, given that the event *has not yet occurred* prior to time $t$: $$h(t)=\lim_{x\to\infty}\frac{1}{x}\frac{P(t\leq T< t+x)}{P(T\geq t)}=\frac{f(t)}{S(t)}$$
 
 
 - **Example**: Given that I haven't experienced symptoms yet, what are my chances of experiencing them in the next year?
@@ -923,7 +897,7 @@ Suppose we want to model the *time-to-event*, $T$, in a study of a treatment for
 
 **Practice**: Find $h(t)$ for $T\sim\text{Exponential}(\beta)$. 
 
-- **Hint**: The hazard function is **constant** for the exponential distribution. 
+- **Note**: The hazard function is **constant** for the exponential distribution. 
     
 ---
 
@@ -945,16 +919,17 @@ The exponential distribution has the **memoryless property**.
 
 ---
 
+```{r, echo = FALSE, eval = FALSE}
 # Simulating the Memoryless Property
 
 We want to estimate $P(Y> 7\mid Y> 5)=P(Y>5+2\mid Y>5)$. 
 
 First, let's generate some data from the $\text{Exponential}(2)$ distribution:
 
-```{r, dpi = 300, out.width = "50%"}
+{r, dpi = 300, out.width = "50%"}
 Y = rexp(n = 10000, rate = 1/2)
 gf_histogram( ~ Y)
-```
+
 
 ---
 
@@ -964,15 +939,14 @@ Next, extract the values of `Y` that are **greater than 5**.
 
 - Compare $P(Y>5+2\mid Y>5)$ to $P(Y>2)$. 
 
-```{r}
+{r}
 Y_sub = Y[Y > 5]
 
 mean(Y_sub > 5+2)
 
 mean(Y > 2)
-```
 
----
+```
 
 class: center, middle, frame
 
@@ -1128,16 +1102,6 @@ ggplot(data = data.frame(x = c(0, 1)), aes(x)) +
 
 If $Y$ is a beta-distributed random variable with parameters $\alpha>0$ and $\beta>0$, then $$\mu=E(Y)=\frac{\alpha}{\alpha+\beta}$$ and $$\sigma^{2}=Var(Y)=\frac{\alpha\beta}{(\alpha+\beta)^{2}(\alpha+\beta+1)}$$
 
---
-
-**Simulating Beta(2, 8)**
-
-```{r}
-Y = rbeta(n = 1000, shape1 = 2, shape2 = 8)
-mean(Y)
-var(Y)
-```
-
 ---
 
 # Practice
@@ -1273,10 +1237,5 @@ The *moment-generating function* for this distribution is: $$m(t)=e^{\mu t + t^{
 
 - Let's use this to find $E(X^{3})$. 
 
---
 
-```{r}
-Y = rnorm(10000, mean = 100, sd = 15)
-mean(Y^3)
-```
 

@@ -629,32 +629,6 @@ The **Gamma(5, 2)** distribution:
 
 ---
 
-# The Gamma Distribution
-
-Sometimes we will want to model random variables that are:
-
-- **right-skewed** (non-symmetric)
-
-- always **nonnegative**
-
---
-
-&lt;br&gt;
-
-**Examples**:
-
-- amount of rainfall accumulated in a given area per day
-
-- the time it takes a mechanic to service your car
-
-- the time Moose needs to wait in between receiving treats
-
-&lt;br&gt;
-
-These can all be adequately modeled by the **gamma distribution**!
-
----
-
 # The Gamma PDF
 
 A random variable `\(Y\)` is said to have a **gamma distribution** with *shape* parameter `\(\alpha&gt;0\)` and *scale* parameter `\(\beta&gt;0\)` if `$$f(y)=\frac{1}{\beta^{\alpha}\Gamma(\alpha)}y^{\alpha-1}e^{-y/\beta},\qquad 0\leq y&lt;\infty,$$` where `$$\Gamma(\alpha)=\int_{0}^{\infty}y^{\alpha-1}e^{-y}\,dy$$`
@@ -776,7 +750,7 @@ The exponential distribution is common in **survival analysis**, which is the an
 
 Suppose we want to model the *time-to-event*, `\(T\)`, in a study of a treatment for type 2 diabetes (an example of the "event" could be myocardial infarction). 
 
-- The **hazard function**, `\(h(t)\)`, provides a *conditional density* of an event, given that the event *has not yet occurred* prior to time `\(t\)`: `$$h(t)=\lim_{x\to\infty}\frac{1}{x}\frac{P(t\leq T&lt; t+x)}{P(T\geq t)}=-\frac{d}{dt}\log S(t)=\frac{f(t)}{S(t)}$$`
+- The **hazard function**, `\(h(t)\)`, provides a *conditional density* of an event, given that the event *has not yet occurred* prior to time `\(t\)`: `$$h(t)=\lim_{x\to\infty}\frac{1}{x}\frac{P(t\leq T&lt; t+x)}{P(T\geq t)}=\frac{f(t)}{S(t)}$$`
 
 
 - **Example**: Given that I haven't experienced symptoms yet, what are my chances of experiencing them in the next year?
@@ -787,7 +761,7 @@ Suppose we want to model the *time-to-event*, `\(T\)`, in a study of a treatment
 
 **Practice**: Find `\(h(t)\)` for `\(T\sim\text{Exponential}(\beta)\)`. 
 
-- **Hint**: The hazard function is **constant** for the exponential distribution. 
+- **Note**: The hazard function is **constant** for the exponential distribution. 
     
 ---
 
@@ -809,54 +783,13 @@ The exponential distribution has the **memoryless property**.
 
 ---
 
-# Simulating the Memoryless Property
 
-We want to estimate `\(P(Y&gt; 7\mid Y&gt; 5)=P(Y&gt;5+2\mid Y&gt;5)\)`. 
-
-First, let's generate some data from the `\(\text{Exponential}(2)\)` distribution:
-
-
-```r
-Y = rexp(n = 10000, rate = 1/2)
-gf_histogram( ~ Y)
-```
-
-&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-27-1.png" width="50%" /&gt;
-
----
-
-# Simulating the Memoryless Property
-
-Next, extract the values of `Y` that are **greater than 5**.
-
-- Compare `\(P(Y&gt;5+2\mid Y&gt;5)\)` to `\(P(Y&gt;2)\)`. 
-
-
-```r
-Y_sub = Y[Y &gt; 5]
-
-mean(Y_sub &gt; 5+2)
-```
-
-```
-## [1] 0.3650416
-```
-
-```r
-mean(Y &gt; 2)
-```
-
-```
-## [1] 0.3721
-```
-
----
 
 class: center, middle, frame
 
 # The Beta Distribution
 
-&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-29-1.png" width="50%" /&gt;
+&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-28-1.png" width="50%" /&gt;
 
 ---
 
@@ -869,7 +802,7 @@ The **beta distribution** is used to model *proportions* - variables that can ta
 --
 
 .center[
-&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-30-1.png" width="50%" /&gt;
+&lt;img src="04-Continuous_RVs_files/figure-html/unnamed-chunk-29-1.png" width="50%" /&gt;
 ]
 
 ---
@@ -887,7 +820,7 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Beta(0.5, 0.5)**
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -897,7 +830,7 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Beta(1, 1)** = **Uniform(0, 1)**
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -907,7 +840,7 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Beta(5, 5)**
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -917,7 +850,7 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Beta(8, 2)**
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -927,7 +860,7 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Beta(2, 8)**
 
 .center[
-![](04-Continuous_RVs_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
+![](04-Continuous_RVs_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -937,28 +870,6 @@ A random variable `\(Y\)` is said to have a **beta distribution** with parameter
 **Theorem** (Expected value and variance of beta RVs):
 
 If `\(Y\)` is a beta-distributed random variable with parameters `\(\alpha&gt;0\)` and `\(\beta&gt;0\)`, then `$$\mu=E(Y)=\frac{\alpha}{\alpha+\beta}$$` and `$$\sigma^{2}=Var(Y)=\frac{\alpha\beta}{(\alpha+\beta)^{2}(\alpha+\beta+1)}$$`
-
---
-
-**Simulating Beta(2, 8)**
-
-
-```r
-Y = rbeta(n = 1000, shape1 = 2, shape2 = 8)
-mean(Y)
-```
-
-```
-## [1] 0.1980705
-```
-
-```r
-var(Y)
-```
-
-```
-## [1] 0.01392687
-```
 
 ---
 
@@ -983,7 +894,7 @@ mean(C)
 ```
 
 ```
-## [1] 17.28367
+## [1] 17.35881
 ```
 
 ```r
@@ -991,7 +902,7 @@ var(C)
 ```
 
 ```
-## [1] 29.61114
+## [1] 30.17042
 ```
 
 ---
@@ -1107,17 +1018,7 @@ The *moment-generating function* for this distribution is: `$$m(t)=e^{\mu t + t^
 
 - Let's use this to find `\(E(X^{3})\)`. 
 
---
 
-
-```r
-Y = rnorm(10000, mean = 100, sd = 15)
-mean(Y^3)
-```
-
-```
-## [1] 1061314
-```
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
