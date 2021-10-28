@@ -526,7 +526,7 @@ Suppose `\(Y\sim\text{Normal}(\mu,\sigma)\)`, and we want to find `\(P(a\leq Y\l
 
 Instead, we'll use ~~normal tables~~ **R**. 👍
 
-- `pnorm(y, mu = ..., sd = ...)` computes the **normal CDF**, `$$P(Y\leq y)=\int_{-\infty}^{y}\frac{1}{\sigma\sqrt{2\pi}}e^{-(y-\mu)^{2}/(2\sigma^{2})}$$`
+- `pnorm(y, mean = ..., sd = ...)` computes the **normal CDF**, `$$P(Y\leq y)=\int_{-\infty}^{y}\frac{1}{\sigma\sqrt{2\pi}}e^{-(y-\mu)^{2}/(2\sigma^{2})}$$`
 
 ---
 
@@ -983,15 +983,14 @@ We've seen some **moments** already!
 - `\(E(Y^{2})\)` is the *second moment*. 
     - This is used to find `\(Var(Y)=E[(Y-\mu)^{2}]=\mu_{2}\)`, the *second central moment*. 
     
---
 
-- The **skewness** of a random variable `\(&amp;\)` is the third *standardized moment*, `$$Skew(Y)=E\left[\left(\frac{Y-\mu}{\sigma}\right)^{3}\right]$$`
+- The **skewness** of a random variable `\(Y\)` is the third *standardized moment*, `$$Skew(Y)=E\left[\left(\frac{Y-\mu}{\sigma}\right)^{3}\right]$$`
 
 ---
 
 # Moment-Generating Functions
 
-For a continuous random variable `\(Y\)`, the **moment-generating function (MGF)**, `\(m(t)\)`, is defined to be `$$m(t)=E(e^{tY})$$`.
+For a continuous random variable `\(Y\)`, the **moment-generating function (MGF)**, `\(m(t)\)`, is defined to be `$$m(t)=E(e^{tY})$$`
 
 - We can evaluate this for any **continuous distribution** with an integral: `$$m(t)=E(e^{tY})=\int_{-\infty}^{\infty}e^{ty}f(y)\,dy$$`
 
