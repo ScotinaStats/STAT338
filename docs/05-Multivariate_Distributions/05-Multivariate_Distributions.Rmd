@@ -223,6 +223,39 @@ Similar to joint discrete random variables, if $X$ and $Y$ are jointly continuou
 
 # Continuous Joint Distributions 
 
+**Example**
+
+Let $X$ and $Y$ be random variables with joint probability density function $$f(x,y)=\begin{cases}x+y,&0<x<1,0<y<1\\0,&\text{elsewhere}.\end{cases}$$
+
+- Find $P(X>0.5)$. 
+
+.center[
+```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "50%"}
+set.seed(228)
+data = data.frame(x = runif(50000, 0, 1), 
+                  y = runif(50000, 0, 1))
+
+pdf = function(x, y){
+  x + y
+}
+probs = pdf(data$x, data$y)
+indices = sample(1:50000, size = 50000, replace = TRUE, prob = probs)
+data = data[indices, ]
+
+ggplot(data, aes(x=x, y=y) ) +
+  stat_density_2d(aes(fill = ..level..), geom = "polygon", color = "white") + 
+  scale_fill_continuous(type = "viridis") +
+  labs(x = "x", y = "y", fill = "f(x,y)") +
+  theme_bw()
+
+#mean(data$x > 1/2)
+```
+]
+
+---
+
+# Continuous Joint Distributions 
+
 **Example** (WMS 5.7)
 
 Let $Y_{1}$ and $Y_{2}$ have the joint probability density function $$f(y_{1},y_{2})=\begin{cases}e^{-(y_{1}+y_{2})},&y_{1}>0,y_{2}>0\\0,&\text{elsewhere}.\end{cases}$$
@@ -249,37 +282,6 @@ ggplot(data, aes(x=y1, y=y2) ) +
   scale_fill_continuous(type = "viridis") +
   labs(x = "Y1", y = "Y2", fill = "f(y1,y2)") +
   theme_bw()
-```
-]
-
----
-
-# Practice
-
-Let $X$ and $Y$ be random variables with joint probability density function $$f(x,y)=\begin{cases}x+y,&0<x<1,0<y<1\\0,&\text{elsewhere}.\end{cases}$$
-
-- Find $P(X>0.5)$. 
-
-.center[
-```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "50%"}
-set.seed(228)
-data = data.frame(x = runif(50000, 0, 1), 
-                  y = runif(50000, 0, 1))
-
-pdf = function(x, y){
-  x + y
-}
-probs = pdf(data$x, data$y)
-indices = sample(1:50000, size = 50000, replace = TRUE, prob = probs)
-data = data[indices, ]
-
-ggplot(data, aes(x=x, y=y) ) +
-  stat_density_2d(aes(fill = ..level..), geom = "polygon", color = "white") + 
-  scale_fill_continuous(type = "viridis") +
-  labs(x = "x", y = "y", fill = "f(x,y)") +
-  theme_bw()
-
-#mean(data$x > 1/2)
 ```
 ]
 
@@ -559,7 +561,7 @@ This was from the first month of class, but we can extend it to a setting involv
 
 The *technical* definition of **independence** involves *cumulative distribution functions*...
 
-Let $X$ have distribution function $F_{X}(x)$, $Y$ have distribution function $F_{Y}(y)$, and $X$ and $Y$ have *joint* distribution function $F(x,y)$. Then $X$ and $Y$ are said to be **independent** if and only if $$F(x,y)=F_{X}(x)F_{Y}(y).$$ If $X$ and $Y$ are not independent, they are said to be **dependent**. 
+Let $X$ have distribution function $F_{X}(x)$, $Y$ have distribution function $F_{Y}(y)$, and $X$ and $Y$ have *joint* distribution function $F(x,y)$. Then $X$ and $Y$ are said to be **independent** if and only if $$F(x,y)=F_{X}(x)F_{Y}(y)=P(X\leq x)P(Y\leq y).$$ If $X$ and $Y$ are not independent, they are said to be **dependent**. 
 
 --
 
@@ -915,8 +917,6 @@ Y = X^2
 data = data.frame(X, Y)
 ```
 
---
-
 Using the `cov()` function on a *data frame* will produce a **covariance matrix**:
 
 ```{r}
@@ -1045,7 +1045,8 @@ fake_data = rnorm_multi(
 
 - $E(X_{2})=20$, $Var(X_{2})=4$
 
-- $Corr(X_{1},X_{2})=0.75\implies Cov(X_{1},X_{2})=0.75\sqrt{1}\sqrt{4}=1.5$
+- $Corr(X_{1},X_{2})=0.75\implies$
+    - $Cov(X_{1},X_{2})=0.75\sqrt{1}\sqrt{4}=1.5$
 ]
 
 .pull-right[
