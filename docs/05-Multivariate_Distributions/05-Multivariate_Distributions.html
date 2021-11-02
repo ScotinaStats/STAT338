@@ -47,17 +47,9 @@ So far, we have looked at a **single random variable**, *Y*.
 
 But in many applications, we care about the relationship between **multiple random variables** in the same experiment!
 
-- **Joint/Multivariate distributions** allow us to learn about how multiple random variables are related, by studying the probability distribution associated with the *intersection* of multiple random variables: `$$(Y_{1}=y_{1}),(Y_{2}=y_{2}),\dots,(Y_{n}=y_{n})$$`
-
---
-
 &lt;br&gt;
 
-Other types of distributions we'll look at:
-
-- **Marginal distributions**: Individual distribution of `\(Y_{1}\)`, ignoring the values of `\(Y_{2}, Y_{3},\dots\)`
-
-- **Conditional distributions** of `\(Y_{1}\)`, given `\(Y_{2}=y_{2}\)`: The updated distribution for `\(Y_{1}\)` after observing `\(Y_{2}=y_{2}\)`
+**Joint/Multivariate distributions** allow us to learn about how multiple random variables are related, by studying the probability distribution associated with the *intersection* of multiple random variables: `$$(Y_{1}=y_{1}),(Y_{2}=y_{2}),\dots,(Y_{n}=y_{n})$$`
 
 ---
 
@@ -890,8 +882,6 @@ Similar to the single variable (**univariate**) case, a *valid* PMF must be nonn
 
 For any random variables `\(X\)` and `\(Y\)`, the **joint (bivariate) distribution function**, `\(F(x,y)\)`, is `$$F(x,y)=P(X\leq x, Y\leq y),\qquad -\infty&lt;x&lt;\infty,\ -\infty&lt;y&lt;\infty.$$`
 
---
-
 &lt;br&gt;
 
 **Practice**
@@ -1279,9 +1269,402 @@ In the *Piéchart Casino* example, find `\(F(2,1)=P(X\leq2,Y\leq1)\)`.
 
 ---
 
+# Joint Distribution Function
+
+For any random variables `\(X\)` and `\(Y\)`, the **joint (bivariate) distribution function**, `\(F(x,y)\)`, is `$$F(x,y)=P(X\leq x, Y\leq y),\qquad -\infty&lt;x&lt;\infty,\ -\infty&lt;y&lt;\infty.$$`
+
+&lt;br&gt;
+
+**Solution**
+
+In the *Piéchart Casino* example, find `\(F(2,1)=P(X\leq2,Y\leq1)\)`.
+
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#nwkvzhtlgw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nwkvzhtlgw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nwkvzhtlgw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nwkvzhtlgw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nwkvzhtlgw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nwkvzhtlgw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nwkvzhtlgw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nwkvzhtlgw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nwkvzhtlgw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nwkvzhtlgw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nwkvzhtlgw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nwkvzhtlgw .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nwkvzhtlgw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nwkvzhtlgw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nwkvzhtlgw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nwkvzhtlgw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nwkvzhtlgw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#nwkvzhtlgw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nwkvzhtlgw .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#nwkvzhtlgw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nwkvzhtlgw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nwkvzhtlgw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nwkvzhtlgw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nwkvzhtlgw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nwkvzhtlgw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#nwkvzhtlgw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nwkvzhtlgw .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#nwkvzhtlgw .gt_left {
+  text-align: left;
+}
+
+#nwkvzhtlgw .gt_center {
+  text-align: center;
+}
+
+#nwkvzhtlgw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nwkvzhtlgw .gt_font_normal {
+  font-weight: normal;
+}
+
+#nwkvzhtlgw .gt_font_bold {
+  font-weight: bold;
+}
+
+#nwkvzhtlgw .gt_font_italic {
+  font-style: italic;
+}
+
+#nwkvzhtlgw .gt_super {
+  font-size: 65%;
+}
+
+#nwkvzhtlgw .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="nwkvzhtlgw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Outcome</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HHH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">THH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HTH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HHT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">TTH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">THT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">HTT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">TTT</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">X</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right" style="color: black; font-weight: bold; background-color: rgba(30,144,255,0.2);">2</td>
+      <td class="gt_row gt_right" style="color: black; font-weight: bold; background-color: rgba(30,144,255,0.2);">2</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right" style="color: black; font-weight: bold; background-color: rgba(30,144,255,0.2);">1</td>
+      <td class="gt_row gt_right" style="color: black; font-weight: bold; background-color: rgba(30,144,255,0.2);">0</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Y</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right" style="color: black; font-weight: bold; background-color: rgba(30,144,255,0.2);">1</td>
+      <td class="gt_row gt_right" style="color: black; font-weight: bold; background-color: rgba(30,144,255,0.2);">1</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right" style="color: black; font-weight: bold; background-color: rgba(30,144,255,0.2);">1</td>
+      <td class="gt_row gt_right" style="color: black; font-weight: bold; background-color: rgba(30,144,255,0.2);">-1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+
+`$$P(X\leq2,Y\leq1)=P(X=0,Y=-1)+P(X=1,Y=1)+P(X=2,Y=1)=\frac{1}{8}+\frac{1}{8}+\frac{2}{8}=\frac{1}{2}$$`
+
+---
+
 # Continuous Joint Distributions
 
-Let `\(X\)` and `\(Y\)` be **continuous** random variables with joint distribution function `\(F(x,y)\)`. If there exists a nonnegative function `\(f(x,y)\)`, such that `$$F(x,y)=\int^{x}_{-\infty}\int^{y}_{-\infty}f(t_{1},t_{2})\,dt_{2}dt_{1},$$` for all `\(-\infty&lt;x&lt;\infty\)`, `\(-\infty&lt;y&lt;\infty\)`, then `\(X\)` and `\(Y\)` are **jointly continuous random variables**. 
+Let `\(X\)` and `\(Y\)` be **continuous** random variables with joint distribution function `\(F(x,y)\)`. If there exists a nonnegative function `\(f(x,y)\)`, such that `$$F(x,y)=P(X\leq x, Y\leq y)=\int^{x}_{-\infty}\int^{y}_{-\infty}f(t_{1},t_{2})\,dt_{2}dt_{1},$$` for all `\(-\infty&lt;x&lt;\infty\)`, `\(-\infty&lt;y&lt;\infty\)`, then `\(X\)` and `\(Y\)` are **jointly continuous random variables**. 
 
 - The function `\(f(x,y)\)` is called the **joint probability density function (PDF)**. 
 
@@ -1295,16 +1678,26 @@ Similar to joint discrete random variables, if `\(X\)` and `\(Y\)` are jointly c
 
 ---
 
+# Continuous Joint Probabilities
+
+Let `\(X\)` and `\(Y\)` be **continuous** random variables with joint distribution function `\(F(x,y)\)`. If there exists a nonnegative function `\(f(x,y)\)`, such that `$$F(x,y)=P(X\leq x, Y\leq y)=\int^{x}_{-\infty}\int^{y}_{-\infty}f(t_{1},t_{2})\,dt_{2}dt_{1},$$` for all `\(-\infty&lt;x&lt;\infty\)`, `\(-\infty&lt;y&lt;\infty\)`, then `\(X\)` and `\(Y\)` are **jointly continuous random variables**. 
+
+- The function `\(f(x,y)\)` is called the **joint probability density function (PDF)**. 
+
+For two RVs `\(X\)` and `\(Y\)` with joint PDF `\(f(x,y)\)`, the *joint probability* `\(P(a_{1}\leq X\leq a_{2}, b_{1}\leq Y\leq b_{2})\)` is `$$P(a_{1}\leq X\leq a_{2}, b_{1}\leq Y\leq b_{2})=\int_{b_{1}}^{b_{2}}\int_{a_{1}}^{a_{2}}f(x,y)\,dxdy$$`
+
+---
+
 # Continuous Joint Distributions 
 
 **Example**
 
 Let `\(X\)` and `\(Y\)` be random variables with joint probability density function `$$f(x,y)=\begin{cases}x+y,&amp;0&lt;x&lt;1,0&lt;y&lt;1\\0,&amp;\text{elsewhere}.\end{cases}$$`
 
-- Find `\(P(X&gt;0.5)\)`. 
+- Find `\(P(X&gt;0.5, Y&lt;0.5)\)`. 
 
 .center[
-&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-9-1.png" width="50%" /&gt;
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-10-1.png" width="50%" /&gt;
 ]
 
 ---
@@ -1315,12 +1708,12 @@ Let `\(X\)` and `\(Y\)` be random variables with joint probability density funct
 
 Let `\(Y_{1}\)` and `\(Y_{2}\)` have the joint probability density function `$$f(y_{1},y_{2})=\begin{cases}e^{-(y_{1}+y_{2})},&amp;y_{1}&gt;0,y_{2}&gt;0\\0,&amp;\text{elsewhere}.\end{cases}$$`
 
-1. What is `\(P(Y_{1}&lt;1, Y_{2}&gt;5)\)`?
+1. Show that `\(P(Y_{1}+Y_{2}&lt;3)=1-4e^{-3}=0.8009\)`. 
 
-2. What is `\(P(Y_{1}+Y_{2}&lt;3)\)`?
+2. Find `\(P(Y_{1}&lt;1, Y_{2}&gt;5)\)`.
 
 .center[
-&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-10-1.png" width="50%" /&gt;
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-11-1.png" width="50%" /&gt;
 ]
 
 ---
@@ -1739,11 +2132,11 @@ We just found a *marginal probability*!
 For **discrete** random variables `\(X\)` and `\(Y\)`, the **marginal probability function** of `\(X\)` is `$$P(X=x)=\sum_{y}P(X=x,Y=y).$$` 
 
 .pull-left[
-![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
-![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1753,11 +2146,11 @@ For **discrete** random variables `\(X\)` and `\(Y\)`, the **marginal probabilit
 For **continuous** random variables `\(X\)` and `\(Y\)`, the **marginal probability functions** of `\(X\)` and `\(Y\)`, respectively, are `$$f_{X}(x)=\int_{-\infty}^{\infty}f(x,y)\,dy\qquad\text{and}\qquad f_{Y}(y)=\int_{-\infty}^{\infty}f(x,y)\,dx.$$` 
 
 .pull-left[
-![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
-![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -1842,7 +2235,7 @@ For **continuous** random variables `\(X\)` and `\(Y\)` with *joint* density fun
 
 Let `\(Y_{1}\)` and `\(Y_{2}\)` have the joint probability density function `$$f(y_{1},y_{2})=\begin{cases}e^{-(y_{1}+y_{2})},&amp;y_{1}&gt;0,y_{2}&gt;0\\0,&amp;\text{elsewhere}.\end{cases}$$`
 
-1. Find the marginal density functions for `\(Y_{1}\)` and `\(Y_{2}\)`. 
+1. Find the marginal density function for `\(Y_{2}\)`, `\(f_{Y_{2}}(y_{2})\)`. 
 
 2. For `\(y_{2}&gt;0\)`, what is the conditional density function of `\(Y_{1}\)` given that `\(Y_{2}=y_{2}\)`?
 
@@ -1850,13 +2243,13 @@ Let `\(Y_{1}\)` and `\(Y_{2}\)` have the joint probability density function `$$f
 
 # Conditional Distributions (Continuous)
 
-**Example**
+**Example** (WMS 5.31)
 
-Let `\(Y_{1}\)` and `\(Y_{2}\)` have the joint probability density function `$$f(y_{1},y_{2})=\begin{cases}6y_{1}^{2}y_{2},&amp;0\leq y_{1}\leq y_{2}\ \text{and}\ y_{1}+y_{2}\leq 2\\0,&amp;\text{elsewhere}.\end{cases}$$`
+Let `\(Y_{1}\)` and `\(Y_{2}\)` have the joint probability density function `$$f(y_{1},y_{2})=\begin{cases}30y_{1}y_{2}^{2},&amp;y_{1}-1\leq y_{2}\leq 1-y_{1}, 0\leq y_{1}\leq 1\\0,&amp;\text{elsewhere}.\end{cases}$$`
 
-1. Find the marginal distribution of `\(Y_{1}\)`, `\(f_{1}(y_{1})\)`. What *named* probability distribution does this follow?
+1. Show that the marginal density of `\(Y_{1}\)` is a beta density with `\(\alpha=2\)` and `\(\beta=4\)`. 
 
-2. Find `\(f(y_{2}\mid y_{1})\)` and use this to find `\(P(Y_{2}\leq 1\mid Y_{1}=1/2)\)`. 
+2. Find the conditional density of `\(Y_{2}\)` given `\(Y_{1}=y_{1}\)`. Use this to show that `\(P(Y_{2}&gt;0\mid Y_{1}=0.75)=0.5\)`. 
 
 ---
 
@@ -2032,13 +2425,21 @@ Therefore, `\(f(y_{1},y_{2})\neq f_{1}(y_{1})f_{2}(y_{2})\)`.
 
 - In some cases, we don't need to derive marginal densities to prove independence! We just need to break the joint density function into separate pieces involving `\(y_{1}\)` and `\(y_{2}\)` alone. 
 
---
+---
 
-**Example**
+# Example
 
 Suppose `\(Y_{1}\)` and `\(Y_{2}\)` denote the lengths of life, in hundreds of hours, for components of types I and II, respectively, in an electronic system. The joint density of `\(Y_{1}\)` and `\(Y_{2}\)` is `$$f(y_{1},y_{2})=\begin{cases}(1/8)y_{1}e^{-(y_{1}+y_{2})/2},&amp; y_{1}&gt;0, y_{2}&gt;0,\\0,&amp;\text{elsewhere}.\end{cases}$$`
 
 - Using the previous theorem, prove that `\(Y_{1}\)` and `\(Y_{2}\)` are independent. 
+
+--
+
+**Solution**: `\(f(y_{1},y_{2})=g(y_{1})h(y_{2})\)`, where...
+
+- `\(g(y_{1})=(1/8)y_{1}e^{-y_{1}/2}\)`
+
+- `\(h(y_{2})=e^{-y_{2}/2}\)`
 
 
 ---
@@ -2112,7 +2513,7 @@ class: center, middle, frame
 # Dependent Random Variables
 
 .center[
-&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-20-1.png" width="45%" /&gt;
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-21-1.png" width="45%" /&gt;
 ]
 
 - `\(E(X)=\mu_{X}=0.0818\)`
@@ -2124,7 +2525,7 @@ class: center, middle, frame
 # Dependent Random Variables
 
 .center[
-&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-21-1.png" width="45%" /&gt;
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-22-1.png" width="45%" /&gt;
 ]
 
 Because `\(X\)` and `\(Y\)` tend to move in the same direction...
@@ -2140,7 +2541,7 @@ This implies that the **covariance** between `\(X\)` and `\(Y\)` will be positiv
 # Independent Random Variables
 
 .center[
-&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-22-1.png" width="45%" /&gt;
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-23-1.png" width="45%" /&gt;
 ]
 
 - `\(E(X)=\mu_{X}=-0.0309\)`
@@ -2152,7 +2553,7 @@ This implies that the **covariance** between `\(X\)` and `\(Y\)` will be positiv
 # Independent Random Variables
 
 .center[
-&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-23-1.png" width="45%" /&gt;
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-24-1.png" width="45%" /&gt;
 ]
 
 Because `\(X\)` and `\(Y\)` don't really have any relationship in *either* direction...
@@ -2243,7 +2644,7 @@ cov(data)
 *Clearly* not independent!
 
 .center[
-&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-26-1.png" width="30%" /&gt;
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-27-1.png" width="30%" /&gt;
 ]
 
 ---
@@ -2362,7 +2763,7 @@ fake_data = rnorm_multi(
 gf_point(X2 ~ X1, data = fake_data)
 ```
 
-![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
 ]
 
 ---

@@ -52,17 +52,9 @@ So far, we have looked at a **single random variable**, *Y*.
 
 But in many applications, we care about the relationship between **multiple random variables** in the same experiment!
 
-- **Joint/Multivariate distributions** allow us to learn about how multiple random variables are related, by studying the probability distribution associated with the *intersection* of multiple random variables: $$(Y_{1}=y_{1}),(Y_{2}=y_{2}),\dots,(Y_{n}=y_{n})$$
-
---
-
 <br>
 
-Other types of distributions we'll look at:
-
-- **Marginal distributions**: Individual distribution of $Y_{1}$, ignoring the values of $Y_{2}, Y_{3},\dots$
-
-- **Conditional distributions** of $Y_{1}$, given $Y_{2}=y_{2}$: The updated distribution for $Y_{1}$ after observing $Y_{2}=y_{2}$
+**Joint/Multivariate distributions** allow us to learn about how multiple random variables are related, by studying the probability distribution associated with the *intersection* of multiple random variables: $$(Y_{1}=y_{1}),(Y_{2}=y_{2}),\dots,(Y_{n}=y_{n})$$
 
 ---
 
@@ -189,8 +181,6 @@ Similar to the single variable (**univariate**) case, a *valid* PMF must be nonn
 
 For any random variables $X$ and $Y$, the **joint (bivariate) distribution function**, $F(x,y)$, is $$F(x,y)=P(X\leq x, Y\leq y),\qquad -\infty<x<\infty,\ -\infty<y<\infty.$$
 
---
-
 <br>
 
 **Practice**
@@ -205,9 +195,37 @@ data.frame(Outcome = c("X", "Y"), HHH = c(3,1), THH = c(2,2), HTH = c(2,1), HHT 
 
 ---
 
+# Joint Distribution Function
+
+For any random variables $X$ and $Y$, the **joint (bivariate) distribution function**, $F(x,y)$, is $$F(x,y)=P(X\leq x, Y\leq y),\qquad -\infty<x<\infty,\ -\infty<y<\infty.$$
+
+<br>
+
+**Solution**
+
+In the *Piéchart Casino* example, find $F(2,1)=P(X\leq2,Y\leq1)$.
+
+```{r, echo = FALSE}
+data.frame(Outcome = c("X", "Y"), HHH = c(3,1), THH = c(2,2), HTH = c(2,1), HHT = c(2,1), 
+           TTH = c(1,3), THT = c(1,2), HTT = c(1,1), TTT = c(0,-1)) %>%
+  gt() %>%
+  tab_style(
+    style = list(
+      cell_text(color = "black", weight = "bold"), 
+      cell_fill(color = "dodgerblue", alpha = 0.2)
+      ),
+    locations = cells_body(
+      columns = vars(HTH, HHT, HTT, TTT)) 
+  )
+```
+
+$$P(X\leq2,Y\leq1)=P(X=0,Y=-1)+P(X=1,Y=1)+P(X=2,Y=1)=\frac{1}{8}+\frac{1}{8}+\frac{2}{8}=\frac{1}{2}$$
+
+---
+
 # Continuous Joint Distributions
 
-Let $X$ and $Y$ be **continuous** random variables with joint distribution function $F(x,y)$. If there exists a nonnegative function $f(x,y)$, such that $$F(x,y)=\int^{x}_{-\infty}\int^{y}_{-\infty}f(t_{1},t_{2})\,dt_{2}dt_{1},$$ for all $-\infty<x<\infty$, $-\infty<y<\infty$, then $X$ and $Y$ are **jointly continuous random variables**. 
+Let $X$ and $Y$ be **continuous** random variables with joint distribution function $F(x,y)$. If there exists a nonnegative function $f(x,y)$, such that $$F(x,y)=P(X\leq x, Y\leq y)=\int^{x}_{-\infty}\int^{y}_{-\infty}f(t_{1},t_{2})\,dt_{2}dt_{1},$$ for all $-\infty<x<\infty$, $-\infty<y<\infty$, then $X$ and $Y$ are **jointly continuous random variables**. 
 
 - The function $f(x,y)$ is called the **joint probability density function (PDF)**. 
 
@@ -221,13 +239,23 @@ Similar to joint discrete random variables, if $X$ and $Y$ are jointly continuou
 
 ---
 
+# Continuous Joint Probabilities
+
+Let $X$ and $Y$ be **continuous** random variables with joint distribution function $F(x,y)$. If there exists a nonnegative function $f(x,y)$, such that $$F(x,y)=P(X\leq x, Y\leq y)=\int^{x}_{-\infty}\int^{y}_{-\infty}f(t_{1},t_{2})\,dt_{2}dt_{1},$$ for all $-\infty<x<\infty$, $-\infty<y<\infty$, then $X$ and $Y$ are **jointly continuous random variables**. 
+
+- The function $f(x,y)$ is called the **joint probability density function (PDF)**. 
+
+For two RVs $X$ and $Y$ with joint PDF $f(x,y)$, the *joint probability* $P(a_{1}\leq X\leq a_{2}, b_{1}\leq Y\leq b_{2})$ is $$P(a_{1}\leq X\leq a_{2}, b_{1}\leq Y\leq b_{2})=\int_{b_{1}}^{b_{2}}\int_{a_{1}}^{a_{2}}f(x,y)\,dxdy$$
+
+---
+
 # Continuous Joint Distributions 
 
 **Example**
 
 Let $X$ and $Y$ be random variables with joint probability density function $$f(x,y)=\begin{cases}x+y,&0<x<1,0<y<1\\0,&\text{elsewhere}.\end{cases}$$
 
-- Find $P(X>0.5)$. 
+- Find $P(X>0.5, Y<0.5)$. 
 
 .center[
 ```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "50%"}
@@ -260,9 +288,9 @@ ggplot(data, aes(x=x, y=y) ) +
 
 Let $Y_{1}$ and $Y_{2}$ have the joint probability density function $$f(y_{1},y_{2})=\begin{cases}e^{-(y_{1}+y_{2})},&y_{1}>0,y_{2}>0\\0,&\text{elsewhere}.\end{cases}$$
 
-1. What is $P(Y_{1}<1, Y_{2}>5)$?
+1. Show that $P(Y_{1}+Y_{2}<3)=1-4e^{-3}=0.8009$. 
 
-2. What is $P(Y_{1}+Y_{2}<3)$?
+2. Find $P(Y_{1}<1, Y_{2}>5)$.
 
 .center[
 ```{r, echo = FALSE, fig.width = 3, fig.height = 2, dpi = 300, out.width = "50%"}
@@ -468,7 +496,7 @@ For **continuous** random variables $X$ and $Y$ with *joint* density function $f
 
 Let $Y_{1}$ and $Y_{2}$ have the joint probability density function $$f(y_{1},y_{2})=\begin{cases}e^{-(y_{1}+y_{2})},&y_{1}>0,y_{2}>0\\0,&\text{elsewhere}.\end{cases}$$
 
-1. Find the marginal density functions for $Y_{1}$ and $Y_{2}$. 
+1. Find the marginal density function for $Y_{2}$, $f_{Y_{2}}(y_{2})$. 
 
 2. For $y_{2}>0$, what is the conditional density function of $Y_{1}$ given that $Y_{2}=y_{2}$?
 
@@ -476,13 +504,13 @@ Let $Y_{1}$ and $Y_{2}$ have the joint probability density function $$f(y_{1},y_
 
 # Conditional Distributions (Continuous)
 
-**Example**
+**Example** (WMS 5.31)
 
-Let $Y_{1}$ and $Y_{2}$ have the joint probability density function $$f(y_{1},y_{2})=\begin{cases}6y_{1}^{2}y_{2},&0\leq y_{1}\leq y_{2}\ \text{and}\ y_{1}+y_{2}\leq 2\\0,&\text{elsewhere}.\end{cases}$$
+Let $Y_{1}$ and $Y_{2}$ have the joint probability density function $$f(y_{1},y_{2})=\begin{cases}30y_{1}y_{2}^{2},&y_{1}-1\leq y_{2}\leq 1-y_{1}, 0\leq y_{1}\leq 1\\0,&\text{elsewhere}.\end{cases}$$
 
-1. Find the marginal distribution of $Y_{1}$, $f_{1}(y_{1})$. What *named* probability distribution does this follow?
+1. Show that the marginal density of $Y_{1}$ is a beta density with $\alpha=2$ and $\beta=4$. 
 
-2. Find $f(y_{2}\mid y_{1})$ and use this to find $P(Y_{2}\leq 1\mid Y_{1}=1/2)$. 
+2. Find the conditional density of $Y_{2}$ given $Y_{1}=y_{1}$. Use this to show that $P(Y_{2}>0\mid Y_{1}=0.75)=0.5$. 
 
 ---
 
@@ -649,13 +677,21 @@ Therefore, $f(y_{1},y_{2})\neq f_{1}(y_{1})f_{2}(y_{2})$.
 
 - In some cases, we don't need to derive marginal densities to prove independence! We just need to break the joint density function into separate pieces involving $y_{1}$ and $y_{2}$ alone. 
 
---
+---
 
-**Example**
+# Example
 
 Suppose $Y_{1}$ and $Y_{2}$ denote the lengths of life, in hundreds of hours, for components of types I and II, respectively, in an electronic system. The joint density of $Y_{1}$ and $Y_{2}$ is $$f(y_{1},y_{2})=\begin{cases}(1/8)y_{1}e^{-(y_{1}+y_{2})/2},& y_{1}>0, y_{2}>0,\\0,&\text{elsewhere}.\end{cases}$$
 
 - Using the previous theorem, prove that $Y_{1}$ and $Y_{2}$ are independent. 
+
+--
+
+**Solution**: $f(y_{1},y_{2})=g(y_{1})h(y_{2})$, where...
+
+- $g(y_{1})=(1/8)y_{1}e^{-y_{1}/2}$
+
+- $h(y_{2})=e^{-y_{2}/2}$
 
 
 ---
