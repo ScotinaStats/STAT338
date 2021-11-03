@@ -35,7 +35,7 @@ library(gt)
 ```
 
 <!--
-pagedown::chrome_print("~/Dropbox/Teaching/03-Simmons Courses/MATH228-Introduction to Data Science/Lecture Slides/01-Introduction/01-Introduction.html")
+pagedown::chrome_print("~/Dropbox/Teaching/03-Simmons Courses/STAT338-Probability Theory/Slides/05-Multivariate_Distributions/05-Multivariate_Distributions.html")
 -->
 
 class: center, middle, frame
@@ -219,7 +219,11 @@ data.frame(Outcome = c("X", "Y"), HHH = c(3,1), THH = c(2,2), HTH = c(2,1), HHT 
   )
 ```
 
-$$P(X\leq2,Y\leq1)=P(X=0,Y=-1)+P(X=1,Y=1)+P(X=2,Y=1)=\frac{1}{8}+\frac{1}{8}+\frac{2}{8}=\frac{1}{2}$$
+\begin{align*}
+P(X\leq2,Y\leq1)&=P(X=0,Y=-1)+P(X=1,Y=1)+P(X=2,Y=1)\\
+&=\frac{1}{8}+\frac{1}{8}+\frac{2}{8}\\
+&=\frac{1}{2}
+\end{align*}
 
 ---
 
