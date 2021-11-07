@@ -2516,58 +2516,29 @@ class: center, middle, frame
 
 # Dependent Random Variables
 
+The **covariance** measures the *joint variability* between two random variables, `\(X\)` and `\(Y\)`. 
+
 .center[
 &lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-21-1.png" width="45%" /&gt;
 ]
 
-- `\(E(X)=\mu_{X}=0.0818\)`
+Because `\(X\)` and `\(Y\)` tend to move in the **same direction**...
 
-- `\(E(Y)=\mu_{Y}=5.3403\)`
+- The **covariance** between `\(X\)` and `\(Y\)` will be positive!
 
 ---
 
-# Dependent Random Variables
+# Independent Random Variables
+
+The **covariance** measures the *joint variability* between two random variables, `\(X\)` and `\(Y\)`. 
 
 .center[
 &lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-22-1.png" width="45%" /&gt;
 ]
 
-Because `\(X\)` and `\(Y\)` tend to move in the same direction...
+Because `\(X\)` and `\(Y\)` **don't really have any relationship** in *either* direction...
 
-- `\(X-E(X)\)` and `\(Y-E(Y)\)` with *both* be either **positive** or **negative**
-
---
-
-This implies that the **covariance** between `\(X\)` and `\(Y\)` will be positive!
-
----
-
-# Independent Random Variables
-
-.center[
-&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-23-1.png" width="45%" /&gt;
-]
-
-- `\(E(X)=\mu_{X}=-0.0309\)`
-
-- `\(E(Y)=\mu_{Y}=0.0188\)`
-
----
-
-# Independent Random Variables
-
-.center[
-&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-24-1.png" width="45%" /&gt;
-]
-
-Because `\(X\)` and `\(Y\)` don't really have any relationship in *either* direction...
-
-- `\(X-E(X)\)` and `\(Y-E(Y)\)` with have the **same** sign for some points, and the **opposite** sign for others
-    - This means that `\((X-E(X))(Y-E(Y))\)` will average to (approx.) zero. 
-
---
-
-This implies that the **covariance** between `\(X\)` and `\(Y\)` will be near zero!
+- The **covariance** between `\(X\)` and `\(Y\)` will be (near) zero!
 
 ---
 
@@ -2648,7 +2619,7 @@ cov(data)
 *Clearly* not independent!
 
 .center[
-&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-27-1.png" width="30%" /&gt;
+&lt;img src="05-Multivariate_Distributions_files/figure-html/unnamed-chunk-25-1.png" width="30%" /&gt;
 ]
 
 ---
@@ -2767,7 +2738,7 @@ fake_data = rnorm_multi(
 gf_point(X2 ~ X1, data = fake_data)
 ```
 
-![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](05-Multivariate_Distributions_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
 ]
 
 ---

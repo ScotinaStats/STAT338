@@ -797,26 +797,7 @@ mean(y2/y1)
 
 # Dependent Random Variables
 
-.center[
-```{r, echo = FALSE, fig.width = 3.5, fig.height = 3, dpi = 300, out.width = "45%"}
-set.seed(228)
-tibble(x = rnorm(1000), 
-       y = 2*x + 5 + rnorm(1000, sd = 0.25)) %>%
-  slice_sample(n = 20) %>%
-  ggplot(aes(x, y)) + 
-  geom_point(size = 2.5) + 
-  #geom_smooth() + 
-  theme_minimal()
-```
-]
-
-- $E(X)=\mu_{X}=0.0818$
-
-- $E(Y)=\mu_{Y}=5.3403$
-
----
-
-# Dependent Random Variables
+The **covariance** measures the *joint variability* between two random variables, $X$ and $Y$. 
 
 .center[
 ```{r, echo = FALSE, fig.width = 3.5, fig.height = 3, dpi = 300, out.width = "45%"}
@@ -838,37 +819,15 @@ tibble(x = rnorm(1000),
 ```
 ]
 
-Because $X$ and $Y$ tend to move in the same direction...
+Because $X$ and $Y$ tend to move in the **same direction**...
 
-- $X-E(X)$ and $Y-E(Y)$ with *both* be either **positive** or **negative**
-
---
-
-This implies that the **covariance** between $X$ and $Y$ will be positive!
+- The **covariance** between $X$ and $Y$ will be positive!
 
 ---
 
 # Independent Random Variables
 
-.center[
-```{r, echo = FALSE, fig.width = 3.5, fig.height = 3, dpi = 300, out.width = "45%"}
-set.seed(228)
-tibble(x = rnorm(1000), 
-       y = rnorm(1000)) %>%
-  slice_sample(n = 100) %>%
-  ggplot(aes(x, y)) + 
-  geom_point(size = 2.5) + 
-  theme_minimal()
-```
-]
-
-- $E(X)=\mu_{X}=-0.0309$
-
-- $E(Y)=\mu_{Y}=0.0188$
-
----
-
-# Independent Random Variables
+The **covariance** measures the *joint variability* between two random variables, $X$ and $Y$. 
 
 .center[
 ```{r, echo = FALSE, fig.width = 3.5, fig.height = 3, dpi = 300, out.width = "45%"}
@@ -888,14 +847,9 @@ tibble(x = rnorm(1000),
 ```
 ]
 
-Because $X$ and $Y$ don't really have any relationship in *either* direction...
+Because $X$ and $Y$ **don't really have any relationship** in *either* direction...
 
-- $X-E(X)$ and $Y-E(Y)$ with have the **same** sign for some points, and the **opposite** sign for others
-    - This means that $(X-E(X))(Y-E(Y))$ will average to (approx.) zero. 
-
---
-
-This implies that the **covariance** between $X$ and $Y$ will be near zero!
+- The **covariance** between $X$ and $Y$ will be (near) zero!
 
 ---
 
