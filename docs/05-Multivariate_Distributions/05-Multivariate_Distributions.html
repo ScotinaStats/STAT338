@@ -2433,7 +2433,7 @@ Therefore, `\(f(y_{1},y_{2})\neq f_{1}(y_{1})f_{2}(y_{2})\)`.
 
 # Example
 
-Suppose `\(Y_{1}\)` and `\(Y_{2}\)` denote the lengths of life, in hundreds of hours, for components of types I and II, respectively, in an electronic system. The joint density of `\(Y_{1}\)` and `\(Y_{2}\)` is `$$f(y_{1},y_{2})=\begin{cases}(1/8)y_{1}e^{-(y_{1}+y_{2})/2},&amp; y_{1}&gt;0, y_{2}&gt;0,\\0,&amp;\text{elsewhere}.\end{cases}$$`
+Suppose `\(Y_{1}\)` and `\(Y_{2}\)` be jointly distributed with PDF `$$f(y_{1},y_{2})=\begin{cases}4y_{1}y_{2},&amp;0\leq y_{1}\leq 1,0\leq y_{2}\leq 1,\\0&amp;\text{elsewhere}.\end{cases}$$`
 
 - Using the previous theorem, prove that `\(Y_{1}\)` and `\(Y_{2}\)` are independent. 
 
@@ -2441,9 +2441,9 @@ Suppose `\(Y_{1}\)` and `\(Y_{2}\)` denote the lengths of life, in hundreds of h
 
 **Solution**: `\(f(y_{1},y_{2})=g(y_{1})h(y_{2})\)`, where...
 
-- `\(g(y_{1})=(1/8)y_{1}e^{-y_{1}/2}\)`
+- `\(g(y_{1})=4y_{1}\)`
 
-- `\(h(y_{2})=e^{-y_{2}/2}\)`
+- `\(h(y_{2})=y_{2}\)`
 
 
 ---
@@ -2502,7 +2502,7 @@ Suppose `\(Y_{1}\)` and `\(Y_{2}\)` denote the lengths of life, in hundreds of h
 
 One way to measure the relative efficiency of the two components is to compute the ratio `\(Y_{2}/Y_{1}\)`. Show that `\(E(Y_{2}/Y_{1})=1\)`. 
 
-- **Hint**: Use the fact that `\(Y_{1}\)` and `\(Y_{2}\)` are *independent*. The *Gamma(2,2)* and *Exponential(2)* PDFs will also help!
+- **Hint**: Use the fact that `\(Y_{1}\)` and `\(Y_{2}\)` are *independent*. The *Gamma(2, 2)* and *Exponential(2)* PDFs might also help!
 
 ---
 
