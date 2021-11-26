@@ -1,0 +1,769 @@
+---
+title: "MATH/STAT 338: Probability"
+subtitle: "Functions of Random Variables"
+author: "Anthony Scotina"
+date: 
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["my-theme.css", "my-fonts.css"]
+    nature:
+      countIncrementalSlides: false
+      highlightLines: true
+---
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+mono_accent(base_color = "#5E5E5E") #3E8A83?
+options(htmltools.preserve.raw = FALSE)
+```
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, warning = FALSE
+)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(mosaic)
+```
+
+<!--
+pagedown::chrome_print("~/Dropbox/Teaching/03-Simmons Courses/MATH228-Introduction to Data Science/Lecture Slides/01-Introduction/01-Introduction.html")
+-->
+
+class: center, middle, frame
+
+# Transformations
+
+---
+
+# Motivation
+
+All quantities used to estimate *unknown* **population parameters** are *functions* of a sample of *n* random observations that appear in a sample. 
+
+- After applying a **function** to some random variable $Y$, our goal is to find the distribution of the *transformed* random variable. 
+
+<br>
+
+**Examples**
+
+**Sample Mean**: For a set of *n* random variables, $Y_{1},Y_{2},\dots,Y_{n}$, $$\bar{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_{i}.$$
+
+- In this case, $T=Y_{1}+\cdots+Y_{n}$ is a *random variable*, and $\bar{Y}=T/n$ is a *transformation* of the random variable. 
+
+---
+
+# Motivation
+
+All quantities used to estimate *unknown* **population parameters** are *functions* of a sample of *n* random observations that appear in a sample. 
+
+- After applying a **function** to some random variable $Y$, our goal is to find the distribution of the *transformed* random variable. 
+
+<br>
+
+**Examples**
+
+**Linear Regression**: One of the most common modeling techniques involves modeling some *response variable*, $Y$, as a *linear function* of one or more *explanatory variables*, $X$, plus an *error term*, $\epsilon$: $$Y=aX+b+\epsilon$$
+
+- This is also known as a *location-scale* chance of a random variable, $X$.
+
+---
+
+# Motivation
+
+All quantities used to estimate *unknown* **population parameters** are *functions* of a sample of *n* random observations that appear in a sample. 
+
+- After applying a **function** to some random variable $Y$, our goal is to find the distribution of the *transformed* random variable. 
+
+<br>
+
+**Examples**
+
+**Extreme Values**: In many cases, statisticians are interested in the distribution of *extreme observations*, such as the **minimum** or **maximum**: $$Y_{(1)}=\min(Y_{1},\dots,Y_{n})\quad\text{or}\quad Y_{(n)}=\max(Y_{1},\dots,Y_{n})$$
+
+- The random variables $Y_{(i)}$ are called **order statistics**.
+
+---
+
+# The "iid" Assumption
+
+For most remaining examples (unless stated otherwise), we will assume the following:
+
+1. The *population* is **large** relative to the *sample size*. 
+
+2. Random variables obtained through a random sample, $$Y_{1},Y_{2},\dots,Y_{n},$$ are **independent and identically distributed (iid)**. 
+
+--
+
+The **iid assumption** means that the *joint probability function* for $Y_{1},Y_{2},\dots,Y_{n}$ is $$f(y_{1},y_{2},\dots,y_{n})=f(y_{1})f(y_{2})\cdots f(y_{n}),$$ where each random variable shares a common density function, $f(y)$. 
+
+- Note that this is analogous for *discrete random variables* and PMFs, $p(y)$. 
+
+---
+
+class: center, middle, frame
+
+# The Method of Moment-Generating Functions
+
+---
+
+# Moment-Generating Functions
+
+**Recall**
+
+For a random variable, $Y$, the **moment-generating function (MGF)** of $Y$, $m_{Y}(t)$, is defined to be $$m_{Y}(t)=E(e^{tY})$$
+
+<br>
+
+**Theorem**
+
+If $m(t)$ exists, then for any positive integer $k$, $$\left.\frac{d^{k}m(t)}{dt^{k}}\right]_{t=0}=m^{(k)}(0)=E(Y^{k})$$
+
+---
+
+# MGF Theorems
+
+MGFs have use that extend *far beyond* calculating **moments**! 
+
+- Namely, if two random variables share the *same MGF*, then they share the same *distribution*. 
+
+**Theorem** (Uniqueness Theorem)
+
+Let $m_{X}(t)$ and $m_{Y}(t)$ denote the moment-generating functions of random variables, $X$ and $Y$, respectively. 
+
+- If both moment-generating functions exist and $m_{X}(t)=m_{Y}(t)$ *for all values of* $t$, then $X$ and $Y$ have the same probability distribution. 
+
+--
+
+**Theorem** (MGF of Sum of iid RVs)
+
+Let $Y_{1},Y_{2},\dots,Y_{n}$ be *independent* random variables with MGFs $m_{Y_{1}}(t),\dots,m_{Y_{n}}(t)$, respectively. 
+
+- If $U=Y_{1}+Y_{2}+\cdots+Y_{n}$, then $$m_{U}(t)=m_{Y_{1}}(t)\times m_{Y_{2}}(t)\times\cdots\times m_{Y_{n}}(t).$$
+
+---
+
+# Normal and Chi-Square RVs
+
+**Example**
+
+Let $Z\sim Normal(0, 1)$. Use the method of moment-generating functions to show that $Z^{2}\sim\chi^{2}(df=1)$. 
+
+- *In other words*: Show that the MGF for $Z^{2}$ is the same as the MGF for a $\chi^{2}(1)$ random variable. 
+
+--
+
+**Starting Point**
+
+- $Z\sim Normal(0,1)\implies f(z)=\frac{1}{\sqrt{2\pi}}e^{-z^{2}/2}$
+
+- $m_{Z^{2}}(t)=E(e^{tZ^{2}})=\int_{-\infty}^{\infty}e^{tz^{2}}f(z)\,dz$
+
+**Goal**
+
+Show that $m_{Z^{2}}(t)=(1-2t)^{-1/2}$, the MGF for a $\chi^{2}(1)$ RV. 
+
+---
+
+# Exponential and Gamma RVs
+
+**Practice** 
+
+Let $Y_{i}\sim iid\ Exponential(\beta)$, $i=1,\dots,n$ denote the time between customer arrivals at a checkout counter (at *Piéchart Emporium*...). 
+
+Use the method of moment-generating functions to show that $U=\sum_{i=1}^{n}Y_{i}\sim Gamma(n,\beta)$. 
+
+--
+
+**Solution**
+
+Because the $Y_{i}$ are *iid*, $$m_{U}(t)=m_{\sum Y_{i}}(t)=m_{Y_{1}}(t)\times m_{Y_{2}}(t)\times\cdots\times m_{Y_{n}}(t),$$ where $m_{Y_{i}}(t)=(1-\beta t)^{-1}$. 
+
+Therefore, $m_{U}(t)=(1-\beta t)^{-n}$, which follows the form of a $Gamma(n, \beta)$ MGF. 
+
+---
+
+# Sum of Independent Normal RVs
+
+**Theorem**
+
+Let $Y_{1},Y_{2},\dots,Y_{n}$ be **independent** *normally* distributed random variables with $E(Y_{i})=\mu_{i}$ and $Var(Y_{i})=\sigma^{2}_{i}$ (i.e., *not* necessarily iid). Let $a_{1},a_{2},\dots,a_{n}$ be constants.
+
+If $U=\sum_{i=1}^{n}a_{i}Y_{i}$, then $$U\sim Normal\left(\sum_{i=1}^{n}a_{i}\mu_{i},\sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}\right)$$
+
+--
+
+🚨 What is the distribution of $\bar{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_{i}$ in this setting?
+
+---
+
+class: center, middle, frame
+
+# Order Statistics
+
+---
+
+# Common Statistics
+
+The most common statistics used to summarize numerical data are:
+
+- the **sample mean**, $\bar{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_{i}$ (for *center* of distribution)
+
+- the **sample standard deviation**, $s$ (for *spread* of distribution)
+
+Though we are also interested in using *extreme values* to summarize a distribution, such as...
+
+- the **sample minimum**
+
+- the **sample maximum**
+
+- or other *quantiles* in between
+
+--
+
+To study the distributions of these extreme values, let's take a deeper dive into **order statistics**. 
+
+---
+
+# Order Statistics
+
+For random variables $Y_{1},Y_{2},\dots,Y_{n}$, the **order statistics** are the random variables $Y_{(1)},Y_{(2)},\dots,Y_{(n)}$, where:
+
+- $Y_{(1)}=\min(Y_{1},Y_{2},\dots,Y_{n})$
+
+- $Y_{(2)}=$ the second-smallest of $Y_{1},Y_{2},\dots,Y_{n}$
+
+- $\cdots$
+
+- $Y_{(n-1)}=$ the second-largest of $Y_{1},Y_{2},\dots,Y_{n}$
+
+- $Y_{(n)}=\max(Y_{1},Y_{2},\dots,Y_{n})$
+
+--
+
+🚨 For now, we'll assume that the $Y_{i}$ are *iid* and **continuous** RVs with:
+
+- *Distribution function* $F(y)=P(Y\leq y)$
+
+- *Density function* $f(y)=F'(Y)$
+
+---
+
+# PDF for Maximum
+
+First, let's derive the PDF for $$Y_{(n)}=\max(Y_{1},Y_{2},\dots,Y_{n})$$ by *first* finding the distribution function, $P(Y_{(n)}\leq y)$. 
+
+- Because $Y_{(n)}$ is the **maximum** of $Y_{1},Y_{2},\dots,Y_{n}$, the event $(Y_{(n)}\leq y)$ occurs *if and only if* each of the $(Y_{i}\leq y)$ events occur for $i=1,2,\dots,n$: $$P(Y_{(n)}\leq y)=P(Y_{1}\leq y,Y_{2}\leq y,\dots,Y_{n}\leq y)$$
+
+- How can we use the fact that the $Y_{i}$ are **iid** here? 🤔
+
+--
+
+<br>
+
+It turns out that the PDF for $Y_{(n)}$, $g_{(n)}(y)$, is given by: $$g_{(n)}(y)=n[F(y)]^{n-1}f(y)$$
+
+---
+
+# PDF for Minimum
+
+Derive the PDF for $$Y_{(1)}=\min(Y_{1},Y_{2},\dots,Y_{n})$$ by *first* finding the distribution function, $P(Y_{(1)}\leq y)$. 
+
+- [**Hint**: Use the fact that $P(Y_{(1)}\leq y)=1-P(Y_{(1)}>y)$.]
+
+--
+
+<br>
+
+It turns out that the PDF for $Y_{(1)}$, $g_{(1)}(y)$, is given by: $$g_{(1)}(y)=n[1-F(y)]^{n-1}f(y)$$
+
+---
+
+# Uniform and Beta RVs
+
+Suppose that $Y_{i}\sim iid\ Uniform(0,1)$, $i=1,\dots,n$, each with PDF $$f(y)=1,\quad 0\leq y \leq 1.$$
+
+- Find the PDFs for $Y_{(1)}$ and $Y_{(n)}$. What distribution do these order statistics follow? Is it $Uniform(0,1)$?
+
+--
+
+.pull-left[
+```{r, fig.height = 2.25, fig.width = 2.5, dpi = 300, echo = FALSE}
+unif_samp = runif(10000)
+gf_density( ~ unif_samp) + 
+  labs(x = "y", y = "f(y)", 
+       title = "Y ~ Uniform(0, 1)") + 
+  theme_bw()
+```
+]
+
+.pull-right[
+```{r, fig.height = 2.25, fig.width = 2.5, dpi = 300, echo = FALSE}
+unif_max = replicate(10000, {
+  unif_samp = runif(10)
+  max(unif_samp)
+})
+gf_density( ~ unif_max) + 
+  labs(x = "y", y = "f(y)", 
+       title = "Y_(n) ~ Beta(n, 1)") + 
+  theme_bw()
+```
+]
+
+---
+
+# Order Statistics for Exponential RVs
+
+**Example**
+
+Electric components of a certain type have a length of life (in hours) $Y~\sim iid\ Exponential(100)$, with PDF given by $$f(y)=\frac{1}{100}e^{-y/100},\quad y >0.$$
+
+**1.** Suppose that two such components operate independently and in series in certain systems (hence, the system fails when *either* component fails). Find the density function for $X=\min(Y_{1},Y_{2})$, the length of life of the system. 
+
+--
+
+- If $Y\sim Exponential$, then $Y_{(1)}\sim Exponential$. 
+
+--
+
+**2.** Suppose that the components operate in parallel (hence, the system does not fail until *both* components fail). Find the density function for $X=\max(Y_{1},Y_{2})$, the length of life of the system. 
+
+--
+
+- If $Y\sim Exponential$, then $Y_{(n)}$ is *not* exponential. 
+
+---
+
+class: center, middle, frame
+
+# Method of Transformations
+
+---
+
+# Method of Transformations
+
+**Theorem**
+
+Let $Y$ have probability density function $f_{Y}(y)$. If $h(y)$ is either strictly *increasing* or *decreasing* for all $y$, then $U=h(Y)$ has density function $$f_{U}(u)=f_{Y}[h^{-1}(u)]\left|\frac{dh^{-1}(u)}{du}\right|.$$
+
+---
+
+# The Log-Normal Distribution
+
+Let $Y\sim Normal(0,1)$. Find the PDF for $U=e^{Y}$. 
+
+1. Find the inverse function, $y=h^{-1}(u)$. 
+
+2. Evaluate $\left|\frac{dh^{-1}(u)}{du}\right|$. 
+
+3. Find $f_{U}(u)$ using the method of transformations. 
+
+--
+
+<br>
+
+**Solution**
+
+- $U=e^{Y}\implies h^{-1}(u)=\log u$
+
+- $\left|\frac{dh^{-1}(u)}{du}\right|=\frac{1}{u}$
+
+---
+
+# Exponential and Weibull RVs
+
+**Practice** (WMS 6.27)
+
+The $Weibull(\alpha,m)$ density function is given by $$f(x)=\frac{1}{\alpha}mx^{m-1}e^{-x^{m}/\alpha},\quad x>0.$$
+
+- Let $Y\sim Exponential(\beta)$. Show that $W=\sqrt{Y}\sim Weibull(\alpha=\beta, m=2)$. 
+
+--
+
+<br>
+
+**Solution**
+
+- $f_{W}(w)=\frac{2}{\beta}we^{-y^{2}/\beta},\ w > 0$
+
+---
+
+# Uniform and Exponential RVs
+
+Let $Y\sim Uniform(0,1)$. Show that $U=-2\log Y \sim Exponential(2)$.
+
+--
+
+<br>
+
+**Solution**
+
+- $U=-2\log Y\implies h^{-1}(u)=e^{-u/2}$
+
+- $\frac{dh^{-1}(u)}{du}=-\frac{1}{2}e^{-u/2}$
+
+- $f_{U}(u)=\frac{1}{2}e^{-u/2},\ u>-$
+
+---
+
+class: center, middle, frame
+
+# Sampling Distributions
+
+---
+
+# Introduction
+
+Previously, we worked through different methods for finding distributions of **functions of random variables**, $Y_{i}$, $i=1,\dots,n$. 
+
+Now we'll treat the $Y_{1},Y_{2},\dots,Y_{n}$ as variables observed in a **random sample** from a **population** of interest. 
+
+- These variables are **iid** (*independent* and *identically distributed*)
+
+--
+
+**Example**
+
+The **sample mean**, $$\bar{y}=\frac{1}{n}\sum_{i=1}^{n}y_{i},$$ is used to estimate the *population mean*, $\mu$. 
+
+- The *goodness* of this estimate depends on the random variables $Y_{1},Y_{2},\dots,Y_{n}$ and how they impact $\bar{Y}=(1/n)\sum Y_{i}$. 
+
+---
+
+# Statistics
+
+The random variable $\bar{Y}$ is an example of a *statistic*, because it is a function of *only* the random variables $Y_{1},Y_{2},\dots,Y_{n}$ and the sample size, $n$ (a constant). 
+
+> A **statistic** is a function of the observable random variables in a sample and known constants. 
+
+--
+
+**Examples**
+
+- The **sample mean**: $\bar{Y}=(1/n)\sum_{i=1}^{n}Y_{i}$
+
+- The **sample variance**: $\frac{1}{n-1}\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}$
+
+- The **range**: $R=Y_{(n)}-Y_{(1)}$
+
+--
+
+Because statistics are *functions* of random variables... 
+
+.center[
+**All statistics are random variables**!
+]
+
+---
+
+# Sampling Distributions
+
+Because **all statistics are random variables**, all statistics have *probability distributions* that illustrate (among other things) how much they *vary from sample to sample*. 
+
+- These "special" probability distributions are called **sampling distributions**. 
+
+--
+
+**Example**
+
+A balanced die is tossed three times, and the number on the uppermost face is recorded each time. Suppose we are interested in the *average of the numbers shown* in the sample of three tosses, $$\bar{Y}=\frac{Y_{1}+Y_{2}+Y_{3}}{3}$$
+
+> Derive the *sampling distribution* of $\bar{Y}$.
+
+---
+
+# Sampling Distributions
+
+```{r, echo = FALSE, fig.align='center', dpi = 300, out.width = "70%"}
+set.seed(338)
+dice_rolls = replicate(10000, {
+  roll = sample(1:6, size = 3, replace = TRUE)
+  mean(roll)
+})
+gf_histogram(~ dice_rolls, binwidth = 1/3, color = "white") + 
+  scale_x_continuous(breaks = scales::pretty_breaks()) + 
+  labs(title = "Sampling Distribution", 
+       subtitle = "Sample Mean of Three Die Tosses", 
+       x = expression(bar(Y)), y = "Frequency (out of 10,000 reps)") +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(size = 12, face = "bold"), 
+        axis.text.y = element_text(size = 12, face = "bold"), 
+        axis.title = element_text(size = 12, face = "bold"), 
+        plot.title = element_text(size = 12, face = "bold"))
+```
+
+---
+
+class: center, middle, frame
+
+# Central Limit Theorem
+
+---
+
+# The Sample Mean
+
+**Previous Result**
+
+Let $Y_{1},Y_{2},\dots,Y_{n}$ be *independent* random variables with $E(Y_{i})=\mu$ and $Var(Y_{i})=\sigma^{2}$. Define the **sample mean** as $$\bar{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_{i}.$$ Then:
+
+- $E(\bar{Y})=\mu$
+
+- $Var(\bar{Y})=\sigma^{2}/n$
+
+--
+
+.center[**But what is the *sampling distribution* of the sample mean?!**]
+
+--
+
+If $Y_{i}\sim iid\ Normal(\mu, \sigma^{2})$, then $\bar{Y}\sim Normal(\mu,\sigma^{2}/n)$. 
+
+.center[**But what if the *Y*<sub>i</sub> are *not* Normal?!**]
+
+---
+
+# Central Limit Theorem
+
+Let $Y_{1},Y_{2},\dots,Y_{n}$ be *independent* and *identically distributed* random variables with $E(Y_{i})=\mu$ and $Var(Y_{i})=\sigma^{2}<\infty$. Then $$Z_{n}=\frac{\bar{Y}-\mu}{\sigma/\sqrt{n}}\to Normal(0,1),\ \text{as}\ n\to\infty,$$ where $\bar{Y}=(1/n)\sum_{i=1}^{n}Y_{i}$. 
+
+- **In other words**: For large $n$, the distribution of $\bar{Y}$ *after standardization* approaches a *standard Normal distribution*. 
+
+--
+
+<br>
+
+🚨🚨 The distribution of the $Y_{i}$ can be **anything**, as long as their mean and variance are *finite*. 
+
+- No matter what, the distribution of the *averages* of the $Y_{i}$ will converge to the standard Normal!
+
+.center[
+(Though the "starting distribution" and *sample size* **DO** matter...)
+]
+
+---
+
+# Simulating the CLT (Normal)
+
+Suppose $Y_{1},Y_{2}\sim iid\ Normal(100, 225)$. That is:
+
+- $E(Y_{i})=100$
+
+- $Var(Y_{i})=225\implies \sigma = 15$
+
+🤔🤔 What does the *sampling distribution* of $Z_{n}$ look like?
+
+```{r}
+# One simulation
+set.seed(338) # Use for reproducibility!
+n = 2; mu = 100; sigma = 15
+Y_samp = rnorm(n, mean = mu, sd = sigma)
+
+Z = (mean(Y_samp) - mu)/(sigma/sqrt(n))
+Z
+```
+
+---
+
+# Simulating the CLT (Normal)
+
+Suppose $Y_{1},Y_{2}\sim iid\ Normal(100, 225)$. That is:
+
+- $E(Y_{i})=100$
+
+- $Var(Y_{i})=225\implies \sigma = 15$
+
+🤔🤔 What does the *sampling distribution* of $Z_{n}$ look like?
+
+```{r}
+# MANY simulations!
+set.seed(338) # Use for reproducibility!
+n = 2; mu = 100; sigma = 15
+
+Z = replicate(10000, {
+  Y_samp = rnorm(n, mean = mu, sd = sigma)
+  (mean(Y_samp) - mu)/(sigma/sqrt(n))
+})
+c(mean(Z), var(Z))
+```
+
+---
+
+# Simulating the CLT (Exponential)
+
+Suppose $Y_{1},Y_{2}\sim iid\ Exponential(\beta = 2)$. That is:
+
+- $E(Y_{i})=2$
+
+- $Var(Y_{i})=2^{2}=4\implies \sigma=2$
+
+🤔🤔 What does the *sampling distribution* of $Z_{n}$ look like?
+
+```{r}
+# MANY simulations!
+set.seed(338) # Use for reproducibility!
+n = 2; beta = 2
+mu = 2; sigma = 2
+
+Z = replicate(10000, {
+  Y_samp = rexp(n, rate = 1/beta) #<<
+  (mean(Y_samp) - mu)/(sigma/sqrt(n)) #<<
+})
+c(mean(Z), var(Z))
+```
+
+---
+
+# Simulating the CLT (Exponential)
+
+Suppose $Y_{1},Y_{2},\dots,Y_{100}\sim iid\ Exponential(\beta = 2)$. That is:
+
+- $E(Y_{i})=2$
+
+- $Var(Y_{i})=2^{2}=4\implies \sigma=2$
+
+🤔🤔 What does the *sampling distribution* of $Z_{n}$ look like?
+
+```{r}
+# MANY simulations!
+set.seed(338) # Use for reproducibility!
+n = 100; beta = 2 #<<
+mu = 2; sigma = 2 
+
+Z = replicate(10000, {
+  Y_samp = rexp(n, rate = 1/beta) 
+  (mean(Y_samp) - mu)/(sigma/sqrt(n)) 
+})
+c(mean(Z), var(Z))
+```
+
+---
+
+# A Note on Sample Size
+
+👀 What's the deal with the **exponential distribution**?
+
+- Let's see what this "starting distribution" looks like...
+
+.pull-left[
+```{r, dpi = 350}
+Y = rexp(10000, rate = 1/2)
+hist(Y, main = "Y ~ Exp(2)")
+```
+]
+
+--
+
+.pull-right[
+If the $Y_{i}$ come from a strongly **skewed** or *multimodal* distribution, we might need $n$ to be very large before the sampling distribution approaches *Normal(0, 1)*. 
+
+- But if the starting distribution for $Y_{i}$ is already Normal, the sampling distribution for $Z_{n}$ is *exactly* Normal for all $n$!
+]
+
+---
+
+# Simulating the CLT (Binomial)
+
+The CLT also applies when the starting distribution is discrete!
+
+Suppose $Y_{1},Y_{2},\dots,Y_{5}\sim iid\ Binomial(n = 20, p = 0.20)$. That is:
+
+- $E(Y_{i})=np = 4$
+
+- $Var(Y_{i})=np(1-p)=3.2\implies \sigma=1.789$
+
+🤔🤔 What does the *sampling distribution* of $Z_{n}$ look like?
+
+```{r}
+set.seed(338) # Use for reproducibility!
+n = 5; size = 20; p = 0.2
+mu = 4; sigma = 1.789
+
+Z = replicate(10000, {
+  Y_samp = rbinom(n, size = size, prob = p) 
+  (mean(Y_samp) - mu)/(sigma/sqrt(n)) 
+})
+c(mean(Z), var(Z))
+```
+
+---
+
+# Simulating the CLT (Uniform)
+
+Suppose $Y_{1},Y_{2},\dots,Y_{100}\sim iid\ Uniform(a=0, b=1)$. That is:
+
+- $E(Y_{i})=(a+b)/2=1/2$
+
+- $Var(Y_{i})=(b-a)^2/12=1/12\implies\sigma=1/\sqrt{12}$
+
+🤔🤔 What does the *sampling distribution* of $Z_{n}$ look like?
+
+```{r}
+set.seed(338) # Use for reproducibility!
+n = 100; a = 0; b = 1
+mu = 1/2; sigma = 1/sqrt(12)
+
+Z = replicate(10000, {
+  Y_samp = runif(n, min = a, max = b) 
+  (mean(Y_samp) - mu)/(sigma/sqrt(n)) 
+})
+c(mean(Z), var(Z))
+```
+
+---
+
+# Practice
+
+(WMS, Example 7.9)
+
+The service times for customers coming through a checkout counter in a retail store are independent random variables with mean 1.5 minutes and variance 1.0. 
+
+> Approximate the probability that 100 customers can be served in less than 2 hours of total service time. 
+
+---
+
+class: center, middle, frame
+
+# Sampling Distributions
+
+## Related to the Normal
+
+---
+
+#  Some thms that we've sort of already seen...
+
+1. Let $Y_{1},Y_{2},\dots,Y_{n}$ be a random sample of size $n$ from a **Normal** distribution with mean $\mu$ and variance $\sigma^{2}$. Then $$\bar{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_{i}$$ is normally distributed with mean $\mu_{\bar{Y}}=\mu$ and $\sigma^{2}_{\bar{Y}}=\sigma^{2}/n$. 
+
+--
+
+2. Let $Y_{1},Y_{2},\dots,Y_{n}$ be a random sample of size $n$ from a **Normal** distribution with mean $\mu$ and variance $\sigma^{2}$. Then $Z_{i}=(Y_{i}-\mu)/\sigma$ are *independent*, **standard Normal** random variables, $i=1,2,\dots,n$, and $$\sum_{i=1}^{n}Z_{i}^{2}=\sum_{i=1}^{n}\left(\frac{Y_{i}-\mu}{\sigma}\right)^{2}$$ has a $\chi^{2}$ distribution with $n$ degrees of freedom. 
+
+---
+
+# The Sample Variance
+
+The $\chi^{2}$ distribution is related to the distribution of the **sample variance**, $$S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}.$$
+
+- In particular, this distribution is used when making *inference* for the *population standard deviation*, $\sigma^{2}$, based on a random sample $Y_{1},Y_{2},\dots,Y_{n}$ from a Normal population. 
+
+--
+
+**Theorem**: Let $Y_{1},Y_{2},\dots,Y_{n}$ be a random sample of size $n$ from a **Normal** distribution with mean $\mu$ and variance $\sigma^{2}$. Then $$\frac{(n-1)S^{2}}{\sigma^{2}}=\frac{1}{\sigma^{2}}\sum_{i=1}^{n}(Y_{i}-\bar{Y})^{2}$$ has a $\chi^{2}$ distribution with $(n-1)$ degrees of freedom. 
+
+---
+
+# Student's t distribution
+
+When the population standard deviation, $\sigma$, is *unknown*, it can be estimated by $S=\sqrt{S^{2}}$, and the quantity $$T=\frac{\bar{Y}-\mu}{S/\sqrt{n}}$$ is used in certain procedures for inference about $\mu$. 
+
+- This quantity, $T$, has a **t distribution** with $n-1$ degrees of freedom!
+
+--
+
+**Definition**: Let $Z$ be a **standard Normal** random variable, and let $W$ be a $\chi^{2}$-distributed random variable with $\nu$ degrees of freedom. Then, if $Z$ and $W$ are *independent*, $$T=\frac{Z}{\sqrt{W/\nu}}$$ is said to have a **t distribution** with $\nu$ degrees of freedom. 
+
