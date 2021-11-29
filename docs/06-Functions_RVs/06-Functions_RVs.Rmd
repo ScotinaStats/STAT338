@@ -757,6 +757,18 @@ The $\chi^{2}$ distribution is related to the distribution of the **sample varia
 
 ---
 
+# Example
+
+(WMS 7.19)
+
+Ammeters produced by a manufacturer are marketed under the specification that the *standard deviation* of gauge readings is no larger than 0.2 amp. One of these ammeters was used to make **ten independent readings** on a test circuit with constant current. 
+
+> If the sample variance of these ten measurements is 0.065 and it is reasonable to assume that the readings are normally distributed, do the results suggest that the ammeter used does not meet the marketing specifications?
+
+[**Note**: In other words, find $P(S^{2}>0.065)$ if the true population variance is 0.04.]
+
+---
+
 # Student's t distribution
 
 When the population standard deviation, $\sigma$, is *unknown*, it can be estimated by $S=\sqrt{S^{2}}$, and the quantity $$T=\frac{\bar{Y}-\mu}{S/\sqrt{n}}$$ is used in certain procedures for inference about $\mu$. 
@@ -766,4 +778,7 @@ When the population standard deviation, $\sigma$, is *unknown*, it can be estima
 --
 
 **Definition**: Let $Z$ be a **standard Normal** random variable, and let $W$ be a $\chi^{2}$-distributed random variable with $\nu$ degrees of freedom. Then, if $Z$ and $W$ are *independent*, $$T=\frac{Z}{\sqrt{W/\nu}}$$ is said to have a **t distribution** with $\nu$ degrees of freedom. 
+
+
+
 
